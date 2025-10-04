@@ -1,22 +1,13 @@
----
-layout: post
-title: "Monadic Parser Combinators in F# - Mind the Context"
-author: <a href="https://arialdomartini.github.io">Arialdo Martini</a>
-tags:
-- fsharp
-- functional programming
-include_in_index: false
----
 Boiling the problem down, we can say that, in Context-sensitive
 grammars, the key challenge is that the parsing of later elements
 depends on values obtained earlier. For example, suppose you have an
 `int Parser` to read a number. Then, based on that number, you
 dynamically create a new parser tailored to it, essentially a parser
-factory `int -> Foo Parser`, that takes the parsed integer and returns
-a parser for a structure depending on that integer.
+factory `int -> Foo Parser`, that takes the parsed integer and returns a
+parser for a structure depending on that integer.
 
-If this sounds like a contrived example, here are other cases where
-this context-sensitiveness may result more intuitively justified:
+If this sounds like a contrived example, here are other cases where this
+context-sensitiveness may result more intuitively justified:
 
 - Making sure that parentheses are properly balanced in nested
   expressions such as `(f a, g (h (b, c)))`: each opening bracket must
@@ -25,7 +16,7 @@ this context-sensitiveness may result more intuitively justified:
 
 - Checking that variables are declarated before use.
 
-- Indentation-based block structures in F#: the number of leading
+- Indentation-based block structures in F\#: the number of leading
   spaces of each line depends on the indentation level established
   earlier. Again, you have to carry along some context.
 
@@ -34,13 +25,13 @@ this context-sensitiveness may result more intuitively justified:
   might count on a parser factory that, depending on the previous
   option, generates one or another parser for the next option.
 
-- Besides programming languages, as a linguistic example, checking
-  that in subject+verb+object structures the agreement in gender and
-  number is ensured. As a trivial example, you want that "I am" and
-  "You are" succeed, and that "I are" and "You am" fail.
+- Besides programming languages, as a linguistic example, checking that
+  in subject+verb+object structures the agreement in gender and number
+  is ensured. As a trivial example, you want that "I am" and "You are"
+  succeed, and that "I are" and "You am" fail.
 
-
-## It All Begins With A Signature
+== It All Begins With A Signature
+<it-all-begins-with-a-signature>
 Keeping types generic, this means that first we find an `'a Parser`,
 then eventually an `'a -> 'b Parser` follows. Our goal is to write the
 parser combinator `bind` (or `>>=`) that, given those 2 elements,
@@ -51,14 +42,14 @@ val bind : 'a Parser -> ('a -> 'b Parser) -> 'b Parser
 ```
 
 We are also going to use our old acquaintance `pure'`, but we will
-adhere to the convention to call it `return'`. 
+adhere to the convention to call it `return'`.
 
 ```fsharp
 let return' = pure'
 ```
 
-First things first: we need a unit test. Let's continue working with
-the XML tag example:
+First things first: we need a unit test. Let's continue working with the
+XML tag example:
 
 ```fsharp
 let bind m f = __
@@ -103,10 +94,9 @@ let ``not matching closing tags raise a failure`` () =
 
 Even before implementing `>>=`, it is worth to analyze its use. The
 disrupting element is the closing tag parser, since it depends on the
-`tagName` value parsed by the previous parser. The combination of the
-2 parsers is obtained by the application of `>>=`. Given its
-signature, you can use it like this:
-
+`tagName` value parsed by the previous parser. The combination of the 2
+parsers is obtained by the application of `>>=`. Given its signature,
+you can use it like this:
 
 ```fsharp
 let openThenCloseP = 
@@ -115,17 +105,16 @@ let openThenCloseP =
             ...)
 ```
 
-* First parse the opening tag (`openingTagP`).
-* Then, pass forward the value it parses (`>>= (fun tagName -> ...`)
-as the argument to a continuation.
-* The continuation can use that value to invoke `makeClosingTagP` to
+- First parse the opening tag (`openingTagP`).
+- Then, pass forward the value it parses (`>>= (fun tagName -> ...`) as
+  the argument to a continuation.
+- The continuation can use that value to invoke `makeClosingTagP` to
   generate a tailored `closingTagP` parser
-* ...
-
+- …
 
 We are not required to immediately use the `tagName` value: in fact,
-between the opening and the closing tags, we want to take the chance
-to parse the content. It's a matter of using a chain of `>>=` applications:
+between the opening and the closing tags, we want to take the chance to
+parse the content. It's a matter of using a chain of `>>=` applications:
 
 ```fsharp
 let nodeP = 
@@ -134,7 +123,6 @@ let nodeP =
             (makeClosingTagP tagName) >>= (fun _tagName ->
                 return' { tag = tagName; content = content })))
 ```
-
 
 If you squint your eyes you could read the funny `>>=` syntax as:
 
@@ -146,36 +134,35 @@ let openCloseP =
 
 so you can read the whole sequence as:
 
-* In order to parse an XML node
-* first parse the opening tag (`openingTagP`).
-* Then, pass forward the value it parses (`>>= (fun tagName -> ...`)
-* to a continuation. This, in turn will parse the content (`contentP`)
-* eventually passing forward the parsed value (`>>= (fun content ->
-  ...`)
-* to the next part. This will use `tagName` to build the
-  parser for the closing tag (`closingTagP tagName`)
-* Finally, handing over (`>>= fun _tagName ->`) to the last part (not
+- In order to parse an XML node
+- first parse the opening tag (`openingTagP`).
+- Then, pass forward the value it parses (`>>= (fun tagName -> ...`)
+- to a continuation. This, in turn will parse the content (`contentP`)
+- eventually passing forward the parsed value
+  (`>>= (fun content ->   ...`)
+- to the next part. This will use `tagName` to build the parser for the
+  closing tag (`closingTagP tagName`)
+- Finally, handing over (`>>= fun _tagName ->`) to the last part (not
   interested in the last parsed value)
-* whose purpose is to just return an instance of the tag record
-  (wrapped in a Parser, with `return'`).
-
+- whose purpose is to just return an instance of the tag record (wrapped
+  in a Parser, with `return'`).
 
 If you find this code convoluted because of the value passing boiler
-plate, you are absolutely right: it sucks. Hang in there for a few
-more minutes: soon we will introduce a technique to dramatically
-streamline the code.
+plate, you are absolutely right: it sucks. Hang in there for a few more
+minutes: soon we will introduce a technique to dramatically streamline
+the code.
 
 Fine. Let's finally implement this infamous `bind` combinator.
 
-## Follow the type signature
+== Follow the type signature
+<follow-the-type-signature>
 ```fsharp
 // 'a Parser -> ('a -> 'b Parser) -> 'b Parser
 let bind m f = ...
 ```
 
-Going with the flow and following the type signature, we know we have
-to return a `'b Parser`:
-
+Going with the flow and following the type signature, we know we have to
+return a `'b Parser`:
 
 ```fsharp
 let bind m f = Parser (fun s ->
@@ -192,8 +179,8 @@ let bind m f = Parser (fun s ->
     ...)
 ```
 
-We are not sure that the parsing succeeded. We'd better pattern
-match. Of course, in case of failure, we can let `binda just fail.
+We are not sure that the parsing succeeded. We'd better pattern match.
+Of course, in case of failure, we can let \`binda just fail.
 
 ```fsharp
 let bind m f = Parser (fun s ->
@@ -207,7 +194,6 @@ let bind m f = Parser (fun s ->
 In case of success, we get the `'a` value and the unconsumed input:
 exactly what we needed to get the `'b Parser`:
 
-
 ```fsharp
 let bind m f = Parser (fun s ->
     let resultA = run m s
@@ -218,11 +204,10 @@ let bind m f = Parser (fun s ->
         ...)
 ```
 
-We are done! We got the `'b Parser` we wanted. We cannot just return
-it, because our code is surrounded by `Parser (fun s -> ...)`  and we
-would end up with a parser inside a parser. Idea: we can `run` the `b
-Parser` with the `rest` input to get its parsed value:
-
+We are done! We got the `'b Parser` we wanted. We cannot just return it,
+because our code is surrounded by `Parser (fun s -> ...)` and we would
+end up with a parser inside a parser. Idea: we can `run` the `b Parser`
+with the `rest` input to get its parsed value:
 
 ```fsharp
 let bind m f = Parser (fun s ->
@@ -236,28 +221,26 @@ let bind m f = Parser (fun s ->
 
 Test it. Green! You just made `Parser` a Monad.
 
-## Is That All, Folks?
-
+== Is That All, Folks?
+<is-that-all-folks>
 You might not be impressed by this result (surprisingly, `Parser` did
 not turn into a burrito). In fact, it's an explosive one. This little
 unsuspected `bind` function, together with `return'`, is so powerful
 that it could replace everything you did in the last 13 chapters. It's
-such a game changer that F# provides native support for its use, which
+such a game changer that F\# provides native support for its use, which
 will bring a dramatic shift to both the syntax and style of your code,
 for the better.
 
 This has been a tough chapter and you deserve some rest. If you never
-enjoyed a Tamil Kootu, that's the perfect chance to give it a
-try. [Chapter 15](/monadic-parser-combinators-15), here we come!
+enjoyed a Tamil Kootu, that's the perfect chance to give it a try.
+#link("/monadic-parser-combinators-15")[Chapter 15];, here we come!
 
+#link("/monadic-parser-combinators-13")[Previous - Things You Want To Remember]
+⁓
+#link("/monadic-parser-combinators-15")[Next - One Combinator to Rule Them All]
 
-[Previous - Things You Want To Remember](/monadic-parser-combinators-13) ⁓
-[Next - One Combinator to Rule Them All](/monadic-parser-combinators-15)
-
-
-# Comments
-[GitHub Discussions](https://github.com/arialdomartini/arialdomartini.github.io/discussions/33)
-
-
+= Comments
+<comments>
+#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
 
 {% include fp-newsletter.html %}
