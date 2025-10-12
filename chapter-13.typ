@@ -1,3 +1,5 @@
+#import "components/mainmatter.typ": alink
+
 = Things You Want To Remember <chapter-13>
 
 Let's write the parser for an XML node. This is a task dressed up as a
@@ -12,12 +14,10 @@ as `<pun>` --- and its corresponding closing tag --- in this case
 following strings should be successfully parsed:
 
 - `<pun>I started out with nothing, and I still have most of it</pun>`
-- `<gardenPathSentence>Time flies like an arrow; fruit flies like   bananas</gardenPathSentence>`1
+- `<gardenPathSentence>Time flies like an arrow; fruit flies like bananas</gardenPathSentence>`
+  #footnote[Parsing a Garden Path Sentence is really a topic on its own. Checkout out #link("https://en.wikipedia.org/wiki/Garden-path_sentence") if you are curious about psycholinguistic.]
 - `<well>well</well>`
 
-1 Parsing a
-#link("https://en.wikipedia.org/wiki/Garden-path_sentence")[Garden Path Sentence]
-is really a topic on its own.
 
 For the sake of simplicity, we won't support nested nodes nor
 attributes. Let's say that parsing nodes should give us back instances

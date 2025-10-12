@@ -8,7 +8,7 @@ Parser Combinators. You've always wanted. So, let's make it happen!
 
 The compiler of your beautiful new language --- with which you will
 bring the use of `goto` and `null` back to life --- will have several
-components:
+components.
 
 - An Intermediate Code Generator.
 - A Linker, and so on.
