@@ -1,3 +1,5 @@
+= Things You Don't Care About
+
 There is another elementary way to sequence 2 parsers: to only return
 the parsed value of one and just ignoring the value of the other.
 
@@ -300,20 +302,7 @@ let ``greeting between dates`` () =
 
 I hope this quirky example doesn't give you any wild ideas for funny
 language syntax constructs. Instead, please: take a break, enjoy a kiwi,
-and carry on with #link("/monadic-parser-combinators-10")[Chapter 10];.
+and carry on with Chapter 10.
 I can only recommend not to eat much and stay light: we are going to
 apply functions ad nauseam.
 
-#link("/monadic-parser-combinators-8")[Previous - Here Comes The Tuple]
-⁓
-#link("/monadic-parser-combinators-10")[Next - Applying Functions, Ad Nauseam]
-
-= References
-<references>
-- #link("https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4552")[F\# source code: `>>` operator]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}

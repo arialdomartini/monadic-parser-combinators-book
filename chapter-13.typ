@@ -1,3 +1,5 @@
+= Things You Want To Remember
+
 Let's write the parser for an XML node. This is a task dressed up as a
 walk in the park, but it is in fact hiding an insidious maze inside.
 Allow me to show you why.
@@ -311,21 +313,5 @@ notion #emph[monad];.
 Implementing it will be super easy, just a matter of following the type
 signature, but the consequences will be revolutionary.
 
-Curious? Grab a liquorice and jump to
-#link("/monadic-parser-combinators-14")[Chapter 14];: we are going to
+Curious? Grab a liquorice and jump to Chapter 14: we are going to
 write it.
-
-#link("/monadic-parser-combinators-12")[Previous - Things You Are Not Sure About]
-⁓ #link("/monadic-parser-combinators-14")[Next - Mind the Context]
-
-= References
-<references>
-- #link("https://en.wikipedia.org/wiki/Garden-path_sentence")[Garden Path Sentence]
-- #link("https://en.wiktionary.org/wiki/semordnilap")[semordnilaP]
-- #link("https://en.wikipedia.org/wiki/Context-sensitive_grammar")[Context-sensitive Grammar]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}

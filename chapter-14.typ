@@ -1,3 +1,5 @@
+= Mind The Context
+
 Boiling the problem down, we can say that, in Context-sensitive
 grammars, the key challenge is that the parsing of later elements
 depends on values obtained earlier. For example, suppose you have an
@@ -233,14 +235,4 @@ for the better.
 
 This has been a tough chapter and you deserve some rest. If you never
 enjoyed a Tamil Kootu, that's the perfect chance to give it a try.
-#link("/monadic-parser-combinators-15")[Chapter 15];, here we come!
-
-#link("/monadic-parser-combinators-13")[Previous - Things You Want To Remember]
-⁓
-#link("/monadic-parser-combinators-15")[Next - One Combinator to Rule Them All]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+Chapter 15, here we come!

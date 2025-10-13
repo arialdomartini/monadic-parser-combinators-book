@@ -1,3 +1,5 @@
+= That's a Combinator!
+
 So, let's challenge the composability of imperative parsers. Suppose
 that other than `parsePerson`:
 
@@ -260,14 +262,4 @@ improvement, finally getting to Applicative Functors and Monads. Bear
 with me.
 
 Have a slice of Black Forest Cake, you deserve it and you need energy
-for #link("monadic-parser-combinators-4")[the next chapter];.
-
-#link("/monadic-parser-combinators-2")[Previous - 5 Shades Of Composability]
-⁓
-#link("/monadic-parser-combinators-4")[Next - I Told You Not Mess With The Signature!!]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+for the next chapter.

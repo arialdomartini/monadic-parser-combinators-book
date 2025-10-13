@@ -1,3 +1,5 @@
+= Things You Are Not Sure About
+
 There are only 2 important missing features in the Parser Combinator
 library you are building:
 
@@ -488,21 +490,4 @@ next chapter should provide the rational why and in which cases we need
 monadic parsers. Then, we will invent them.
 
 Take a long break. Enjoy a Swiss cheese fondue (and take your time to
-digest it). We will see in
-#link("/monadic-parser-combinators-13")[Chapter 13]
-
-#link("/monadic-parser-combinators-11")[Previous - Lifting Functions] ⁓
-#link("/monadic-parser-combinators-13")[Next - Things You Want To Remember]
-
-= References
-<references>
-- #link("https://ncatlab.org/nlab/show/semigroup")[nCatLab - Semigroup]
-- #link("https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html#reduce")[reduce - FSharp.Core/list.fsi\#L1717]
-- #link("https://en.wikipedia.org/wiki/Cons")[Wikipedia - cons]
-- #link("https://wiki.haskell.org/Bottom")[Bottom]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+digest it). We will see in Chapter 13.

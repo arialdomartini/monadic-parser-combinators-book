@@ -1,3 +1,5 @@
+= Parser-Powered Function Application
+
 Until this point, we have worked with these types:
 
 ```fsharp
@@ -806,22 +808,5 @@ We've covered many details about transforming a single parser and
 adapting it to our needs, but we haven't yet looked at sequencing two
 parsers in a row.
 
-It's time to take a break, enjoy a salmiakki, and then jump to
-#link("monadic-parser-combinators-8")[chapter 8] to explore this new
-topic.
-
-#link("/monadic-parser-combinators-6")[Previous - Mapping the Journey] ⁓
-#link("/monadic-parser-combinators-8")[Next - Here Comes The Tuple]
-
-= References
-<references>
-- #link("https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4546")[F\# source code: `<|` operator]
-- #link("https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4540")[F\# source code: `|>` operator]
-- #link("https://en.wikipedia.org/wiki/Tacit_programming")[Tacit Programming]
-- #link("https://en.wikipedia.org/wiki/Unix_time")[Epoch time]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+It's time to take a break, enjoy a salmiakki, and then jump to chapter
+8 to explore this new topic.

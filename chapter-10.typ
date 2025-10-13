@@ -1,3 +1,5 @@
+= Applying Functions, Ad Nauseam
+
 There is something magic about the native F\# function application: once
 you apply a function to an argument, if the result is another function,
 you can just run function application again. And if you get yet another
@@ -436,29 +438,8 @@ interpretation to the extreme, with Conor McBride's
 d = [| f aP bP cP |]
 ```
 
-Like this, it really seems an ordinary function application! But enough
-for now. Time to get our hands dirty building some real parsers with
-`<*>` and `pure'`, and to play with the second interpretation of
+Like this, it really seems an ordinary function application! But
+enough for now. Time to get our hands dirty building some real parsers
+with `<*>` and `pure'`, and to play with the second interpretation of
 Applicative Functors, that has to do with the notion of lifting
-functions. Treat yourself with a rösti and get prepared to
-#link("/monadic-parser-combinators-11")[Chapter 11];.
-
-#link("/monadic-parser-combinators-9")[Previous - Things You Don't Care About]
-⁓ #link("/monadic-parser-combinators-11")[Next - Lifting Functions]
-
-= References
-<references>
-- #link("https://idris-lang.org/")[Idris]
-- #link("https://docs.idris-lang.org/en/latest/tutorial/interfaces.html?highlight=idiom%20bracket#idiom-brackets")[Idris - Idiom Brackets]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
-
-= Comments
-<comments-1>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+functions. Treat yourself with a rösti and get prepared to Chapter 11.

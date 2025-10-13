@@ -1,3 +1,5 @@
+= Lifting Functions
+
 == Fancy dates
 <fancy-dates>
 Do you remember when in
@@ -292,24 +294,4 @@ Given the diagram, it all makes sense.
 
 That'll do for now! Let's take a break: you deserve a pistacchio kulfi
 to refresh your mind. \
-See you later in #link("/monadic-parser-combinators-12")[Chapter 12];.
-
-#link("/monadic-parser-combinators-10")[Previous - Applying Functions, Ad Nauseam]
-⁓
-#link("/monadic-parser-combinators-12")[Next - Things You Are Not Sure About]
-
-= References
-<references>
-#link("https://wiki.haskell.org/Eta_conversion")[Eta Reduction]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
-
-= Comments
-<comments-1>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+See you later in Chapter 12.

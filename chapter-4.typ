@@ -1,3 +1,6 @@
+= I Told You Not Mess With The Signature!
+<chapter4>
+
 == Arialdo, You Are A Liar
 <arialdo-you-are-a-liar>
 When I wrote:
@@ -420,18 +423,4 @@ invent Applicative Functors and Monads. Let's reflect how we should
 proceed.
 
 A quick espresso? Good idea, it's the perfect moment for a break! See
-you at the #link("monadic-parser-combinators-5")[5th chapter];.
-
-#link("/monadic-parser-combinators-3")[Previous - That's a Combinator!]
-⁓
-#link("/monadic-parser-combinators-5")[Next - A Different Kind of Coupling]
-
-= References
-<references>
-- #link("https://en.wikipedia.org/wiki/Pyramid_of_doom_(programming)")[Pyramid of Doom]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+you at the 5th chapter.

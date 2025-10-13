@@ -1,3 +1,5 @@
+= A Programmable Semicolon
+
 Monads are beautiful, and so is F\#. No wonders that the latter natively
 supports the former. There a little trick to extend the F\# syntax to
 support monadic parser combinators. Indeed, since F\# natively knows how
@@ -70,7 +72,7 @@ notation] (see
 That's often what I call it too, although the correct name for F\# is
 Computation Expression.
 
-== `map` In Do Notation
+=== `map` In Do Notation
 <map-in-do-notation>
 Here's `map`, in its initil implementation, from
 #link("/monadic-parser-combinators-7")[Chapter 7];:
@@ -170,7 +172,7 @@ let map f aP = parse {
 As far as I know, when using this style there is no way to obtain a
 Point Free style.
 
-== `ap` In Do Notation
+=== `ap` In Do Notation
 <ap-in-do-notation>
 Do you remember how we defined the Applicative Functor's `ap` in
 #link("/monadic-parser-combinators-10")[Chapter 10];?
@@ -203,7 +205,7 @@ let ap fP aP =
 
 Isn't it sweet?
 
-== Do Notation Everywhere
+=== Do Notation Everywhere
 <do-notation-everywhere>
 Computation Expressions are particularly effective at capturing the
 meaning of a parser and at making the intent clear. In
@@ -246,9 +248,9 @@ will find the resulting expression more eloquent and expressive.
 
 Here are some examples.
 
-== Old Wine In New Bottles
+=== Old Wine In New Bottles
 <old-wine-in-new-bottles>
-=== `.>>.`
+==== `.>>.`
 <section>
 Apply 2 parsers, returning both results in a tuple. \
 This is a literal translation:
@@ -263,7 +265,7 @@ let (.>>.) aP bP =
     }
 ```
 
-=== `.>>`
+==== `.>>`
 <section-1>
 Apply 2 parsers, returning the result of the first one only. \
 Here the trick is to ignore the result of the second parser.
@@ -278,7 +280,7 @@ let (.>>) firstP secondP =
     }
 ```
 
-=== `>>.`
+==== `>>.`
 <section-2>
 Apply 2 parsers, returning the result of the second one only. \
 That's trivial! This time we just need to ignore the first result:
@@ -295,7 +297,7 @@ let (>>.) firstP secondP =
     }
 ```
 
-=== `many`
+==== `many`
 <many>
 Repeatedly apply a parser until it fails, returning a list of parsed
 values. \
@@ -349,7 +351,7 @@ let rec many parser =
 With Computation Expression we obtained an astoundingly easier
 formulation, don't you think?
 
-=== `skipMany`
+==== `skipMany`
 <skipmany>
 Parse zero or more occurrences of something, discarding the result.
 That's easy! We just need to parse many elements, only to ignore them:
@@ -362,7 +364,7 @@ let skipMany p =
     }
 ```
 
-=== `sepBy`
+==== `sepBy`
 <sepby>
 Parse a list of elements separated by a separator. \
 Finally, a more challenging one! Here's a possible implementation. A
@@ -386,7 +388,7 @@ let rec sepBy separator parser =
     }
 ```
 
-=== `lift3`
+==== `lift3`
 <lift3>
 Elevate a 3-parameter function into the Parsers world. \
 It's the combinator with this signature:
@@ -412,18 +414,6 @@ let lift3 f aP bP cP =
     }
 ```
 
-== A Programmable Semicolon
+=== A Programmable Semicolon
 <a-programmable-semicolon>
 `<|>`
-
-= References
-<references>
-- #link("https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/computation-expressions")[Computation Expression]
-- #link("https://arialdomartini.github.io/sicp-let-syntactic-sugar-csharp")[Variables are syntactic sugar for lambda expressions]
-- #link("https://www.haskell.org/definition/from12to13.html#do")[Changes from Haskell 1.2 to Haskell 1.3 - Monad Syntax]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}

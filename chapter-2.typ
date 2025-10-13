@@ -1,3 +1,5 @@
+= 5 Shades Of Composability
+
 You have surely noted that people into functional programming have an
 obsession with the notion of composition. For example, you could have
 stumbled into sentences such as:
@@ -333,16 +335,3 @@ Combinators you will reach the 5th level, the complete zen illumination
 and probably a couple of other super-powers?
 
 OK, let's have a break here. You deserve a hot infusion and some relax.
-When ready, jump to
-#link("/monadic-parser-combinators-3")[the next chapter];.
-
-#link("/monadic-parser-combinators")[Previous - Intro] ⁓
-#link("/monadic-parser-combinators-3")[Next - That's a Combinator!]
-
-= References
-<references>
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}

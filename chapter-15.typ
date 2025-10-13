@@ -1,3 +1,5 @@
+= One Combinator to Rule Them All
+
 We will dedicate the next couple of chapters to giving ourselves a pat
 on the back to celebrate this little `bind` function as our most
 outstanding invention since chapter 1. \
@@ -336,22 +338,8 @@ To me, in most of the cases, it makes little sense. I personally find
 this result too cryptic and not particularly expressive.
 
 So, here's my alternative plan: I would rather get an energizing
-Tiramisù; then I will quickly proceed with
-#link("/monadic-parser-combinators-16")[Chapter 16];, in which I intend
-to transform this horrible syntax into something more digestible for the
-rest of us. Then, I promise, there will be a very convincing reason to
-rewrite #emph[some] of the past combinators with Monads. In the
-meanwhile, buon appetito.
-
-#link("/monadic-parser-combinators-14")[Previous - Mind the Context] ⁓
-#link("/monadic-parser-combinators-16")[Next - A Programmable Semicolon]
-
-= References
-<references>
-- #link("https://people.cs.nott.ac.uk/pszgmh/fold.pdf")[Graham Hutton - A tutorial on the universality and expressiveness of fold]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+Tiramisù; then I will quickly proceed with Chapter 16, in which I
+intend to transform this horrible syntax into something more
+digestible for the rest of us. Then, I promise, there will be a very
+convincing reason to rewrite #emph[some] of the past combinators with
+Monads. In the meanwhile, buon appetito.

@@ -1,28 +1,11 @@
-You want to invent a new language, and you want to do this in F\#, don't
-you? And, of course, you want to base its parser on Monadic Parser
-Combinators. You've always wanted. So, let's make it happen!
-
-== Index
-<index>
-+ #link("/monadic-parser-combinators")[Intro]
-+ #link("/monadic-parser-combinators-2")[5 Shades Of Composability]
-+ #link("/monadic-parser-combinators-3")[That's a Combinator!]
-+ #link("/monadic-parser-combinators-4")[I Told You Not Mess With The Signature!]
-+ #link("/monadic-parser-combinators-5")[A Different Kind of Coupling]
-+ #link("/monadic-parser-combinators-6")[Mapping the Journey]
-+ #link("/monadic-parser-combinators-7")[Parser-Powered Function Application]
-+ #link("/monadic-parser-combinators-8")[Here Comes The Tuple]
-+ #link("/monadic-parser-combinators-9")[Things You Don't Care About]
-+ #link("/monadic-parser-combinators-10")[Applying Functions, Ad Nauseam]
-+ #link("/monadic-parser-combinators-11")[Lifting Functions]
-+ #link("/monadic-parser-combinators-12")[Things You Are Not Sure About]
-+ #link("/monadic-parser-combinators-13")[Things You Want To Remember]
-+ #link("/monadic-parser-combinators-14")[Mind The Context]
-+ #link("/monadic-parser-combinators-15")[One Combinator to Rule Them All]
-+ #link("/monadic-parser-combinators-16")[A Programmable Semicolon]
-
 == Introduction
+
 <introduction>
+
+You want to invent a new language, and you want to do this in F\#,
+don't you? And, of course, you want to base its parser on Monadic
+Parser Combinators. You've always wanted. So, let's make it happen!
+
 The compiler of your beautiful new language --- with which you will
 bring the use of `goto` and `null` back to life --- will have several
 components:
@@ -158,7 +141,7 @@ This post tries to stand out in a few different ways:
   tutorials and books, we never address testing at all?
 
 Fine, enough with the introduction. Ready? Treat yourself to a sorbet,
-then #link("/monadic-parser-combinators-2")[let's get started];.
+then let's get started.
 
 == Notes
 <notes>
@@ -166,21 +149,5 @@ I am not a native English speaker: if you spot any typo or weird
 sentence, feel free to
 #link("https://github.com/arialdomartini/arialdomartini.github.io/")[send me a pull request];.
 
-This blog is crafted by people, not AI. Illustrations are original work
-by Nanou.
-
-#link("/monadic-parser-combinators-2")[Next: 5 Shades Of Composability]
-
-= References
-<references>
-- #link("https://en.wikipedia.org/wiki/Recursive_descent_parser")[Recursive Descent Parser]
-- #link("https://tree-sitter.github.io/tree-sitter/")[Tree-sitter]
-- #link("https://fsharpforfunandprofit.com/series/understanding-parser-combinators/")[Scott Wlaschin - The "Understanding Parser Combinators" series]
-- #link("https://hasura.io/blog/parser-combinators-walkthrough")[Antoine Leblanc - Parser Combinators: a Walkthrough, Or: Write you a Parsec for Great Good]
-- \[Turtles all the way down\]\[turtles\]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+This book is crafted by people, not AI. Illustrations are original
+work by Nanou.

@@ -1,3 +1,5 @@
+= Mapping the Journey
+
 I sometimes feel uneasy when books keep providing too many details
 without giving a hint of where things are headed. This chapter takes a
 more relaxed approach, setting aside implementation details to offer you
@@ -385,29 +387,14 @@ What the heck? It works!!! This funny syntax gives you back is #emph[a
 parser] for `MultiDate`. How can it be? There must be some black magic
 involved!
 
-== Did It Pique Your Curiousity?
-<did-it-pique-your-curiousity>
-If all of this sounds confusing, that's perfectly fine: I just hope it
-also sounds a bit exciting. \
-What you saw above involves a fair bit of syntactic sugar, and a good
-amount of behind-the-scenes magic. As with any magic trick, true
-understanding comes from peeking behind the curtain and rebuilding it
-from scratch. That's exactly what we are doing in
-#link("monadic-parser-combinators-7")[the next chapter];.
+== Did It Pique Your Curiousity?  <did-it-pique-your-curiousity> If
+all of this sounds confusing, that's perfectly fine: I just hope it
+also sounds a bit exciting. \ What you saw above involves a fair bit
+of syntactic sugar, and a good amount of behind-the-scenes magic. As
+with any magic trick, true understanding comes from peeking behind the
+curtain and rebuilding it from scratch. That's exactly what we are
+doing in the next chapter.
 
 Enough with reading code: take a moment for a Yerba mate, warm up the
 keyboard and finally hit some keys!
 
-#link("/monadic-parser-combinators-5")[Previous - A Different Kind of Coupling]
-⁓
-#link("/monadic-parser-combinators-7")[Next - Parser-Powered Function Application!]
-
-= References
-<references>
-#link("https://en.wikipedia.org/wiki/Paprika_(2006_film)")[Satoshi Kon - Paprika (2006)]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}

@@ -1,3 +1,5 @@
+= Here Comes The Tuple
+
 Very well. We have a powerful tool at our disposal for applying
 functions to the content of a parser. The biggest limitation is that it
 works with a single parser only. In this installment we will distill one
@@ -260,17 +262,6 @@ version:
 let andThen = liftA2 (,)
 ```
 
-But be patient, we will get there. I guess you can reward yourself with
-a slice of castagnaccio and then move to
-#link("/monadic-parser-combinators-9")[Chapter 9];, where we will play
-with the idea of ignoring parsers. Buon appetito!
-
-#link("/monadic-parser-combinators-7")[Previous - Parser-Powered Function Application]
-⁓
-#link("/monadic-parser-combinators-9")[Next - Things You Don't Care About]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
+But be patient, we will get there. I guess you can reward yourself
+with a slice of castagnaccio and then move to Chapter 9, where we will
+play with the idea of ignoring parsers. Buon appetito!
