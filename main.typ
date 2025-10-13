@@ -10,6 +10,9 @@
 
 #set heading(numbering: "1.")
 
+
+#outline(title: "Table of Content")
+
 #include "chapter-1.typ"
 #include "chapter-2.typ"
 #include "chapter-3.typ"
