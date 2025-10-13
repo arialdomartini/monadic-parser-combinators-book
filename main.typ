@@ -8,6 +8,8 @@
     it
 }
 
+#set heading(numbering: "1.")
+
 #include "chapter-1.typ"
 #include "chapter-2.typ"
 #include "chapter-3.typ"
