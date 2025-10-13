@@ -1,3 +1,9 @@
+#show link: it => {
+    underline(it)
+    footnote([#it.body --- #it.dest])
+}
+
+
 #include "chapter-1.typ"
 #include "chapter-2.typ"
 #include "chapter-3.typ"
