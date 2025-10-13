@@ -3,19 +3,19 @@
 So, let's challenge the composability of imperative parsers. Suppose
 that other than `parsePerson`:
 
-```fsharp
+```ocaml
 parsePerson: string -> Person
 ```
 
 we also wish to write a Parser for `RockTrio` objects:
 
-```fsharp
+```ocaml
 parseRockTrio: string -> RockTrio
 ```
 
 where `RockTrio` is:
 
-```fsharp
+```ocaml
 type RockTrio =
     { Name: string
       BassPlayer: Person
@@ -30,7 +30,7 @@ and `parsePerson`.
 
 What if we also have `SoloArtist` to be parsed as:
 
-```fsharp
+```ocaml
 type SoloArtist =
     { NickName: string
       Artist: Person }
@@ -50,14 +50,14 @@ that happens to succeed. Oh! So there must exist a notion of
 needs to signal when it failed. Uhm… Maybe we can let parsers raise
 exceptions in case of failure. Let's define:
 
-```fsharp
+```ocaml
 exception ParseException of string
 ```
 
 OK, fine: provided that `RockTrio` and `SoloArtist` are both cases of
 the same union type:
 
-```fsharp
+```ocaml
 type RockBand =
     | RockTrio of RockTrio
     | SoloArtist of SoloArtist
@@ -65,7 +65,7 @@ type RockBand =
 
 our `parseBand` parser could be:
 
-```fsharp
+```ocaml
 
 open System
 open AutoFixture
@@ -124,7 +124,7 @@ because I am too lazy for defining every test instances.
 
 The implementation:
 
-```fsharp
+```ocaml
 let parseBand parseRockTrio parseSoloArtist input : RockBand =
     try
         parseRockTrio input
@@ -136,7 +136,7 @@ is straightforward. Also, if you entirely abandon yourself to the F\#
 type inference, you realize that it is super generic too: indeed, it
 works with any couple of parsers. We could generalize it as:
 
-```fsharp
+```ocaml
 let (<|>) first second =
     fun input ->
         try
@@ -169,7 +169,7 @@ let ``falls back to second parser if first parser fails`` () =
 
 Let's read the signature again:
 
-```fsharp
+```ocaml
 val (<|>) : (string -> 'a) -> (string -> 'a) -> (string -> 'a)
 ```
 
@@ -181,7 +181,7 @@ this is a higher-order function that #emph[combines] parsers,
 #emph[generating] a brand new one, seemingly out of thin air. \
 Here's how it is used:
 
-```fsharp
+```ocaml
 let parseRockTrioOrSoloArtist = parseRockTrio <|> parseSoloArtist
 ```
 

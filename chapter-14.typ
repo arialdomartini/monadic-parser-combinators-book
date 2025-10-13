@@ -39,21 +39,21 @@ then eventually an `'a -> 'b Parser` follows. Our goal is to write the
 parser combinator `bind` (or `>>=`) that, given those 2 elements,
 generates a `'b Parser`:
 
-```fsharp
+```ocaml
 val bind : 'a Parser -> ('a -> 'b Parser) -> 'b Parser
 ```
 
 We are also going to use our old acquaintance `pure'`, but we will
 adhere to the convention to call it `return'`.
 
-```fsharp
+```ocaml
 let return' = pure'
 ```
 
 First things first: we need a unit test. Let's continue working with the
 XML tag example:
 
-```fsharp
+```ocaml
 let bind m f = __
 
 let (>>=) = bind
@@ -100,7 +100,7 @@ disrupting element is the closing tag parser, since it depends on the
 parsers is obtained by the application of `>>=`. Given its signature,
 you can use it like this:
 
-```fsharp
+```ocaml
 let openThenCloseP = 
     openingTagP >>= (fun tagName ->
             let closingTagP = makeClosingTagP tagName
@@ -118,7 +118,7 @@ We are not required to immediately use the `tagName` value: in fact,
 between the opening and the closing tags, we want to take the chance to
 parse the content. It's a matter of using a chain of `>>=` applications:
 
-```fsharp
+```ocaml
 let nodeP = 
     openingTagP >>= (fun tagName ->
         contentP >>= (fun content ->
@@ -128,7 +128,7 @@ let nodeP =
 
 If you squint your eyes you could read the funny `>>=` syntax as:
 
-```fsharp
+```ocaml
 let openCloseP = 
          openingTagP    >>=    (fun tagName -> ...)
 // apply openingTagP   then    pass tagName to a lambda continuation
@@ -158,7 +158,7 @@ Fine. Let's finally implement this infamous `bind` combinator.
 
 == Follow the type signature
 <follow-the-type-signature>
-```fsharp
+```ocaml
 // 'a Parser -> ('a -> 'b Parser) -> 'b Parser
 let bind m f = ...
 ```
@@ -166,7 +166,7 @@ let bind m f = ...
 Going with the flow and following the type signature, we know we have to
 return a `'b Parser`:
 
-```fsharp
+```ocaml
 let bind m f = Parser (fun s ->
     ...)
 ```
@@ -175,7 +175,7 @@ We have the input string `s` and `m`, the `'a Parser`. If we run this
 parser with the input string, we will get back a parsing result,
 possibly containing a parsed value `a: 'a`:
 
-```fsharp
+```ocaml
 let bind m f = Parser (fun s ->
     let resultA = run m s
     ...)
@@ -184,7 +184,7 @@ let bind m f = Parser (fun s ->
 We are not sure that the parsing succeeded. We'd better pattern match.
 Of course, in case of failure, we can let \`binda just fail.
 
-```fsharp
+```ocaml
 let bind m f = Parser (fun s ->
     let resultA = run m s
     match resultA with
@@ -196,7 +196,7 @@ let bind m f = Parser (fun s ->
 In case of success, we get the `'a` value and the unconsumed input:
 exactly what we needed to get the `'b Parser`:
 
-```fsharp
+```ocaml
 let bind m f = Parser (fun s ->
     let resultA = run m s
     match resultA with
@@ -211,7 +211,7 @@ because our code is surrounded by `Parser (fun s -> ...)` and we would
 end up with a parser inside a parser. Idea: we can `run` the `b Parser`
 with the `rest` input to get its parsed value:
 
-```fsharp
+```ocaml
 let bind m f = Parser (fun s ->
     let resultA = run m s
     match resultA with

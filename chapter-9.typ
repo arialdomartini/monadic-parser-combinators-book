@@ -24,7 +24,7 @@ inst Person
 
 to be parsed into:
 
-```fsharp
+```ocaml
 type Person =
     { Id: Guid
       Name: string
@@ -50,7 +50,7 @@ To build the parser for a GUID you needs to give it this recipe:
 
 You remember how in @chapter-6 we imagined to build:
 
-```fsharp
+```ocaml
 let surroundedBy before after parser = before >>. parser .>> after
 ```
 
@@ -71,7 +71,7 @@ Let's start with `>>.`. Notice the `.` on the right side? It's the hint
 that this operator runs both the parsers, but only keeps the result of
 the right one. Here's how you could test it:
 
-```fsharp
+```ocaml
 type Prefix = Prefix
 type Content = Content of int
 
@@ -93,7 +93,7 @@ one of `.>>.`. Only, rather than returning a tuple with both the values,
 you can return the right value only. If you Copy/paste `.>>.`, you will
 not struggle to modify it as:
 
-```fsharp
+```ocaml
 let (>>.) leftP rightP =
     Parser(fun input ->
         let resultL = run leftP input
@@ -125,14 +125,14 @@ times you will win. Let's think about it:
 Interesting. What does it mean to compose 2 functions each returning a
 parser? Quick review how to compose ordinary functions. If you have:
 
-```fsharp
+```ocaml
 val f : 'a -> 'b
 val g : 'b -> 'c
 ```
 
 then:
 
-```fsharp
+```ocaml
 val fComposedG : 'a -> 'c
 
 let fComposedG = fun a -> g(f(a))
@@ -140,7 +140,7 @@ let fComposedG = fun a -> g(f(a))
 
 You could conceive an operator for this:
 
-```fsharp
+```ocaml
 // ('a -> 'b) -> ('b -> 'c) -> ('a -> 'c)
 let (>>) f g = fun a -> g(f(a))
 
@@ -161,13 +161,13 @@ let ``function composition`` () =
 Indeed, this operator is natively provided by F\#
 (#link("https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4552")[FSharp.Core/prim-types.fs\#L4546];):
 
-```fsharp
+```ocaml
 let inline (>>) func1 func2 x = func2 (func1 x)
 ```
 
 Let's give it a try, on our Parser-returnign functions:
 
-```fsharp
+```ocaml
 let (>>.) leftP rightP = 
     leftP .>>. rightP
     >> snd
@@ -177,7 +177,7 @@ Uhm, no… This does not even compile. Of course it does not! A parser is
 not a plain function; it's a function wrapped in a type. You need a
 different operator, with this signature:
 
-```fsharp
+```ocaml
 val combineP : 'a Parser -> ('a -> 'b) -> 'b Parser
 ```
 
@@ -185,7 +185,7 @@ Well well well, look at that! This is our friend `|>>`, the dual of
 Functor's `map` which we developed in @chapter-7! Let's see if it
 works:
 
-```fsharp
+```ocaml
 let (>>.) leftP rightP = 
     leftP .>>. rightP
     |>> snd
@@ -195,7 +195,7 @@ Indeed, this compiles, and the test is green. \
 Wait a minute! Does it mean that using `fst` instead of `snd` we will
 obtain `.>>` as well? Let's see:
 
-```fsharp
+```ocaml
 let (>>.) leftP rightP = 
     leftP .>>. rightP
     |>> fst
@@ -232,7 +232,7 @@ Let's keep flying in this direction, building on top of `.>>` and
 something you want to parse. You saw it already in @chapter-6. Its
 signature is:
 
-```fsharp
+```ocaml
 val between<'o, 'c, 'v> : 'o Parser -> 'c Parser -> 'v Parser
 ```
 
@@ -244,7 +244,7 @@ where:
 
 This could be used, for example, for parsing a date inside an XML tag:
 
-```fsharp
+```ocaml
 let between opening closing content = failwith "Not yet implemented"
 
 [<Fact>]
@@ -263,7 +263,7 @@ let ``date in tags`` () =
 
 The implementation is straighforward:
 
-```fsharp
+```ocaml
 let between opening closing content =
     opening >>. content .>> closing
 ```
@@ -276,7 +276,7 @@ managed to develop a parser for a whole code block and a parser for
 comments, you can easily define a parser that detects a comment between
 2 arbitarily complex code blocks:
 
-```fsharp
+```ocaml
 let commentBetweenBlocksP = commentP |> between codeBlockP codeBlockP
 ```
 
@@ -284,7 +284,7 @@ It is that easy. \
 As an outrageously useless example, here's how to parse a string
 surrounded by dates:
 
-```fsharp
+```ocaml
 [<Fact>]
 let ``greeting between dates`` () =
 

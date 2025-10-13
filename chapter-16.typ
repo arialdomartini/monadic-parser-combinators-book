@@ -8,7 +8,7 @@ to deal with Monads, via
 it's a matter telling it which Monad implementation to use. \
 The implementations of `bind` and `return'` will suffice:
 
-```fsharp
+```ocaml
 type ParseBuilder() =
     member this.Bind(m, f) = m >>= f
     member this.Return(v) = return' v
@@ -22,13 +22,13 @@ and `return'` implementation. Even better, we won't even need to
 explicitly mention `bind` and `return'` in that block: F\# will let us
 use some very sweet syntactic sugar. For whatever expression like:
 
-```fsharp
+```ocaml
 parser >>= (fun value -> f value)
 ```
 
 we can just write:
 
-```fsharp
+```ocaml
 let! value = parser
 f value
 ```
@@ -55,7 +55,7 @@ such as the `>>=` operator, `fun`, etc.
 
 So, keep in mind this transformation:
 
-```fsharp
+```ocaml
 parser >>= (fun value -> doSomethingWith value)
 
 let! value = parser
@@ -75,7 +75,7 @@ Computation Expression.
 === `map` In Do Notation <map-in-do-notation> Here's `map`, in its
 initil implementation, from @chapter-7:
 
-```fsharp
+```ocaml
 let map (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
     Parser (fun input ->
         let ar : 'a ParseResult = run aP input
@@ -87,7 +87,7 @@ let map (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
 Here is it how we defined it, in @chapter-10, in terms of `<*>` and
 `pure'`:
 
-```fsharp
+```ocaml
 let map = (<<|)
 let map (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
     pure' f <*> aP
@@ -96,7 +96,7 @@ let map (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
 And, finally, the version of @chapter-15, implemented with `bind` and
 `return'`:
 
-```fsharp
+```ocaml
 let map (f: 'a -> 'b) (aP: `a Parser) = 
     bind aP (f >> return')
 ```
@@ -107,7 +107,7 @@ Otherwise, we could always think to `let!` as a convenient and almost
 magic way to put our hands on the parsed value. Either way will lead us
 to:
 
-```fsharp
+```ocaml
 let map f aP = parse {
     let! a = aP
     let b = f a
@@ -128,7 +128,7 @@ Read it as:
 
 Does it work? Let us update the original test we had for `map`:
 
-```fsharp
+```ocaml
 [<Fact>]
 let ``parser-powered function application`` () =
     let twice x = x * 2
@@ -158,7 +158,7 @@ always used.
 
 Of course, you can make the whole implemenetation a bit shorter:
 
-```fsharp
+```ocaml
 let map f aP = parse {
     let! a = aP
     return' f a
@@ -171,7 +171,7 @@ Point Free style.
 === `ap` In Do Notation <ap-in-do-notation> Do you remember how we
 defined the Applicative Functor's `ap` in @chapter-10?
 
-```fsharp
+```ocaml
 // ap : ('a -> 'b) Parser -> 'a Parser -> 'b Parser
 let ap fP aP = Parser (fun input ->
     match run fP input with
@@ -187,7 +187,7 @@ implementation revolves around running both parsers to get to the
 contained value, then applying the function to the value. We can really
 translate this literally, using the `parser` computation expression:
 
-```fsharp
+```ocaml
 let ap fP aP =
     parse {
         let! f = fP
@@ -205,7 +205,7 @@ Computation Expressions are particularly effective at capturing the
 meaning of a parser and at making the intent clear. In @chapter-9 we defined `between`
 using `>>.` and `.>>`:
 
-```fsharp
+```ocaml
 let between opening closing content =
     opening >>. content .>> closing
 ```
@@ -220,7 +220,7 @@ yourself: "What is `between` supposed to do?"
 
 Well, here is a literal translation:
 
-```fsharp
+```ocaml
 let between openingP closingP contentP =
     parse {
         let! _ = openingP
@@ -248,7 +248,7 @@ Here are some examples.
 Apply 2 parsers, returning both results in a tuple. \
 This is a literal translation:
 
-```fsharp
+```ocaml
 let (.>>.) aP bP =
     parse {
         let! a = aP
@@ -263,7 +263,7 @@ let (.>>.) aP bP =
 Apply 2 parsers, returning the result of the first one only. \
 Here the trick is to ignore the result of the second parser.
 
-```fsharp
+```ocaml
 let (.>>) firstP secondP =
     parse {
         let! first = firstP
@@ -278,7 +278,7 @@ let (.>>) firstP secondP =
 Apply 2 parsers, returning the result of the second one only. \
 That's trivial! This time we just need to ignore the first result:
 
-```fsharp
+```ocaml
 // 'a Parser -> 'b Parser -> 'b Parser
 
 let (>>.) firstP secondP = 
@@ -298,7 +298,7 @@ An idea could be to implement it as recursive function. We parse a first
 element, then we rely on recursion to parse the rest of the elements.
 Returning the result is a matter of building a list:
 
-```fsharp
+```ocaml
 let rec many1 p =
     parse {
         let! x = p
@@ -312,7 +312,7 @@ Notice that this is the implementation of `many1`, requiring at least 1
 element. `many` is easily obtained combining `many1` with the empty
 sequence case, by the use of `<|>`:
 
-```fsharp
+```ocaml
 let rec many p = 
     many1 p
     <|> (pure' [])
@@ -321,7 +321,7 @@ let rec many p =
 Compare this with what we obtained in
 #link("/monadic-parser-combinators-11")[Chapter 11];:
 
-```fsharp
+```ocaml
 let many<'a> (parser: 'a Parser): 'a list Parser = Parser (fun input ->
     let rec zeroOrMore input =
         match run parser input with
@@ -336,7 +336,7 @@ let many<'a> (parser: 'a Parser): 'a list Parser = Parser (fun input ->
 
 and:
 
-```fsharp
+```ocaml
 let rec many parser = 
     (cons <!> parser <*> (many parser)) <|> (pure' [])
 ```
@@ -349,7 +349,7 @@ formulation, don't you think?
 Parse zero or more occurrences of something, discarding the result.
 That's easy! We just need to parse many elements, only to ignore them:
 
-```fsharp
+```ocaml
 let skipMany p =
     parse {
         let! _ = many p
@@ -365,7 +365,7 @@ list of elements separated by a separator is an element followed by many
 groups "separator + element". We could capture the idea of "separator +
 element" with a parser on its own, to be used with `many`.
 
-```fsharp
+```ocaml
 let rec sepBy separator parser =
     let sepThenP =
         parse {
@@ -386,7 +386,7 @@ let rec sepBy separator parser =
 Elevate a 3-parameter function into the Parsers world. \
 It's the combinator with this signature:
 
-```fsharp
+```ocaml
 val lift3 : ('a -> 'b -> 'c -> 'd) -> 'a Parser -> 'b Parser -> 'c Parser -> 'd Parser
 ```
 
@@ -396,7 +396,7 @@ Get a 3-parameter function and the 3 arguments, each wrapped in a
 parser. Parse each argumement then apply the function to the parsed
 values.
 
-```fsharp
+```ocaml
 let lift3 f aP bP cP =
     parse {
         let! a = aP

@@ -6,7 +6,7 @@ you can just run function application again. And if you get yet another
 function, you can do the same, ad nauseam. \
 See this example:
 
-```fsharp
+```ocaml
 [<Fact>]
 let ``function application with 2 parameters`` () =
 
@@ -29,7 +29,7 @@ let ``function application with 2 parameters`` () =
 It's easy to see how this does not stop with 2-parameter functions.
 Here's a test for a 3-parameter function:
 
-```fsharp
+```ocaml
 [<Fact>]
 let ``function application with 3 parameters`` () =
 
@@ -45,7 +45,7 @@ let ``function application with 3 parameters`` () =
 
 Now:
 
-```fsharp
+```ocaml
 let f:  int  -> (bool -> (string -> string)) = 
     fun a -> fun b -> fun c -> $"{a}, {b}, {c}"
 ```
@@ -56,7 +56,7 @@ turn, returning a function. F\# lets you:
 - remove the parenthesis from the signature, since function application
   associates to the right:
 
-```fsharp
+```ocaml
 let f:  int  -> bool -> string -> string =
     fun a -> fun b -> fun c -> $"{a}, {b}, {c}"
 ```
@@ -65,7 +65,7 @@ let f:  int  -> bool -> string -> string =
   `f a b c`. This can be expressed saying that in F\# all the functions
   are automatically curried:
 
-```fsharp
+```ocaml
 let f a b c = $"{a}, {b}, {c}"
 ```
 
@@ -73,7 +73,7 @@ let f a b c = $"{a}, {b}, {c}"
 
 - apply it to multiple parameters in a single shot, with:
 
-```fsharp
+```ocaml
 let d = f 42 true "foobar"
 ```
 
@@ -89,7 +89,7 @@ Let's see. We start from a generic 3-parameter function
 `'a -> 'b -> 'c -> 'd`. In this context, we are not concerned how it is
 implemented, we can just focus on its signature:
 
-```fsharp
+```ocaml
 
 [<Fact>]
 let ``Parser-powered function application with 3 parameters`` () =
@@ -102,7 +102,7 @@ Then, we apply it to an argument `'a Parser`, of course using `map`. Let
 me use the symbol `<!>` instead of `<<|` or `map`; after all, we
 mentioned that they are all synonyms:
 
-```fsharp
+```ocaml
 let (<!>) = map
 
 [<Fact>]
@@ -153,7 +153,7 @@ will call it "apply" or `ap`.
 
 Let's recover from where we left:
 
-```fsharp
+```ocaml
 [<Fact>]
 let ``Parser-powered function application with 3 parameters`` () =
 
@@ -180,27 +180,27 @@ let f: 'a -> 'b -> 'c -> 'd = __
 
 you can apply it to arguments just by separating them with white spaces:
 
-```fsharp
+```ocaml
 let d = f a b c
 ```
 
 With a bit of imagination, you can think to those white spaces as an
 native F\# pseudo-operator, as we did with `map`. We got to:
 
-```fsharp
+```ocaml
 let dP = f <!> aP ...
 ```
 
 The idea is to keep running function application using an improved,
 Parser-powered `<*>` operator:
 
-```fsharp
+```ocaml
 let dP = f <!> aP <*> bP <*> cP
 ```
 
 You see the equivalence?
 
-```fsharp
+```ocaml
 let d:  'd         = f     a      b      c
 let dP: 'd Parser  = f <!> aP <*> bP <*> cP
 ```
@@ -210,7 +210,7 @@ Basically, we are writing an enhanced version of whitespace.
 If you don't like the fact that `<*>` is used for all the arguments but
 the first one, you might prefer this alternative syntax:
 
-```fsharp
+```ocaml
 let dP: 'd Parser  = pure' f <*> aP <*> bP <*> cP
 ```
 
@@ -220,7 +220,7 @@ type signature. Let's start with the simplest case of 1-parameter
 functions. `ap` / `<*>` is that operator that given a 1-parameter
 function wrapped in a Parser:
 
-```fsharp
+```ocaml
 val ap : ('a -> 'b) Parser -> ...
 
 let (<*>) = ap
@@ -228,7 +228,7 @@ let (<*>) = ap
 
 lets us apply the wrapped `'a -> 'b` to an `'a Parser` argument:
 
-```fsharp
+```ocaml
 val ap : ('a -> 'b) Parser -> 'a Parser -> ...
 ```
 
@@ -237,13 +237,13 @@ get back a `'b` value: a Parser is a promise of a value, so if we give
 parsers it's fair to be paid back with other parsers. It's legitimate to
 assume we get back a `'b Parser`:
 
-```fsharp
+```ocaml
 val ap : ('a -> 'b) Parser -> 'a Parser -> 'b Parser
 ```
 
 Let's implement it:
 
-```fsharp
+```ocaml
 let ap fP aP = __
 
 let (<*>) = ap
@@ -263,7 +263,7 @@ not even consume the input: `aP` just returns a Parser-wrapped `42`,
 have a convenience function `pure'`, which takes whatever value you give
 it in and wraps it into a doing-nothing Parser:
 
-```fsharp
+```ocaml
 let pure' a = Parser (fun input -> Success (a, input))
 
 // ('a -> 'b) Parser -> 'a Parser -> 'b Parser
@@ -281,7 +281,7 @@ let ``ap with a 1-parameter function`` () =
 You know how to proceed. The signature of `ap` tells you to return a
 `'b Parser`. Just build one:
 
-```fsharp
+```ocaml
 let ap fP aP = Parser (fun input ->
     ...)
 ```
@@ -300,7 +300,7 @@ analogy, it seems that solving this riddle is a matter of:
 Conventionally, the first box to open is the one containing the
 function:
 
-```fsharp
+```ocaml
 let ap fP aP = Parser (fun input ->
     match run fP input with
     | Failure e ->  Failure e
@@ -312,7 +312,7 @@ Of course, if we get an error, we give up. If we are successful, we get
 the inner function `f` the unconsumed input `rf` ("rest of `f`"). Fine,
 we have all the ingredients to open the `a` box:
 
-```fsharp
+```ocaml
 let ap fP aP = Parser (fun input ->
     match run fP input with
     | Failure e ->  Failure e
@@ -325,7 +325,7 @@ let ap fP aP = Parser (fun input ->
 Cool. We have `f`, we have `a` and the unconsumed input `ra`. Time to
 finally apply `f` to `a`, and to wrap the result in a `Success`:
 
-```fsharp
+```ocaml
 let ap fP aP = Parser (fun input ->
     match run fP input with
     | Failure e ->  Failure e
@@ -348,14 +348,14 @@ even be demonstrated mathematically. Even further: we can easily show
 that, since Applicative Functors are more powerful than Functors, we can
 rewrite `map` in terms of `pure'` and `ap`:
 
-```fsharp
+```ocaml
 let map f aP = pure' f <*> aP
 ```
 
 This `map` implementation may look obscure, but it is in fact very
 logic. If you compare the signatures of `map` and `ap`:
 
-```fsharp
+```ocaml
 val map:  ('a -> 'b)        -> 'a Parser -> 'b Parser
 val ap:   ('a -> 'b) Parser -> 'a Parser -> 'b Parser
 ```
@@ -379,7 +379,7 @@ the unsuspectedly powerful whitespace pseudo-operator.
 Does your brand new `<*>` have the same super-power? Let's see. We want
 to have the equivalent of this test:
 
-```fsharp
+```ocaml
 [<Fact>]
 let ``function application with 3 parameters, inlined`` () =
 
@@ -396,7 +396,7 @@ let ``function application with 3 parameters, inlined`` () =
 
 but using Parser arguments:
 
-```fsharp
+```ocaml
 [<Fact>]
 let ``ap with a 3-parameter function`` () =
     let f a b c = $"{a}, {b}, {c}"
@@ -422,7 +422,7 @@ extension of function application. It should not come as a surprise that
 we have made every effort to ensure that using Applicative Functors
 resembled just applying functions:
 
-```fsharp
+```ocaml
 let d:  'd         = f     a      b      c
 let dP: 'd Parser  = f <!> aP <*> bP <*> cP
 ```

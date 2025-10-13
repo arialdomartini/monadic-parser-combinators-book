@@ -30,7 +30,7 @@ inst Person
 That's what I call a gorgeous syntax! \
 To deserialize such a string into the F\# record:
 
-```fsharp
+```ocaml
 type Person =
     { Id: Guid
       Name: string
@@ -39,7 +39,7 @@ type Person =
 
 you need a parsing function of type:
 
-```fsharp
+```ocaml
 val parsePerson: string -> Person
 ```
 
@@ -54,7 +54,7 @@ As for the field values, though, `parsePerson` could smartly delegate
 parsing of GUIDs, strings and dates to some specialized sub-functions.
 Each would have a specific signature:
 
-```fsharp
+```ocaml
 val parseGuid: string -> Guid
 val parseString: string -> string
 val parseDateOnly: string -> DateOnly
@@ -65,7 +65,7 @@ val parseDateOnly: string -> DateOnly
 and `>>`, and so on. `parsePerson` will not need to worry about those
 details, so the skeleton of its implementation can be something like:
 
-```fsharp
+```ocaml
 open System
 open Xunit
 open Swensen.Unquote
@@ -175,7 +175,7 @@ Take expressions and statements, for example. Expressions can be
 composed via operators (like in `a * b` and `list1 ++ list2`);
 statements can be composed sequencing them, like in:
 
-```fsharp
+```ocaml
 use writer = new StreamWriter(filename)
 writer.WriteLine("Hello, world!")
 ```
@@ -185,7 +185,7 @@ and `while`. \
 However, this creates asymmetry. Control structures like `if` can use
 expressions:
 
-```fsharp
+```ocaml
 if(condition) { ...  }
 ```
 
@@ -210,7 +210,7 @@ unifying the 2 worlds. They offer greater composability by allowing
 control logic to be manipulated just like any other value. For example,
 this is valid F\# code:
 
-```fsharp
+```ocaml
 let squares = [for x in 1..10 do yield x*x]
 ```
 
@@ -240,7 +240,7 @@ processes hold the same guarantee? \
 Unfortunately, no. Consider 2 functions acquiring 2 locks `x` and `y`,
 in opposite order:
 
-```fsharp
+```ocaml
 open System.Threading
 open System.Threading.Tasks
 open Xunit
@@ -310,7 +310,7 @@ function using locks do compose into other functions using locks, but
 <what-about-our-manual-parser>
 Getting back to our fictional Parser:
 
-```fsharp
+```ocaml
 let parsePerson: string -> Person =
     fun input ->
         let parseRecordStructure: string -> string * string * string = __

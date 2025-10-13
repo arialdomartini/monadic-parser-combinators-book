@@ -21,7 +21,7 @@ the next components to crunch.
 
 It would be a (probably very complex) function with a signature like:
 
-```fsharp
+```ocaml
 type SourceCode = string
 
 type AbstractSyntaxTree =
@@ -35,7 +35,7 @@ val parser : SourceCode -> AbstractSyntaxTree
 If you think about it, that's not qualitatively different from
 deserializing a JSON string:
 
-```fsharp
+```ocaml
 type JSON = string
 
 val jsonDeserializer : JSON  -> MyObject
@@ -66,7 +66,7 @@ and it emits a tree like:
 We can imagine the Tree-sitter grammar for F\# as a function with this
 signature:
 
-```fsharp
+```ocaml
 val treeSitter : SourceCode -> TreeSitterSExpression
 ```
 

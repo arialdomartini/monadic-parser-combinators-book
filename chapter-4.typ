@@ -4,7 +4,7 @@
 <arialdo-you-are-a-liar>
 When I wrote:
 
-```fsharp
+```ocaml
 let parsePerson: string -> Person =
     fun input ->
         let parseRecordStructure: string -> string * string * string = __
@@ -35,7 +35,7 @@ inst Person
 
 is still a mystery. I just wrote:
 
-```fsharp
+```ocaml
 let guidPart, namePart, birthdayPart = parseRecordStructure input
 ```
 
@@ -90,13 +90,13 @@ sequentially, from the first to the last character.
 
 So, rather than:
 
-```fsharp
+```ocaml
 val parser : string -> 'a
 ```
 
 a parser would rather have the signature:
 
-```fsharp
+```ocaml
 val parser : string -> ('a * string)
 ```
 
@@ -118,7 +118,7 @@ if you are curious). The basic usage pattern, then, could be:
 
 With this pattern in mind, `parsePerson` turns into something like:
 
-```fsharp
+```ocaml
 let parseRecord input = __
 let parseGuid input = __
 let parseUpToName input = __
@@ -147,7 +147,7 @@ let parsePerson: string -> (Person * string) =
 
 No, wait: we also have to consider error handling:
 
-```fsharp
+```ocaml
 let parsePerson: string -> Person * string =
     fun input ->
         try
@@ -198,7 +198,7 @@ separate, generic function to parse based on a list of parsers, and to
 return a list of parsed value (being in a list, necesserily of the same
 type):
 
-```fsharp
+```ocaml
 open Xunit
 open Swensen.Unquote
 
@@ -239,7 +239,7 @@ of the same type `'a`. If we really wanted to use this combinator in
 instances of the same type, for example by wrapping them in a single
 union type:
 
-```fsharp
+```ocaml
 type MyTypes =
    | GuidCase of Guid
    | StringCase of string
@@ -251,7 +251,7 @@ the typical approach for programming language parsers. Let's keep this
 in mind. Whatever, probably this is not a very useful building block,
 after all. We have to live with this series of:
 
-```fsharp
+```ocaml
 let value1, rest = parse1 input
 let value2, rest = parse2 rest
 let value3, rest = parse3 rest
@@ -279,20 +279,20 @@ parsers.
 Speaking about elegance, I don't know about you, but these verbose
 signatures:
 
-```fsharp
+```ocaml
 val sequence<'a> (string -> 'a * string) list -> string -> 'a list * string
 ```
 
 are really starting to get on my nerves. We should do something to make
 them simpler. Type aliases for the win! Just defining:
 
-```fsharp
+```ocaml
 type Parser<'a> = string -> 'a * string
 ```
 
 turns `<|>` and `sequence`'s signatures to:
 
-```fsharp
+```ocaml
 val (<|>) : 'a Parser -> 'a Parser -> 'a Parser
 
 val sequence : 'a Parser list -> 'a list Parser
@@ -316,7 +316,7 @@ OK, I'm sold: let's use a `Result`, then.
 There are 2 possibilities. Either we return the unconsumed input only in
 case of a successful parsing:
 
-```fsharp
+```ocaml
 type ParseError = string
 type Input = string
 type Rest = string
@@ -326,7 +326,7 @@ type Parser<'a> = Input -> Result<'a * Rest, ParseError>
 
 or we return it in any case:
 
-```fsharp
+```ocaml
 type Parser<'a> = Input -> Result<'a, ParseError> * Rest
 ```
 
@@ -341,7 +341,7 @@ Let's use the first signature.
 <from-exceptions-to-functional-error-handling>
 Adapting `<|>` and its tests is a piece of cake:
 
-```fsharp
+```ocaml
 let (<|>) (first: 'a Parser) (second: 'a Parser) : 'a Parser =
     fun input ->
         let result = first input
@@ -376,7 +376,7 @@ let ``falls back to second parser if first parser fails`` () =
 Voilà, no more exceptions! \
 Unfortunately, the same cannot be said for `parsePerson`:
 
-```fsharp
+```ocaml
 let parsePerson: Person Parser =
     fun input ->
 

@@ -2,7 +2,7 @@
 
 Until this point, we have worked with these types:
 
-```fsharp
+```ocaml
 type ParseError = string
 type Input = string
 type Rest = string
@@ -14,7 +14,7 @@ So defined, `Parser` is a type alias. It's a good idea to improve the
 encapsulation wrapping the function on the right side in a Single-case
 Discriminated Union:
 
-```fsharp
+```ocaml
 type Parser<'a> = Parser of (Input -> Result<'a * Rest, ParseError>)
 ```
 
@@ -22,7 +22,7 @@ Note the `Parser of` case constructor. We can also grant
 `Result<Rest * 'a, ParseError>` the dignity of its own type, independent
 from `Result`:
 
-```fsharp
+```ocaml
 type ParseResult<'a> =
     | Success of ('a * Rest)
     | Failure of ParseError
@@ -36,7 +36,7 @@ drawback of having the function wrapped inside `Parser`, though, is that
 you can't direcly apply it to a string input anymore. A helper function
 will come in handy:
 
-```fsharp
+```ocaml
 let run (p: 'a Parser) (input: string)=
     match p with
     | Parser f -> f input
@@ -56,7 +56,7 @@ let ``runs a parser`` () =
 
 Actually, you can simplify `run` as:
 
-```fsharp
+```ocaml
 let run (Parser f) input =
     f input
 ```
@@ -156,7 +156,7 @@ application that, under the hood, takes care of passing `rest` around
 and of handling errors. This bears the question: what's the native F\#
 function application, to begin with?
 
-```fsharp
+```ocaml
 [<Fact>]
 let ``function application`` () =
     let twice x = x * 2
@@ -166,7 +166,7 @@ let ``function application`` () =
 
 Do you see that whitespace between `twice` and `42`?
 
-```fsharp
+```ocaml
 twice 42
      ^
 ```
@@ -175,7 +175,7 @@ With a bit of fantasy, you can imagine that this is an actual operator:
 it applies `twice` to the value `42`. If it were a real operator, its
 signature would be:
 
-```fsharp
+```ocaml
 val ( ) : ('a -> 'b) -> 'a -> 'b
 ```
 
@@ -184,7 +184,7 @@ operator name. But wait a moment! F\# #emph[does provide] an actual
 operator with that exact signature! It's `<|`. If you were to write it
 manually, you would have:
 
-```fsharp
+```ocaml
 let (<|) (f: 'a -> 'b) (a: 'a) : 'b = f a
 
 [<Fact>]
@@ -198,7 +198,7 @@ Its real implementation
 (#link("https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4546")[FSharp.Core/prim-types.fs\#L4546];)
 is:
 
-```fsharp
+```ocaml
 let inline (<|) func arg1 = func arg1
 ```
 
@@ -207,7 +207,7 @@ original! So gratifying… \
 `<|` is the same of the famous pipe operator `|>`, only with flipped
 parameters. Let's reinvent `|>` too:
 
-```fsharp
+```ocaml
 let (|>) (a: 'a) (f: 'a -> 'b) : 'b = f a
 
 [<Fact>]
@@ -220,7 +220,7 @@ let ``function application with pipe`` () =
 `|>` is actually defined like this in the F\# code
 (#link("https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4540")[FSharp.Core/prim-types.fs\#L4540];):
 
-```fsharp
+```ocaml
 let inline (|>) arg func = func arg
 ```
 
@@ -271,7 +271,7 @@ and:
   , kind: table
   )
 
-```fsharp
+```ocaml
 let (<<|) (f: 'a -> 'b) (aP: 'a Parser) : 'b = __
 
 let (|>>) (aP: 'a Parser) (f: 'a -> 'b) : 'b = __
@@ -347,7 +347,7 @@ and:
 
 Since both `<<|` and `|>>` now return a `'b Parser`, the assertions:
 
-```fsharp
+```ocaml
 test <@ twice <<| p42 = 84 @>
 test <@ p42 |>> twice = 84 @>
 ```
@@ -356,14 +356,14 @@ will not compile. We cannot compare the returned `'b Parser` with `84`.
 Is a sense, you got back a future, successfully parsed `84` wrapped in a
 box. You need `run` to unwrap it:
 
-```fsharp
+```ocaml
 test <@ run (twice <<| p42) "some input" = Success ("rest", 84) @>
 test <@ run (p42 |>> twice) "some input" = Success ("rest", 84) @>
 ```
 
 Putting all together:
 
-```fsharp
+```ocaml
 let (<<|) (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser = __
 
 let (|>>) (aP: 'a Parser) (f: 'a -> 'b) : 'b Parser = __
@@ -384,14 +384,14 @@ Now that we are armed with a failing test, we are ready to implement
 `|>>` and `<<|`. Not only can you be driven by tests: types can drive
 you too. Listen to the signature:
 
-```fsharp
+```ocaml
 let (<<|) (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser = ...
 ```
 
 It tells us to return an instance of `Parser`. Fine, let's obey. We need
 to invoke the `Parser` case constructor:
 
-```fsharp
+```ocaml
 let (<<|) (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
     Parser ...
 ```
@@ -399,7 +399,7 @@ let (<<|) (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
 What does the case constructor want as an argument? A function from an
 input `string` to something. Fine, type system, I trust you:
 
-```fsharp
+```ocaml
 let (<<|) (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
     Parser (fun input ->
         ...)
@@ -426,7 +426,7 @@ Now:
 
 Let's translate all of this to code:
 
-```fsharp
+```ocaml
 let (<<|) (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
     Parser (fun input ->
         let ar : 'a ParseResult = run aP input
@@ -437,7 +437,7 @@ let (<<|) (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
 
 Relying on type inference, you can simplify this to:
 
-```fsharp
+```ocaml
 let (<<|) f aP =
     Parser (fun input ->
         match run aP input with
@@ -468,7 +468,7 @@ obtained with a tool other than the classic dependency injection.
 
 Defining `|>>` is trivial: just swap the parameters:
 
-```fsharp
+```ocaml
 let (|>>) aP f = f <<| aP
 ```
 
@@ -497,7 +497,7 @@ For example, it is trivial to write a DateTime parser for the boring
 format `yyyy-MM-dd hh:mm:ss` if only you cheat and you use the native
 `TryParse` method:
 
-```fsharp
+```ocaml
 let dateTimeP: DateTime Parser =
     Parser (fun input ->
         match DateTime.TryParse(input[..18]) with
@@ -518,7 +518,7 @@ represents time by the number of seconds since the midnight of 1 January
 What a lame excuse! You rather prefer a format that celebrates yourself.
 What about using:
 
-```fsharp
+```ocaml
 type EpicTime = EpicTime of double
 ```
 
@@ -529,7 +529,7 @@ After all, that was the most epic moment in the universe history.
 
 Here's how to convert a depressing `DateTime` to a gorgeous `EpicTime`:
 
-```fsharp
+```ocaml
 type EpicTime = EpicTime of double
 
 let toEpicTime (date: DateTime) =
@@ -548,7 +548,7 @@ more convenient and intuitive representation than
 Presto! You can combine the `DateTime Parser` with `toEpicTime`, using
 `|>>`:
 
-```fsharp
+```ocaml
 let epicTimeP : EpicTime Parser =
     dateTimeP |>> toEpicTime 
 
@@ -559,7 +559,7 @@ let ``epicTime test`` () =
 
 Look how concise:
 
-```fsharp
+```ocaml
 let epicTimeP = dateTimeP |>> toEpicTime
 ```
 
@@ -588,7 +588,7 @@ To check the presence of a specific string, if you want to be generic,
 you can define a parser factory, something that gets the string you want
 to match and generates a parser for it:
 
-```fsharp
+```ocaml
 let str (s: string) =
     Parser (fun input ->
         if input.StartsWith(s) then Success (s, input[s.Length..])
@@ -605,7 +605,7 @@ as a building block to parse more refined parsers. For example, here's
 how to define booleans in your language. With a stroke of genius you
 take the decision to have three-state booleans:
 
-```fsharp
+```ocaml
 type Boolish =
     | SoTrue
     | SoFalse
@@ -631,7 +631,7 @@ overrated and boring… What about using German instead?
 Sounds promising! Building a parser for the keyword `falsch` is
 straighforward if you use `str`:
 
-```fsharp
+```ocaml
 let falschStr: string Parser = str "falsch"
 
 [<Fact>]
@@ -644,7 +644,7 @@ let ``parsing the string 'falsch'`` () =
 We are not done yet. `falschParser` is a `String Parser`, not a
 `Boolish Parser`. `|>>` to the resque!
 
-```fsharp
+```ocaml
 let boolishFalscheP = falschStr |>> (fun _ -> SoFalse)
 
 [<Fact>]
@@ -659,7 +659,7 @@ Functors! In order to understand this better, we need to examine the
 `<<|` signature and to reinterpret it through a new lens. Here's the
 implementation:
 
-```fsharp
+```ocaml
 let (<<|) (f: 'a -> 'b) (ap: 'a Parser) =
     Parser (fun input ->
         match run ap input with
@@ -669,7 +669,7 @@ let (<<|) (f: 'a -> 'b) (ap: 'a Parser) =
 
 and here the signature:
 
-```fsharp
+```ocaml
 val (<<|) : ('a -> 'b) -> 'a Parser -> 'b Parser
 ```
 
@@ -694,20 +694,20 @@ You can easily apply the 1st interpretation to the `EpicTime` case. You
 have a function from `DateTime` (the sad cat) to `EpicTime` (the happy,
 punk cat):
 
-```fsharp
+```ocaml
 val toEpicTime : DateTime -> EpicTime
 ```
 
 and you wanted to apply it to #emph[the value inside the]
 `DateTime Parser` box (the glass can):
 
-```fsharp
+```ocaml
 val dateTimeP: DateTime Parser
 ```
 
 You can do this with:
 
-```fsharp
+```ocaml
 let epicTimeP : EpicTime Parser =
     toEpicTime <<| dateTimeP
 ```
@@ -745,7 +745,7 @@ The second --- more fascinating and powerful --- interpretation arises
 from the second signature interpretation. Or as soon as you partially
 apply `<<|`:
 
-```fsharp
+```ocaml
 let toEpicTimeP = (<<|) toEpicTime
 ```
 
@@ -753,7 +753,7 @@ Wait, having an operator used in prefix fashion is a bit weird. Let's
 define an alias before proceeding. We can call it either `map` or
 `lift`, and the reason will be immediately clear:
 
-```fsharp
+```ocaml
 let map = (<<|)
 
 let toEpicTimeP = map toEpicTime
@@ -761,7 +761,7 @@ let toEpicTimeP = map toEpicTime
 
 Read `map`'s signature using the 2nd interpretation, as:
 
-```fsharp
+```ocaml
 val map: ('a -> 'b) -> ('a Parser -> 'b Parser)
 ```
 
@@ -775,7 +775,7 @@ Applied to our case:
 - You have `toEpicTime: DateTime -> EpicTime`.
 - You lift `toEpicTime` with `map`:
 
-```fsharp
+```ocaml
 let epicTime = map toEpicTime
 ```
 
@@ -784,13 +784,13 @@ let epicTime = map toEpicTime
 
 When you can feed it with a `DateTime Parser`:
 
-```fsharp
+```ocaml
 let epicTimeParser = toEpicTimeP dateTimeP
 ```
 
 you will give you back an `EpicTime Parser`:
 
-```fsharp
+```ocaml
 let toEpicTimeP = map toEpicTime
 
 [<Fact>]

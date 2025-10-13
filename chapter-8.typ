@@ -19,7 +19,7 @@ will assign the `int` value `42` to the variable `foo`. Terrific. \
 Internally, you want to store the parsed value in an instance of type
 `IntVariable`:
 
-```fsharp
+```ocaml
 type VariableName = VariableName of string
 
 type Assignment =
@@ -31,7 +31,7 @@ If you had a parser returning an `(int * VariableName)` tuple, building
 an `Assignment` parser would be a breeze, with the help of your old
 friend `map`:
 
-```fsharp
+```ocaml
 // Test parser, magically returning (42, VariableName "foo")
 let tupleP: (int * VariableName) Parser =
     Parser(fun _ -> Success((42, VariableName "foo"), "rest"))
@@ -65,7 +65,7 @@ want it to be as generic as possible, therefore we assume that we start
 from an `'a Parser` and a `'b Parser`. Since there is a notion of
 parsing elements in a sequence, we will call it `andThen`:
 
-```fsharp
+```ocaml
 let andThen<'a, 'b>: 'a Parser -> 'b Parser -> ('a * 'b) Parser = __
 ```
 
@@ -77,13 +77,13 @@ with them.
 
 The conventional operator symbol for `andThen` is `.>>.`:
 
-```fsharp
+```ocaml
 let (.>>.) = andThen
 ```
 
 Let's have a test for guiding the implementation:
 
-```fsharp
+```ocaml
 type VariableName = VariableName of string
 
 type Assignment =
@@ -108,14 +108,14 @@ work, so it's fine to give them a dummy, hardcoded implementation. As
 for the implementation of `andThen`, as usual we can let types drive us.
 We know we have to return a `Parser`. So, let's build one:
 
-```fsharp
+```ocaml
 let andThen<'a, 'b>: 'a Parser -> 'b Parser -> ('a * 'b) Parser = 
     Parser ...
 ```
 
 The Case Constructor wants a function from `input: string`. Let's go:
 
-```fsharp
+```ocaml
 let andThen (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser = 
     Parser (fun input -> 
         ...)
@@ -125,7 +125,7 @@ OK. In case of success, we have to return a tuple `(valueA, valueB)`,
 together with the unconsumed input. How to obtain `valueA`? We have an
 `'a Parser`, we have an input. That's easy, with `run`:
 
-```fsharp
+```ocaml
 let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
     Parser (fun input ->
         let resultA = run aP input
@@ -135,7 +135,7 @@ let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
 It's fair to assume that if `aP` fails, the whole `andThen` must also
 fail:
 
-```fsharp
+```ocaml
 let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
     Parser (fun input ->
         let resultA = run aP input
@@ -147,7 +147,7 @@ let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
 If `aP` succeeds, it returns the parsed value `valueA` (the first part
 of the tuple you want to return) plus the unconsumed input `restA`, :
 
-```fsharp
+```ocaml
 let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
     Parser (fun input ->
         let resultA = run aP input
@@ -160,7 +160,7 @@ let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
 We are almost done. With `restA` it's easy to also run the second parser
 `bP`:
 
-```fsharp
+```ocaml
 let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
     Parser (fun input ->
         let resultA = run aP input
@@ -174,7 +174,7 @@ let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
 Same story here: should `bP` fail, we let `andThen` fail; otherwise, we
 successfully return the tuple:
 
-```fsharp
+```ocaml
 let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
     Parser (fun input ->
         let resultA = run aP input
@@ -189,7 +189,7 @@ let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser): ('a * 'b) Parser =
 
 You can make the whole expression slightly shorter like this:
 
-```fsharp
+```ocaml
 let andThen<'a, 'b> (aP: 'a Parser) (bP: 'b Parser) : ('a * 'b) Parser =
     Parser(fun input ->
         match run aP input with
@@ -205,7 +205,7 @@ often. \
 Armed with `andThen` / `.>>.` and `|>>`, you can finally build the
 `Assignment` parser:
 
-```fsharp
+```ocaml
 let intP: int Parser = Parser(fun input -> Success(42, input[2..]))
 
 let variableNameP: VariableName Parser = str "foo" |>> VariableName
@@ -228,7 +228,7 @@ Nice! You did it!
 <umpf>
 Can I say something? This syntax:
 
-```fsharp
+```ocaml
 let assignmentP =
     intP .>>. variableNameP
     |>> (fun (i,v) -> { variableName = v; value = i })
@@ -240,7 +240,7 @@ expressions. However, I am sure that you are happy to know that in the
 next chapters you will learn how to write `andThen` / `.>>.` using a
 completely different syntax:
 
-```fsharp
+```ocaml
 let andThen aP bP =
     parser {
         let! a = aP
@@ -251,7 +251,7 @@ let andThen aP bP =
 Isn't it just easier to interpret? Funny enough, you will also learn to
 write it in a more concise way like this:
 
-```fsharp
+```ocaml
 let andThen = lift2 (fun a b -> (a, b))
 ```
 

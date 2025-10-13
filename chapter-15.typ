@@ -44,7 +44,7 @@ uncovered with `>>=`.
 
 Do you remember when in @chapter-7 we defined `map`?
 
-```fsharp
+```ocaml
 let map (f: 'a -> 'b) (ap: 'a Parser) : 'b Parser =
     Parser (fun input ->
         let ar : 'a ParseResult = run ap input
@@ -60,7 +60,7 @@ parser, and we gave it the alias `<!>`. Finally, in @chapter-10 we
 discovered Applicative Functors, and we found out that `map` could be
 expressed in terms of `<*>` and `pure'`:
 
-```fsharp
+```ocaml
 let map f a =
     pure' f <*> a
 ```
@@ -71,7 +71,7 @@ easy exercise but it is worth trying, and very rewarding.
 
 Here is how I would do this. I would start by analyzing the signatures:
 
-```fsharp
+```ocaml
 map : ('a -> 'b) -> 'a Parser -> 'b Parser 
 bind : 'a Parser -> ('a -> 'b Parser) -> 'b Parser
 return : 'a -> 'a Parser
@@ -79,7 +79,7 @@ return : 'a -> 'a Parser
 
 We want to build `map`, so we want to complete this implementation:
 
-```fsharp
+```ocaml
 let map (f: 'a -> 'b) (aP: 'a Parser) = 
     ...
 ```
@@ -93,7 +93,7 @@ parameter. The second parameter, though, should be `'a -> 'b Parser`,
 while we have `'a -> 'b`. But we know that `return'` can help lifting a
 `'b` to `'b Parser`:
 
-```fsharp
+```ocaml
 let map (f: 'a -> 'b) (aP: `a Parser) = 
     let f' = fun a -> 
         let b:  'b        = f a
@@ -103,7 +103,7 @@ let map (f: 'a -> 'b) (aP: `a Parser) =
 
 Good, that's it! We just have to invoke `bind` now:
 
-```fsharp
+```ocaml
 let map (f: 'a -> 'b) (aP: `a Parser) = 
     let f' = fun a -> 
         let b = f a
@@ -115,7 +115,7 @@ let map (f: 'a -> 'b) (aP: `a Parser) =
 
 We can make it way shorter inlining the variables:
 
-```fsharp
+```ocaml
 let map (f: 'a -> 'b) (aP: `a Parser) = 
     let f' = fun a -> return' f a
         
@@ -124,13 +124,13 @@ let map (f: 'a -> 'b) (aP: `a Parser) =
 
 and then observing that:
 
-```fsharp
+```ocaml
     let f' = fun a -> return' f a
 ```
 
 can be written in Point-Free style with the `>>` operator:
 
-```fsharp
+```ocaml
 let map (f: 'a -> 'b) (aP: `a Parser) = 
     let f' = f >> return'
         
@@ -139,7 +139,7 @@ let map (f: 'a -> 'b) (aP: `a Parser) =
 
 It helps me to read `>>` as "#emph[and then];", so that the expression:
 
-```fsharp
+```ocaml
 f >> return'
 ```
 
@@ -151,20 +151,20 @@ apply f, and then return'
 
 which is exactly what the meaning of the original:
 
-```fsharp
+```ocaml
 fun a -> return' f a
 ```
 
 This gets us to:
 
-```fsharp
+```ocaml
 let map (f: 'a -> 'b) (aP: `a Parser) = 
     bind aP (f >> return')
 ```
 
 or, using the infix alias `>>=`:
 
-```fsharp
+```ocaml
 let map f aP =
     aP >>= (f >> return')
 ```
@@ -190,7 +190,7 @@ tool, the mythical silver-bullet operator.
 
 In @chapter-10 we wrote:
 
-```fsharp
+```ocaml
 let ap fP aP = Parser (fun input ->
     match run fP input with
     | Failure e ->  Failure e
@@ -206,7 +206,7 @@ How can we write this in terms of `>>=`? OK, this is tought. I have no
 idea where to start from. Shall we try analyzing the signatures, like we
 did with `map`?
 
-```fsharp
+```ocaml
 ap :  ('a -> 'b) Parser -> 'a Parser -> 'b Parser 
 bind : 'a Parser -> ('a -> 'b Parser) -> 'b Parser
 return : 'a -> 'a Parser
@@ -217,19 +217,19 @@ lost. It's just beyond what my brain can process. What can help my poor
 limited understanding is the following mental translation. \
 Whenever I see the `>>=` operator in an expression like:
 
-```fsharp
+```ocaml
 foo >>= (fun bar -> baz)
 ```
 
 I interpret it like:
 
-```fsharp
+```ocaml
 someParser >>= (fun theValueItParsed -> whatIWantToDoWithThatValue)
 ```
 
 This matches 1:1 the signature:
 
-```fsharp
+```ocaml
 bind : 'a Parser -> ('a -> 'b Parser) -> 'b Parser
 ```
 
@@ -247,13 +247,13 @@ Basically, I often use this metaphor: `>>=` is a lens that lets me look
 #emph[inside] the parser box, so I can completely forget about parsers
 and deal directly with values:
 
-```fsharp
+```ocaml
 parser >>= (fun parsedValue -> ...)
 ```
 
 Fine. Going back to rewriting `ap`:
 
-```fsharp
+```ocaml
 // ('a -> 'b) Parser -> 'a Parser -> 'b Parser 
 let ap (fP: ('a -> 'b) Parser) (aP: 'a Parser) =
     ...
@@ -265,7 +265,7 @@ Unfortunately, they are both inside a parser. No problem: we'll use the
 one time to look inside `fP`, the other time for `aP`. Let's start with
 accessing `f` inside `fP`:
 
-```fsharp
+```ocaml
 let ap (fP: ('a -> 'b) Parser) (aP: 'a Parser) =
     fP >>= (fun f ->
         ...)
@@ -273,7 +273,7 @@ let ap (fP: ('a -> 'b) Parser) (aP: 'a Parser) =
 
 Let's do the same with `aP`:
 
-```fsharp
+```ocaml
 let ap fP (aP: 'a Parser) =
     fP >>= (fun f ->
         aP >>= (fun a ->
@@ -283,7 +283,7 @@ let ap fP (aP: 'a Parser) =
 Good. We have `f` and its argument `a`. That's easy! Applying `f` to `a`
 will get us back `b`:
 
-```fsharp
+```ocaml
 let ap fP (aP: 'a Parser) =
     fP >>= (fun f ->
         aP >>= (fun a ->
@@ -295,7 +295,7 @@ Can we just return `b`? No, both the `>>=` signature and the signature
 of `aP` itself claim we should return a `'b Parser`, not a `'b`. Easy!
 `return'` to the resque:
 
-```fsharp
+```ocaml
 let ap fP (aP: 'a Parser) =
     fP >>= (fun f ->
         aP >>= (fun a ->
@@ -305,7 +305,7 @@ let ap fP (aP: 'a Parser) =
 
 Done! Let's make it shorter, now, by inlining the temporary variable:
 
-```fsharp
+```ocaml
 let ap fP (aP: 'a Parser) =
     fP >>= (fun f ->
         aP >>= (fun a ->
@@ -314,7 +314,7 @@ let ap fP (aP: 'a Parser) =
 
 and then, again applying `>>`:
 
-```fsharp
+```ocaml
 let ap fP (aP: 'a Parser) =
     fP >>= (fun f -> 
         aP >>= (f >> return'))

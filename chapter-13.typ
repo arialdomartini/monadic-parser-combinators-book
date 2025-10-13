@@ -23,7 +23,7 @@ For the sake of simplicity, we won't support nested nodes nor
 attributes. Let's say that parsing nodes should give us back instances
 of this record:
 
-```fsharp
+```ocaml
 type Node = 
     { tag: string
       content: string }
@@ -43,7 +43,7 @@ Instead of `many`, which succeeds also in case of empty collections, we
 are going to use `many1`, a flavour of `many` requiring at least 1
 successful parsing:
 
-```fsharp
+```ocaml
 let many1<'a> (parser: 'a Parser) : 'a list Parser =
     let build f s = f :: s
     build <!> parser <*> (many parser) 
@@ -64,7 +64,7 @@ let ``applies a parser at least 1 time`` () =
 It really seems that we have all the ingredients we need. Let's write
 the node parser down to code:
 
-```fsharp
+```ocaml
 type Node =
     { tag: string
       content: string }
@@ -115,7 +115,7 @@ Now: parser combinators are composable, so simply improving the
 from the change. After all, that's exactly their selling point, right?
 Reversing a string is dead easy:
 
-```fsharp
+```ocaml
 let reverse (s: string) = new string(s.ToCharArray() |> Array.rev)
 ```
 
@@ -123,7 +123,7 @@ Therefore, creating a parser for closing tags should be a matter of
 lifting this `reverse` function to the parser world. Maybe we could try
 mapping `reverse`, with `<!>`:
 
-```fsharp
+```ocaml
 let PemaNgat = reverse <!> tagNameP
         
 let openingTagP = tagNameP |> between (str "<") (str ">")
@@ -133,7 +133,7 @@ let closingTagP = PemaNgat |> between (str "</") (str ">")
 Does this work? I don't know, pal, how can I tell? Didn't we just forget
 to work with TDD? Where are tests? Let's put it right at once:
 
-```fsharp
+```ocaml
 [<Theory>]
 [<InlineData("foo")>]
 [<InlineData("barBaz")>]
@@ -180,7 +180,7 @@ any string is the reverse of, ehm, its reverse.
 Does this mean that this test would pass no matter the string? Let's
 find it out with a random string:
 
-```fsharp
+```ocaml
 [<Fact>]
 let ``a random string can be both an opening and a closing tag name`` () =
     let random = Random()
@@ -196,7 +196,7 @@ Wait a minute! Does it mean that our XML node parser would accept any
 closing tag, even if its name does not match with the opening tag? Let's
 see:
 
-````fsharp
+````ocaml
 [<Fact>]
 let ``accepts a wrong closing tag`` () =
 
@@ -218,7 +218,7 @@ Doubt: is this a bug related to reversing the string, because of the
 semordnilap-based syntax? Let's try using unmatched tags with to the
 conventional tag name rule:
 
-```fsharp
+```ocaml
 let tagNameP = many1 (anyOf ['a'..'Z'])
 
 let openingTagP = tagNameP |> between (str "<") (str ">")
@@ -242,7 +242,7 @@ Oh, no! It's still green! So, this bug is really inherent.
 If you think about it, in the definition of `openingTagP` and
 `closingTagP`:
 
-```fsharp
+```ocaml
 let tagNameP = many1 (anyOf ['a'..'Z'])
 
 let openingTagP = tagNameP |> between (str "<") (str ">")
@@ -269,7 +269,7 @@ What we would rather do, instead, is to build `closingTagP` as the
 parser expecting #emph[exactly] the #emph[value] parsed by
 `openingTagP`. Something like:
 
-```fsharp
+```ocaml
 let tagNameP = many1 (anyOf ['a'..'Z'])
 
 let openingTagP = tagNameP |> between (str "<") (str ">")

@@ -30,7 +30,7 @@ application];.
 The native function application works just fine as long as it operates
 within the simple case of things with compatible signatures:
 
-```fsharp
+```ocaml
 f : 'a -> 'b
 g : 'b -> 'c
 ```
@@ -38,7 +38,7 @@ g : 'b -> 'c
 Languages natively know how to glue `f` with `g` because the output of
 `f` can be passed, just as it is, to `g`.
 
-```fsharp
+```ocaml
 let glued x = g (f x)
 ```
 
@@ -59,7 +59,7 @@ The farest we go with making things intentionally incompatible and with
 adding new functionalities to function application, in OOP, is with
 Async calls:
 
-```fsharp
+```ocaml
 f : 'a -> Task<'b>
 g : 'b -> Task<'c>
 ```

@@ -27,7 +27,7 @@ input. If both parsers fail, only then a parsing error is returned. We
 implemented it already in @chapter-3, but before introducing a
 `Parser` type wrapper. The implementation is straightforward:
 
-```fsharp
+```ocaml
 let orElse tryFirst fallback  =
     Parser (fun input ->
         match run tryFirst input with
@@ -62,7 +62,7 @@ let ``if the first parser fails, applies the fallback parser`` () =
 <choice>
 Naturally, you can apply `<|>` multiple times:
 
-```fsharp
+```ocaml
 type WhateverResult = Whatever
 
 [<Fact>]
@@ -82,7 +82,7 @@ let ``sequence of <|>`` () =
 This invites us to conceive a combinator that tries all the parsers we
 feed it with:
 
-```fsharp
+```ocaml
 let choice (parsers: 'a Parser list) : 'a Parser = __
 
 
@@ -107,7 +107,7 @@ let ``applies the first successful parser`` () =
 
 A possible recursive implementation could be:
 
-```fsharp
+```ocaml
 let rec choice<'a> (parsers: 'a Parser list) : 'a Parser =
     match parsers with
     | [] ->
@@ -120,7 +120,7 @@ let rec choice<'a> (parsers: 'a Parser list) : 'a Parser =
 
 Amazingly, a shorter working version is:
 
-```fsharp
+```ocaml
 let choice parsers = 
     List.reduce (<|>) parsers
 ```
@@ -128,7 +128,7 @@ let choice parsers =
 It would be nice to write it even more concisely, in Point Free Style
 as:
 
-```fsharp
+```ocaml
 let choice =
     List.reduce (<|>)
 ```
@@ -187,7 +187,7 @@ like to parse:
 
 Here is how we could create `12` parsers in one shot:
 
-```fsharp
+```ocaml
 let months: string list =
     [ "Jan"
       "Feb"
@@ -209,7 +209,7 @@ let monthParsers: int Parser list =
 
 Then, we can use `choice` to coalesce them in a single parser:
 
-```fsharp
+```ocaml
 let monthParser = choice monthParsers
 
 [<Fact>]
@@ -267,7 +267,7 @@ Following this path, let's build `anyOf` and `many`.
 builds a parser for any of them. Under the hoods, it uses `charP`, a
 parser for a single character:
 
-```fsharp
+```ocaml
 
 let charP (c: char) = Parser (fun input ->
     if input.StartsWith(c)
@@ -306,7 +306,7 @@ The idea is:
 
 Let's go.
 
-```fsharp
+```ocaml
 let many<'a> (parser: 'a Parser): 'a list Parser = __ 
     
 let toInteger (digits: char list) : int = __
@@ -322,7 +322,7 @@ let ``parse numbers of any number of digits`` () =
 
 Implementing `intP` it is a walk in the park:
 
-```fsharp
+```ocaml
 let intP = many digit |>> toInteger
 ```
 
@@ -337,7 +337,7 @@ Read it as:
 
 Implementing `toInteger` is ordinary F\#, nothing to do with parsers:
 
-```fsharp
+```ocaml
 let toInteger (digits: char list) : int =
     digits
     |> List.map string
@@ -353,7 +353,7 @@ let ``from list of chars to integer`` () =
 
 The last missing piece is, finally, `many`:
 
-```fsharp
+```ocaml
 let many<'a> (parser: 'a Parser): 'a list Parser = __
 
 
@@ -376,7 +376,7 @@ would happily succeed, returning an empty list.
 
 Here's a possible implementation:
 
-```fsharp
+```ocaml
 let many<'a> (parser: 'a Parser): 'a list Parser = Parser (fun input ->
     let rec zeroOrMore input =
         match run parser input with
@@ -404,13 +404,13 @@ to the Parser world using `<!>` and `<*>`? I mean, if building a list
 can be done #link("https://en.wikipedia.org/wiki/Cons")[cons-ing] values
 with:
 
-```fsharp
+```ocaml
 let cons head tail = head :: tail
 ```
 
 can't we just lift it with:
 
-```fsharp
+```ocaml
 let rec many parser = 
     cons <!> parser <*> (many parser)
 ```
@@ -420,7 +420,7 @@ least 1 application of parser (in the parser jargon: this is `many1`).
 `many` should succeeds also in case 0 applications. Easy peasy, `<|>` to
 the resque:
 
-```fsharp
+```ocaml
 let rec many parser = 
     (cons <!> parser <*> (many parser)) <|> (pure' [])
 ```
@@ -444,7 +444,7 @@ could possibly work, but that's not the case with F\#.
 <many-for-the-rest-of-us>
 What about this implementation?
 
-```fsharp
+```ocaml
 let rec many parser =
     parse {
         let! x = parser
@@ -468,7 +468,7 @@ maybe you can grasp some of it:
 I bet that you agree: besides the funny new syntactic elements, this
 version is way more linear than the original:
 
-```fsharp
+```ocaml
 let many<'a> (parser: 'a Parser) : 'a list Parser =
     Parser(fun input ->
         let rec zeroOrMore input =

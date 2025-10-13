@@ -15,7 +15,7 @@ happen. Let's design it top-down, fully applying the idea that complex
 parsers can be thought as a combination of even simpler parsers, down to
 the smallest parsers you can create. Of course, we start from a test:
 
-```fsharp
+```ocaml
 type MultiDate = MultiDate of DateOnly list
 
 let multiDateP: MultiDate Parser = __
@@ -41,7 +41,7 @@ into its syntactical components:
 and to define a builder function in terms of those ordinary parsed
 values, postponing the problem of defining their parsers:
 
-```fsharp
+```ocaml
 let makeMultiDate (n: int) (_command: string) (date: DateOnly) : MultiDate =
     let dates = List.replicate n date
     MultiDate dates
@@ -53,7 +53,7 @@ value. \
 Armed with the factory `makeMultiDate`, we can apply it to parsers using
 `<!>` and `<*>`:
 
-```fsharp
+```ocaml
 let intP: int Parser = __
 let times: string Parser = __
 let fancyDate: DateOnly Parser = __
@@ -66,14 +66,14 @@ Since we are proceeding top-down, we can proceed building the underlying
 parsers. `times` is trivial, it's a string parser for the hardcoded
 value `" times "`:
 
-```fsharp
+```ocaml
 let times = str " times "
 ```
 
 Let's go with `fancyDate` next. To parse `date{16/03/1953}` as a
 `DateOnly` we need to make this test pass:
 
-```fsharp
+```ocaml
 let fancyDate: DateOnly Parser = __
 
 
@@ -93,7 +93,7 @@ You have all the necessary building blocks, if you observe that
 
 You can use `between` for `{` and `}`, and `>>.`:
 
-```fsharp
+```ocaml
 let openBrace = str "{"
 let closeBrace = str "}"
 
@@ -113,7 +113,7 @@ Here we assume we are using the already implemented `>>.` and `between`.
 But if you think about it, they are both very simple to define, using an
 Applicative Functor:
 
-```fsharp
+```ocaml
 let (>>.) left right =
     let takeRight _ right = right
     takeRight <!> left <*> right
@@ -130,7 +130,7 @@ Going deeper, it's `date`'s turn. `date` is the parser for the inner
 `16/03/1953` syntax. It can be defined --- guess how? --- using an
 Applicative Functor, feeding its factory method `makeDateOnly`:
 
-```fsharp
+```ocaml
 let digitsP (nDigits: int) : int Parser = __
 
 let slash = str "/"
@@ -158,7 +158,7 @@ an `int Parser` to parse a number with exactly that many digits. At this
 stage, we haven't yet developed the ideal building blocks to make this
 parser elegant. Let me cheat using `Int32.Parse`:
 
-```fsharp
+```ocaml
 let digitsP nDigits = Parser (fun input ->
     try
         Success(Int32.Parse(input[..nDigits-1]), input[nDigits..])
@@ -188,7 +188,7 @@ We are left with one last building block to write: `intP`. It is
 supposed to parse the `7` in `7 times date{16/03/1953}`. We can just use
 `digitsP 1`, can't we?
 
-```fsharp
+```ocaml
 let intP: int Parser = digitsP 1
 ```
 
@@ -211,7 +211,7 @@ We learnt that a function taking values can be applied to parsers of
 those values by the means of replacing the white-space pseudo-operator
 with `<!>` and `<*>` like this:
 
-```fsharp
+```ocaml
 let f:  'value         = f     a      b      c
 let fP: 'value Parser  = f <!> aP <*> bP <*> cP
 ```
@@ -223,13 +223,13 @@ operator to perform that lifting beforehand, even before we have an
 argument to feed the function with. In other words, it would be amazing
 if we could convert:
 
-```fsharp
+```ocaml
 f:   a -> b -> c -> d
 ```
 
 into:
 
-```fsharp
+```ocaml
 fP: 'a Parser -> 'b Parser -> 'c Parser -> 'd Parser
 ```
 
@@ -238,28 +238,28 @@ in one shot. That's the work for `lift3`:
 But implementing it is a piece of cake! We don't even need a test for
 this, type checking will suffice:
 
-```fsharp
+```ocaml
 let lift3 f =
     fun a b c -> f <!> a <*> b <*> c 
 ```
 
 or, more concisely:
 
-```fsharp
+```ocaml
 let lift3 f a b c = f <!> a <*> b <*> c 
 ```
 
 `lift3` comes in handy to simplify some expressions. For example,
 instead of:
 
-```fsharp
+```ocaml
 let multiDateP =
     makeMultiDate <!> intP <*> times <*> fancyDate
 ```
 
 you can just write:
 
-```fsharp
+```ocaml
 
 let multiDateP = 
     (lift3 makeMultiDate) intP times fancyDate
@@ -270,14 +270,14 @@ code from sight, so to get back the original linear, pure code. Sweet! \
 As the name suggests, `lift3` works for 3-parameter functions. For
 2-parameter functions `lift2` is similarly defined as:
 
-```fsharp
+```ocaml
 let lift2 f a b = f <!> a <*> b
 ```
 
 Removing 1 parameter more, it's easy to define `lift`, for lifting
 1-parameter functions:
 
-```fsharp
+```ocaml
 let lift f a = f <!> a
 ```
 
@@ -285,7 +285,7 @@ But look! #link("https://wiki.haskell.org/Eta_conversion")[η-reducing]
 this expression --- that is, removing `a` and `f` from both sides ---
 it's easy to see that `lift` is in fact our old friend `map`:
 
-```fsharp
+```ocaml
 let lift = map
 ```
 

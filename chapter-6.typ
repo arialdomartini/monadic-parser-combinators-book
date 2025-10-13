@@ -40,7 +40,7 @@ SWITCH
 The beauty of this syntax! I'm such a fan of your language! You wish to
 parse this as an instance of `Switch`:
 
-```fsharp
+```ocaml
 type SwitchBranch = { Condition : Condition; Block : Block }
 type Switch = { Branches : SwitchBranch list }
 ```
@@ -48,7 +48,7 @@ type Switch = { Branches : SwitchBranch list }
 Imagine that you already managed to have a parser for `predicate` and
 one for `block`. Presto! Here is `switchParser`:
 
-```fsharp
+```ocaml
 let branch =
     tuple3
         (condition |> between (pchar '/') (pchar '/'))
@@ -105,7 +105,7 @@ syntax of F\# is often regarded as a notable example, because it allows
 you to write expressions in a way that closely resembles natural
 language. Instead of a series of nested function calls like:
 
-```fsharp
+```ocaml
 let res =
     saveAudit "user_flow" (
         sendWelcomeIfNew "welcome_template" (
@@ -117,7 +117,7 @@ let res =
 one may prefer a cascade of calls connected with by the pipe operator
 `|>`:
 
-```fsharp
+```ocaml
 let res =
     getUser 42
     |> fetchProfile "basic"
@@ -140,7 +140,7 @@ would take 3 parameters:
 
 Here's an implementation:
 
-```fsharp
+```ocaml
 let between before after parser = 
     before >>. parser .>> after
 ```
@@ -175,7 +175,7 @@ imperative-like code, while making sure it's still functional? Enter
 do-notation, or computation expressions. Here is how the `between`
 combinator we defined before can be written with this style:
 
-```fsharp
+```ocaml
 let between parser openTag closeTag =
     parse {
         let! _ = openTag
@@ -208,7 +208,7 @@ Let me show you a second example. Say you want to parse a tuple:
 
 as an instance of:
 
-```fsharp
+```ocaml
 (int * int)
 ```
 
@@ -216,7 +216,7 @@ So, it's a `(` followed by a number, then a comma, then some spaces,
 etc. The corresponding needed parser is pretty much a literal
 translation of this description:
 
-```fsharp
+```ocaml
 let tuple : (int * int) Parser = 
     parser {
         let! _ = str "("
@@ -266,7 +266,7 @@ Consider the case of parsing an arithmetic expression:
 In the AST of your language, this can be represented as an instance of
 `Expression`:
 
-```fsharp
+```ocaml
 type Operation = Sum | Sub | Mul | Div
 
 type Expression = Expression of int * int * Operation
@@ -274,14 +274,14 @@ type Expression = Expression of int * int * Operation
 
 Building an instance of `Expression` is trivially a matter of defining:
 
-```fsharp
+```ocaml
 let buildExpression (a: int) (op: Operation) (b: int) = 
     Expression (a, b, op)
 ```
 
 and of invoking it:
 
-```fsharp
+```ocaml
 let expression = buildExpression 42 79 Sum
 ```
 
@@ -289,19 +289,19 @@ Now, let's push `buildExpression` into the elevator. It will lift it
 into the world of parsers, so that it becomes a
 `buildExpressionOnSteroids`:
 
-```fsharp
+```ocaml
 let buildExpressionOnSteroids = lift3 buildExpression
 ```
 
 That's it. While `buildExpression` signature was:
 
-```fsharp
+```ocaml
 val buildExpression : int -> Operation -> int -> Expression
 ```
 
 by the application of `lift3` the signature turned into:
 
-```fsharp
+```ocaml
 val buildExpressionOnSteoids : int Parser -> Operation Parser-> int
 Parser -> Expression Parser
 ```
@@ -324,7 +324,7 @@ language, you proclaim that the syntax:
 builds a list of `7` dates (all the same), boxed inside a `MultiDate`
 object. Sounds like a very useful construct, doesn't it?
 
-```fsharp
+```ocaml
 type MultiDate = MultiDate of (DateOnly list)
 
 let multiDate : MultiDate Parser = __
@@ -349,7 +349,7 @@ To build `multiDate`, you can start by splitting the input
 
 With those 5 values, building a `MultiDate` instance is a breeze:
 
-```fsharp
+```ocaml
 let makeMultiDate (n: int) (_space: char) (command: string) (_space2: char) (date: DateOnly) : Foo =
     let dates = [ for i in 0 .. n - 1 -> date ]
     MultiDate dates
@@ -358,7 +358,7 @@ let makeMultiDate (n: int) (_space: char) (command: string) (_space2: char) (dat
 The problem is: you don't have #emph[values];; instead, you have
 #emph[parsers of values];:
 
-```fsharp
+```ocaml
 let nP:        int Parser      = intParser
 let spaceP:    char Parser     = charParser ' '
 let commandP:  string Parser   = str "times"
@@ -367,7 +367,7 @@ let dateP:     DateOnly Parser = parseDateOnly
 
 Can you feed `makeMultiDate` with parsers instead of with actual values?
 
-```fsharp
+```ocaml
 let multiDate : MultiDate = 
     makeMultiDate     nP     spaceP     commandP     spaceP     dateP
 ```
@@ -377,7 +377,7 @@ application works. \
 What if instead of the native F\# function application you use a
 specialized #emph[parser-aware function application];?
 
-```fsharp
+```ocaml
 let multiDate: MultiDate Parser =
 //  makeMultiDate     nP     spaceP     commandP     spaceP     dateP
     makeMultiDate <!> nP <*> spaceP <*> commandP <*> spaceP <*> dateP
