@@ -10,6 +10,8 @@
 
 #set heading(numbering: "1.")
 
+#set page(paper: "a5")
+
 
 #outline(title: "Table of Content")
 
