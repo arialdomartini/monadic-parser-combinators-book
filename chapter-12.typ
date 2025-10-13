@@ -1,4 +1,4 @@
-= Things You Are Not Sure About
+= Things You Are Not Sure About <chapter-12>
 
 There are only 2 important missing features in the Parser Combinator
 library you are building:
@@ -19,16 +19,13 @@ encountered: parsing an integer of an unknown number of digits.
 
 Let's start from the latter.
 
-== Alternative
-<alternative>
-The basic operator for implementing backtracking is `<|>`: its purpose
-is to try the parser on its left, first; if that parser fails, instead
-of propagating the error, it #emph[backtracks] trying the parser on the
-right, using the original input. If both parsers fail, only then a
-parsing error is returned. We implemented it already in
-#link("/monadic-parser-combinators-3")[Chapter 3];, but before
-introducing a `Parser` type wrapper. The implementation is
-straightforward:
+== Alternative <alternative> The basic operator for implementing
+backtracking is `<|>`: its purpose is to try the parser on its left,
+first; if that parser fails, instead of propagating the error, it
+#emph[backtracks] trying the parser on the right, using the original
+input. If both parsers fail, only then a parsing error is returned. We
+implemented it already in @chapter-3, but before introducing a
+`Parser` type wrapper. The implementation is straightforward:
 
 ```fsharp
 let orElse tryFirst fallback  =
@@ -490,4 +487,4 @@ next chapter should provide the rational why and in which cases we need
 monadic parsers. Then, we will invent them.
 
 Take a long break. Enjoy a Swiss cheese fondue (and take your time to
-digest it). We will see in Chapter 13.
+digest it). We will see in <chapter-13>.

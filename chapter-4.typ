@@ -1,5 +1,4 @@
-= I Told You Not Mess With The Signature!
-<chapter4>
+= I Told You Not Mess With The Signature! <chapter4>
 
 == Arialdo, You Are A Liar
 <arialdo-you-are-a-liar>

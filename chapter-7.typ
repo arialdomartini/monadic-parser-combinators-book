@@ -1,4 +1,4 @@
-= Parser-Powered Function Application
+= Parser-Powered Function Application <chapter-7>
 
 Until this point, we have worked with these types:
 
@@ -463,9 +463,8 @@ separate:
 - `f` encapsulates the actual domain logic.
 - `<<|` encapsulates the #emph[glueing] logic.
 
-As we said in #link("monadic-parser-combinators-5")[chapter 5];, it's a
-form of structural decoupling, obtained with a tool other than the
-classic dependency injection.
+As we said in @chapter-5, it's a form of structural decoupling,
+obtained with a tool other than the classic dependency injection.
 
 Defining `|>>` is trivial: just swap the parameters:
 
@@ -808,5 +807,5 @@ We've covered many details about transforming a single parser and
 adapting it to our needs, but we haven't yet looked at sequencing two
 parsers in a row.
 
-It's time to take a break, enjoy a salmiakki, and then jump to chapter
+It's time to take a break, enjoy a salmiakki, and then jump to Chapter
 8 to explore this new topic.

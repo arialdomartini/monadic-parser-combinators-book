@@ -1,4 +1,4 @@
-= Things You Don't Care About
+= Things You Don't Care About <chapter-9>
 
 There is another elementary way to sequence 2 parsers: to only return
 the parsed value of one and just ignoring the value of the other.
@@ -12,9 +12,8 @@ you are giving it. Indeed, it is perfectly legit that, while processing
 an input string, you wish something specific to be present, and not to
 be interested in getting back its value.
 
-You have already strumbled upon this case. Remember when in
-#link("/monadic-parser-combinators-2")[Chapter 2] we imagined a possible
-(exquisite) syntax for a record:
+You have already strumbled upon this case. Remember when in @chapter-2
+we imagined a possible (exquisite) syntax for a record:
 
 ```
 inst Person
@@ -49,8 +48,7 @@ To build the parser for a GUID you needs to give it this recipe:
 - Make sure there is another `*`. Again, either raise an error or just
   go ahead without storing its value.
 
-You remember how in #link("/monadic-parser-combinators-6")[Chapter 6] we
-imagined to build:
+You remember how in @chapter-6 we imagined to build:
 
 ```fsharp
 let surroundedBy before after parser = before >>. parser .>> after
@@ -184,8 +182,7 @@ val combineP : 'a Parser -> ('a -> 'b) -> 'b Parser
 ```
 
 Well well well, look at that! This is our friend `|>>`, the dual of
-Functor's `map` which we developed in
-#link("/monadic-parser-combinators-7")[Chapter 7];! Let's see if it
+Functor's `map` which we developed in @chapter-7! Let's see if it
 works:
 
 ```fsharp
@@ -230,10 +227,10 @@ I guess you see the pattern here:
   the existing ones, without repeating yourself, ending up with very
   concise code.
 
-Let's keep flying in this direction, building on top of `.>>` and `>>.`:
-let's invent a combinator for ignoring the elements surronding something
-you want to parse. You saw it already in
-#link("/monadic-parser-combinators-6")[Chapter 6];. Its signature is:
+Let's keep flying in this direction, building on top of `.>>` and
+`>>.`: let's invent a combinator for ignoring the elements surronding
+something you want to parse. You saw it already in @chapter-6. Its
+signature is:
 
 ```fsharp
 val between<'o, 'c, 'v> : 'o Parser -> 'c Parser -> 'v Parser

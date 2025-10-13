@@ -1,4 +1,4 @@
-= Things You Want To Remember
+= Things You Want To Remember <chapter-13>
 
 Let's write the parser for an XML node. This is a task dressed up as a
 walk in the park, but it is in fact hiding an insidious maze inside.
@@ -313,5 +313,5 @@ notion #emph[monad];.
 Implementing it will be super easy, just a matter of following the type
 signature, but the consequences will be revolutionary.
 
-Curious? Grab a liquorice and jump to Chapter 14: we are going to
+Curious? Grab a liquorice and jump to @chapter-14: we are going to
 write it.

@@ -1,4 +1,4 @@
-= One Combinator to Rule Them All
+= One Combinator to Rule Them All <chapter-15>
 
 We will dedicate the next couple of chapters to giving ourselves a pat
 on the back to celebrate this little `bind` function as our most
@@ -40,10 +40,9 @@ more.
 sections ahead, I will be able to show you what a tremendous power you
 uncovered with `>>=`.
 
-== Look Ma, Functors!
-<look-ma-functors>
-Do you remember when in
-#link("/monadic-parser-combinators-7")[Chapter 7] we defined `map`?
+== Look Ma, Functors!  <look-ma-functors>
+
+Do you remember when in @chapter-7 we defined `map`?
 
 ```fsharp
 let map (f: 'a -> 'b) (ap: 'a Parser) : 'b Parser =
@@ -57,10 +56,9 @@ let map (f: 'a -> 'b) (ap: 'a Parser) : 'b Parser =
 Initially, we named it `<<|`, because we wanted to see it as the
 on-steroid sibling of the reverse-pipe operator `<|`. Then we started
 interpreting it as a way to map a function to the #emph[content] of a
-parser, and we gave it the alias `<!>`. Finally, in
-#link("/monadic-parser-combinators-10")[Chapter 10] we discovered
-Applicative Functors, and we found out that `map` could be expressed in
-terms of `<*>` and `pure'`:
+parser, and we gave it the alias `<!>`. Finally, in @chapter-10 we
+discovered Applicative Functors, and we found out that `map` could be
+expressed in terms of `<*>` and `pure'`:
 
 ```fsharp
 let map f a =
@@ -190,7 +188,7 @@ and `return'`? That would be similar to the case of `Aggregate` and
 LINQ: `>>=` would really be all we ever needed, the one-size-fits-all
 tool, the mythical silver-bullet operator.
 
-In #link("/monadic-parser-combinators-10")[Chapter 10] we wrote:
+In @chapter-10 we wrote:
 
 ```fsharp
 let ap fP aP = Parser (fun input ->
@@ -338,7 +336,7 @@ To me, in most of the cases, it makes little sense. I personally find
 this result too cryptic and not particularly expressive.
 
 So, here's my alternative plan: I would rather get an energizing
-Tiramisù; then I will quickly proceed with Chapter 16, in which I
+Tiramisù; then I will quickly proceed with @chapter-16, in which I
 intend to transform this horrible syntax into something more
 digestible for the rest of us. Then, I promise, there will be a very
 convincing reason to rewrite #emph[some] of the past combinators with

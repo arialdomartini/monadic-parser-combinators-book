@@ -1,9 +1,8 @@
-= Lifting Functions
+= Lifting Functions <chapter-11>
 
 == Fancy dates
 <fancy-dates>
-Do you remember when in
-#link("/monadic-parser-combinators-6")[Chapter 6] we fantasized about
+Do you remember when in @chapter-6 we fantasized about
 the syntax:
 
 ```
@@ -294,4 +293,4 @@ Given the diagram, it all makes sense.
 
 That'll do for now! Let's take a break: you deserve a pistacchio kulfi
 to refresh your mind. \
-See you later in Chapter 12.
+See you later in @chapter-12.

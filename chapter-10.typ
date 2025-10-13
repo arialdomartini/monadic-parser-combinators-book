@@ -1,4 +1,4 @@
-= Applying Functions, Ad Nauseam
+= Applying Functions, Ad Nauseam <chapter-10>
 
 There is something magic about the native F\# function application: once
 you apply a function to an argument, if the result is another function,
@@ -80,11 +80,9 @@ let d = f 42 true "foobar"
 Ah, much better! But, note: it's just syntactic sugar. This is still a
 function returning a function --- in turn, returning a function.
 
-== A Crocked Function Application
-<a-crocked-function-application>
-What about the Parser-Powered Function Application `<<|` / `map` that we
-have so proudly distilled in
-#link("/monadic-parser-combinators-7")[Chapter 7];? Can we also apply it
+== A Crocked Function Application <a-crocked-function-application>
+What about the Parser-Powered Function Application `<<|` / `map` that
+we have so proudly distilled in @chapter-7? Can we also apply it
 #emph[ad nauseam];?
 
 Let's see. We start from a generic 3-parameter function

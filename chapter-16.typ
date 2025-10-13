@@ -1,4 +1,4 @@
-= A Programmable Semicolon
+= A Programmable Semicolon <chapter-16>
 
 Monads are beautiful, and so is F\#. No wonders that the latter natively
 supports the former. There a little trick to extend the F\# syntax to
@@ -72,10 +72,8 @@ notation] (see
 That's often what I call it too, although the correct name for F\# is
 Computation Expression.
 
-=== `map` In Do Notation
-<map-in-do-notation>
-Here's `map`, in its initil implementation, from
-#link("/monadic-parser-combinators-7")[Chapter 7];:
+=== `map` In Do Notation <map-in-do-notation> Here's `map`, in its
+initil implementation, from @chapter-7:
 
 ```fsharp
 let map (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
@@ -86,9 +84,8 @@ let map (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
         | Failure s -> Failure s )
 ```
 
-Here is it how we defined it, in
-#link("/monadic-parser-combinators-10")[Chapter 10];, in terms of `<*>`
-and `pure'`:
+Here is it how we defined it, in @chapter-10, in terms of `<*>` and
+`pure'`:
 
 ```fsharp
 let map = (<<|)
@@ -96,9 +93,8 @@ let map (f: 'a -> 'b) (aP: 'a Parser) : 'b Parser =
     pure' f <*> aP
 ```
 
-And, finally, the version of
-#link("/monadic-parser-combinators-15")[Chapter 15];, implemented with
-`bind` and `return'`:
+And, finally, the version of @chapter-15, implemented with `bind` and
+`return'`:
 
 ```fsharp
 let map (f: 'a -> 'b) (aP: `a Parser) = 
@@ -172,10 +168,8 @@ let map f aP = parse {
 As far as I know, when using this style there is no way to obtain a
 Point Free style.
 
-=== `ap` In Do Notation
-<ap-in-do-notation>
-Do you remember how we defined the Applicative Functor's `ap` in
-#link("/monadic-parser-combinators-10")[Chapter 10];?
+=== `ap` In Do Notation <ap-in-do-notation> Do you remember how we
+defined the Applicative Functor's `ap` in @chapter-10?
 
 ```fsharp
 // ap : ('a -> 'b) Parser -> 'a Parser -> 'b Parser
@@ -208,8 +202,7 @@ Isn't it sweet?
 === Do Notation Everywhere
 <do-notation-everywhere>
 Computation Expressions are particularly effective at capturing the
-meaning of a parser and at making the intent clear. In
-#link("/monadic-parser-combinators-9")[Chapter 9] we defined `between`
+meaning of a parser and at making the intent clear. In @chapter-9 we defined `between`
 using `>>.` and `.>>`:
 
 ```fsharp

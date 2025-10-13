@@ -1,4 +1,4 @@
-= Mapping the Journey
+= Mapping the Journey <chapter-6>
 
 I sometimes feel uneasy when books keep providing too many details
 without giving a hint of where things are headed. This chapter takes a
