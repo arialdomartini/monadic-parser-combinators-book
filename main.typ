@@ -3,6 +3,10 @@
     footnote([#it.body --- #it.dest])
 }
 
+#show heading.where(level: 1): it => {
+    pagebreak(weak: true)
+    it
+}
 
 #include "chapter-1.typ"
 #include "chapter-2.typ"
