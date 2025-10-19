@@ -4,7 +4,6 @@
 }
 
 
-
 ///////////
 // Headings
 ///////////
@@ -44,10 +43,32 @@
 }  
 
 
+////////////////////
+// Table of Contents
+////////////////////
+
+
+// Emphasize Chapters in TOC:
+#show outline.entry: it => {
+    let entry = it.indented(it.prefix(), it.inner(), gap: 0em)
+
+    if it.level == 1 {
+        v(1em, weak: true)
+        strong(entry)
+    }
+    else {entry}
+}
+
+
+
  ///////
  // Page
  ///////
  
+
+///////
+// Page
+///////
 
 #set page(paper: "a5")
 
@@ -69,6 +90,7 @@
     breakable: true,
     number-format: none
 )
+
 
 
 #include "content.typ"
