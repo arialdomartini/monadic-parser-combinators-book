@@ -1,4 +1,4 @@
-#outline(title: "Table of Content")
+// #outline(title: "Table of Content")
 
 #include "chapter-1.typ"
 #include "chapter-2.typ"
