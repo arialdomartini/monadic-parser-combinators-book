@@ -19,7 +19,9 @@ encountered: parsing an integer of an unknown number of digits.
 
 Let's start from the latter.
 
-== Alternative <alternative> The basic operator for implementing
+== `alternative` <alternative>
+
+The basic operator for implementing
 backtracking is `<|>`: its purpose is to try the parser on its left,
 first; if that parser fails, instead of propagating the error, it
 #emph[backtracks] trying the parser on the right, using the original
@@ -58,7 +60,7 @@ let ``if the first parser fails, applies the fallback parser`` () =
     test <@ run trying "some input" = Success (Two, "the rest") @>
 ```
 
-== Choice
+== `choice`
 <choice>
 Naturally, you can apply `<|>` multiple times:
 
@@ -261,7 +263,7 @@ combinators, a next-to-empty collection of actual parsers.
 
 Following this path, let's build `anyOf` and `many`.
 
-== anyOf
+== `anyOf`
 <anyof>
 `anyOf` is just a helper function. It takes a list of characters and it
 builds a parser for any of them. Under the hoods, it uses `charP`, a
@@ -286,7 +288,7 @@ let ``parses any digit`` () =
     test <@ run digit "92 the rest" = Success ('9', "2 the rest") @>
 ```
 
-== many
+== `many`
 <many>
 Remember that we started investigating this very topic in the attempt of
 parsing an unsigned integer of an unknown number of digits. We are very
@@ -440,7 +442,7 @@ eager: F\# evaluates all the arguments before passing them to a
 function. If we had a lazy language, like Haskell, this implementation
 could possibly work, but that's not the case with F\#.
 
-== many, For The Rest Of Us
+== `many`, For The Rest Of Us
 <many-for-the-rest-of-us>
 What about this implementation?
 
