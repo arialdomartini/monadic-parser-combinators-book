@@ -14,21 +14,26 @@
     pagebreak(weak: true)
     it
 }
- 
+
 // Heading numbers on the left margin
 #show heading: it => {
-  rect(
-    stroke: {},
-    inset: 0em,
-    place(
-      right,
-      dx: -100% - 0.618em,
-      text(
-        counter(heading).display()
-      ),
-    ) + it.body
-  )
-}  
+    let headingNumber = counter(heading)
+    rect(
+        stroke: {},
+        inset: 0em,
+        if headingNumber.display() != "0" {
+            place(
+                right,
+                dx: -100% - 0.618em,
+                text(
+                    headingNumber.display()
+                ),
+            ) + it.body
+        } else {
+            it.body
+        }
+    )
+}
 
 
 ////////////////////
