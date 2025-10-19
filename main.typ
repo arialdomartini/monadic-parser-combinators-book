@@ -12,6 +12,9 @@
 
 #set page(paper: "a5")
 
+#set par(
+    justify: true
+)
 
 #import "@preview/codly:1.3.0": *
 
