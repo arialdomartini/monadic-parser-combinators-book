@@ -129,12 +129,3 @@ us to re-invent --- yet another time --- Monads.
 
 Take a break, bite an apple, then jump to
 #link("/monadic-parser-combinators-6")[the next installment];.
-
-#link("/monadic-parser-combinators-4")[Previous - I Told You Not To Mess With The Signature!]
-⁓ #link("/monadic-parser-combinators-6")[Next - Mapping the Journey]
-
-= Comments
-<comments>
-#link("https://github.com/arialdomartini/arialdomartini.github.io/discussions/33")[GitHub Discussions]
-
-{% include fp-newsletter.html %}
