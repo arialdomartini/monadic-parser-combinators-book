@@ -4,7 +4,7 @@ Let's write the parser for an XML node. This is a task dressed up as a
 walk in the park, but it is in fact hiding an insidious maze inside.
 Allow me to show you why.
 
-== Opening and closing tags
+== Opening And Closing Tags
 <opening-and-closing-tags>
 We assume that a node is any text surrounded by an opening tag --- such
 as `<pun>` --- and its corresponding closing tag --- in this case
@@ -99,7 +99,7 @@ let ``parses an XML node`` () =
 Not too difficult, after all. What was the big deal? \
 The big deal is: this implementation is wrong. Did you spot the bug?
 
-== semordnilap tags
+== Semordnilap Tags
 <semordnilap-tags>
 If you did not, let me make it more apparent. Indulge me while I
 introduce a little silly change in the XML grammar, in line with the
@@ -237,7 +237,7 @@ let ``XML node test`` () =
 
 Oh, no! It's still green! So, this bug is really inherent.
 
-== Lack of context
+== Lack Of Context
 <lack-of-context>
 If you think about it, in the definition of `openingTagP` and
 `closingTagP`:

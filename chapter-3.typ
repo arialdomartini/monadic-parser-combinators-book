@@ -39,7 +39,7 @@ type SoloArtist =
 No problem: we can again delegate most of the work to `parseString` and
 `parsePerson`. This is what I call reuse!
 
-== Your first Parser Combinator
+== Your First Parser Combinator
 <your-first-parser-combinator>
 Wait a sec: what if the input string happens to contain #emph[either] a
 `RockTrio` #emph[or] a `SoloArtist`?

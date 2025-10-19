@@ -166,7 +166,7 @@ aim to write parsers proudly fitting the last level.
 
 To clarify each level, let me give you some examples.
 
-=== Case 1: things that do not compose
+=== Case 1: Things That Do Not Compose
 <case-1-things-that-do-not-compose>
 Surprisingly, the building blocks of most programming languages just
 don't compose.
@@ -214,7 +214,7 @@ this is valid F\# code:
 let squares = [for x in 1..10 do yield x*x]
 ```
 
-=== Case 2: composing `X`s results in something other than `X`.
+=== Case 2: Composing `X`s Results In Something Other Than `X`.
 <case-2-composing-xs-results-in-something-other-than-x.>
 Or, more concisely: some things are not closed under composition. \
 The canonical example is with integer numbers: they compose via
@@ -224,7 +224,7 @@ Objects are another notable case. You can compose `Wheel` and `Engine`,
 but you want the result to be `Car`, not something that is both a
 `Wheel` and an `Engine`.
 
-=== Case 3: Things that compose in surprising ways
+=== Case 3: Things That Compose In Surprising Ways
 <case-3-things-that-compose-in-surprising-ways>
 The canonical example is again with numbers. In many languages'
 floating-point arithmetic: `0.1 + 0.2` computes to
@@ -306,7 +306,7 @@ successfully return, their combination might generate a deadlock. So,
 function using locks do compose into other functions using locks, but
 #emph[not nicely];: you cannot guarantee all the invariants still hold.
 
-=== What about our manual parser?
+=== What About Our Manual Parser?
 <what-about-our-manual-parser>
 Getting back to our fictional Parser:
 

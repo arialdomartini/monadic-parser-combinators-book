@@ -156,7 +156,7 @@ the code.
 
 Fine. Let's finally implement this infamous `bind` combinator.
 
-== Follow the type signature
+== Follow The Type Signature
 <follow-the-type-signature>
 ```ocaml
 // 'a Parser -> ('a -> 'b Parser) -> 'b Parser

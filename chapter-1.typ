@@ -8,11 +8,11 @@ The compiler of your beautiful new language --- with which you will
 bring the use of `goto` and `null` back to life --- will have several
 components:
 
-- A Lexer, for splitting the source code into tokens.
-- A Parser, to convert the token sequence into a syntax tree, and to
-  check the grammatical structure.
 - An Intermediate Code Generator.
 - A Linker, and so on.
+- A Parser, to convert the token sequence into a syntax tree, and to
+  check the grammatical structure.
+- A Lexer, for splitting the source code into tokens.
 
 Here we are focusing on the very first component: a piece of code able
 to analyze the source, to check its syntax against the esoteric formal
@@ -102,7 +102,7 @@ is, how Parsers Combinators work.
 
 That's the goal of these pages.
 
-== How we will proceed
+== How We Will Proceed
 <how-we-will-proceed>
 There are many similar series online, some specific to F\# --- such as
 #link("https://fsharpforfunandprofit.com/series/understanding-parser-combinators/")[The "Understanding Parser Combinators" series]
