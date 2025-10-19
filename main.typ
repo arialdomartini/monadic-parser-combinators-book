@@ -3,12 +3,51 @@
     footnote([#it.body --- #it.dest])
 }
 
+
+
+///////////
+// Headings
+///////////
+
+#set heading(numbering: "1.")
+
 #show heading.where(level: 1): it => {
     pagebreak(weak: true)
     it
 }
 
-#set heading(numbering: "1.")
+
+// Emphasize Chapters in TOC:
+#show outline.entry: it => {
+    let entry = it.indented(it.prefix(), it.inner(), gap: 0em)
+
+    if it.level == 1 {
+        v(1em, weak: true)
+        strong(entry)
+    }
+    else {entry}
+}
+ 
+// Heading numbers on the left margin
+#show heading: it => {
+  rect(
+    stroke: {},
+    inset: 0em,
+    place(
+      right,
+      dx: -100% - 0.618em,
+      text(
+        counter(heading).display()
+      ),
+    ) + it.body
+  )
+}  
+
+
+ ///////
+ // Page
+ ///////
+ 
 
 #set page(paper: "a5")
 
