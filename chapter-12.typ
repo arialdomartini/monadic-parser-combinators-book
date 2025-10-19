@@ -440,7 +440,7 @@ eager: F\# evaluates all the arguments before passing them to a
 function. If we had a lazy language, like Haskell, this implementation
 could possibly work, but that's not the case with F\#.
 
-== Many, For The Rest Of Us
+== many, For The Rest Of Us
 <many-for-the-rest-of-us>
 What about this implementation?
 

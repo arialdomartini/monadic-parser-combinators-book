@@ -1,4 +1,4 @@
-== A Tale Of 2 Coupling Types <chapter-5>
+= A Tale Of 2 Coupling Types <chapter-5>
 
 The `parsePerson` function delegates the parsing of GUIDs, strings and
 dates to external functions. We think that this decouples it from of the
