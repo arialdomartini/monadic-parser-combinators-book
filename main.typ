@@ -14,18 +14,6 @@
     pagebreak(weak: true)
     it
 }
-
-
-// Emphasize Chapters in TOC:
-#show outline.entry: it => {
-    let entry = it.indented(it.prefix(), it.inner(), gap: 0em)
-
-    if it.level == 1 {
-        v(1em, weak: true)
-        strong(entry)
-    }
-    else {entry}
-}
  
 // Heading numbers on the left margin
 #show heading: it => {
@@ -54,23 +42,18 @@
 
     if it.level == 1 {
         v(1em, weak: true)
-        strong(entry)
+        text(size: 1.2em)[
+            #smallcaps(strong(entry))
+        ]
     }
     else {entry}
 }
-
-
-
- ///////
- // Page
- ///////
- 
 
 ///////
 // Page
 ///////
 
-#set page(paper: "a5")
+#set page(paper: "a4")
 
 #set par(
     justify: true
