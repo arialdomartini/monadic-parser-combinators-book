@@ -101,6 +101,7 @@
     number-format: none
 )
 
+#show raw.where(block: true): set text(0.7em, font: "Monoid")
 
 
 ////////////////////
