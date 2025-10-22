@@ -15,20 +15,6 @@
 // Header
 /////////
 
-// #set page(
-//     header-ascent: 0pt,
-//     header: pad(left: -2em, right: -2em, [
-//         #set text(.8em, rgb("#888888"))
-//         #smallcaps(current-chapter-title())
-//         #h(1fr)
-//         #context counter(page).display()
-//         #line(
-//             length: 100%,
-//             stroke: 1pt + rgb("#888888")
-//         )
-//         #v(2em)
-//     ])
-// )
 
 #let current-chapter-title() = context {
   let headings = query(heading.where(level: 1).before(here()))
@@ -131,24 +117,21 @@
     pagebreak(weak: true)
     it
 }
- 
 
-// Heading numbers on the left margin
+
 #show heading: it => {
-    let headingNumber = counter(heading)
-    rect(
-        stroke: {},
-        inset: 0em,
-
-            place(
-                right,
-                dx: -100% - 0.618em,
-                text(
-                    headingNumber.display()
-                ),
-            ) + it.body
-
+  let headingNumber = counter(heading)
+  block(above: 2.5em)[
+    #rect(
+      stroke: {},
+      inset: 0em,
+      place(
+        right,
+        dx: -100% - 0.618em,
+        text(headingNumber.display())
+      ) + it.body
     )
+  ]
 }
 
 
