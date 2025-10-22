@@ -74,6 +74,18 @@
 // Code
 ///////
 
+#show raw: it => {
+    box(
+        fill: rgb("#f5f5f5"),
+        // fill: rgb("#e6e8ea"),
+        //      stroke: rgb("#d1d9e0b3"),
+        outset: (y: 3pt),
+        inset: (x: 2pt),
+        radius: 3pt,
+        it
+    )
+}
+
 #import "@preview/codly:1.3.0": *
 
 #show: codly-init.with()
