@@ -24,7 +24,8 @@
 
 
 #let my-header = pad(left: 0em, right: 0em, [
-    #set text(.8em, rgb("#888888"))
+    // #set text(.8em, rgb("#888888"))
+    #set text(.7em)
     #smallcaps(current-chapter-title())
     #h(1fr)
     #context counter(page).display()
@@ -50,8 +51,13 @@
     }
 )
 
+//////////////////
+// Paragraph style
+//////////////////
+
 #set par(
-    justify: true
+    justify: true,
+    leading: 0.84em
 )
 
 
@@ -61,11 +67,12 @@
 }
 
 
+#set list(marker: [\u{2023}])
 
-////////
-// Codly
-////////
 
+///////
+// Code
+///////
 
 #import "@preview/codly:1.3.0": *
 
@@ -120,18 +127,18 @@
 
 
 #show heading: it => {
-  let headingNumber = counter(heading)
-  block(above: 2.5em)[
-    #rect(
-      stroke: {},
-      inset: 0em,
-      place(
-        right,
-        dx: -100% - 0.618em,
-        text(headingNumber.display())
-      ) + it.body
-    )
-  ]
+    let headingNumber = counter(heading)
+    block(above: 2.0em)[
+        #rect(
+            stroke: {},
+            inset: 0em,
+            place(
+                right,
+                dx: -100% - 0.618em,
+                text(headingNumber.display())
+            ) + it.body
+        )
+    ]
 }
 
 
