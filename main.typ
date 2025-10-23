@@ -111,7 +111,7 @@
 
 // Emphasize Chapters in TOC:
 #show outline.entry: it => {
-    let entry = it.indented(it.prefix(), it.inner(), gap: 0em)
+    let entry = it.indented(it.prefix(), it.inner(), gap: .5em)
 
     if it.level == 1 {
         v(1em, weak: true)
