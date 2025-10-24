@@ -1,3 +1,13 @@
+
+#let alink(text, to, note) = {
+    link(to)[#text]
+
+    footnote([#to --- #note])
+
+}
+
+
+
 #let mainmatter(body) = [
     /////////
     // Header
@@ -47,10 +57,8 @@
         leading: 0.84em
     )
 
-
     #show link: it => {
         underline(it)
-        footnote([#it.body --- #it.dest])
     }
 
 

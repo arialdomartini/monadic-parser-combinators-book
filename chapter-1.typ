@@ -1,3 +1,5 @@
+#import "components/mainmatter.typ": alink
+
 = Introduction <introduction>
 
 You want to invent a new language, and you want to do this in F\#,
@@ -45,8 +47,16 @@ Of course, it's likely that a programming language grammar is more
 complex than the JSON grammar. But the two concepts are alike, and so
 are the signatures.
 
-#link("https://tree-sitter.github.io/tree-sitter/")[Tree-sitter] too
-does something similar. It parses a string like:
+#let tree-sitter = alink("Tree-sitter",
+    "https://tree-sitter.github.io/tree-sitter",
+    [Tree-sitter is a parser generator library that builds syntax trees
+    for source code in real time. It powers editing features in
+    editors such Vim and Emacs.])
+
+
+#tree-sitter too does something similar. It parses a string like:
+
+
 
 ```
 "let x = 42"
