@@ -146,7 +146,7 @@
 
     #show heading: it => {
         let headingNumber = counter(heading)
-        block(above: 2.0em)[
+        block(above: 2.0em, below: 0.8em)[
             #rect(
                 stroke: {},
                 inset: 0em,
