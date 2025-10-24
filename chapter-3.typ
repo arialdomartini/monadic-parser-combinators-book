@@ -203,44 +203,36 @@ building block of a grammar of Parser Combinators, with which to build
 the parser of any arbitrarily complex language. Using a bit of fantasy,
 you could conceive other Parser Combinators such as:
 
-#figure(
-  align(center)[#table(
-    columns: (7.51%, 45.66%, 46.82%),
-    align: (auto,auto,auto,),
+#table(
+    columns: (auto, auto, auto),
     table.header([Name], [Signature], [Generates a parser that…],),
     table.hline(),
     [`many`], [`(string -> 'a) -> (string -> 'a list)`], [parses zero or
-    more occurrences of something, collecting the results in a list.],
+        more occurrences of something, collecting the results in a list.],
     [`many1`], [`(string -> 'a) -> (string -> 'a list)`], [same as
-    above, but expects at least 1 occurrence.],
+        above, but expects at least 1 occurrence.],
     [`skipMany`], [`(string -> 'a) -> (string -> ())`], [parses zero or
-    more occurrences of something, discarding results.],
+        more occurrences of something, discarding results.],
     [`skipMany1`], [`(string -> 'a) -> (string -> ())`], [same as above,
-    but expects at least 1 occurrence.],
+        but expects at least 1 occurrence.],
     [`between`], [`(string -> 'open) -> (string -> 'close) -> (string -> 'a) -> (string -> 'a)`], [parses
-    something between opening and closing elements.],
+        something between opening and closing elements.],
     […], [], [],
-  )]
-  , kind: table
-  )
+)
 
 It turns out that if you manage to design a set of very expressful and
 fine tuned building blocks, you don't need to write the code of many
 parsers: indeed, you will be able to generate any imaginable parser only
 combinining the most trivial parsers that could be conceived, that are:
 
-#figure(
-  align(center)[#table(
-    columns: (9.72%, 27.78%, 62.5%),
-    align: (auto,auto,auto,),
+#table(
+    columns: (auto, auto, auto),
     table.header([Name], [Signature], [Generates a parser that…],),
     table.hline(),
     [`eof`], [`(string -> ())`], [succeeds only at the end of file.],
-    [`any`], [`(string -> char)`], [succeeds no matter what the input
-    contains.],
-  )]
-  , kind: table
-  )
+    [`any`], [`(string -> char)`], [succeeds no matter what the input contains.],
+)
+
 
 Don't despair. We will get to this.
 

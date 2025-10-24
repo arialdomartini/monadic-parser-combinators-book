@@ -145,21 +145,24 @@ is, you can either have that:
 
 If you will, you can see these levels as follows:
 
-#figure(
-  align(center)[#table(
-    columns: (7.69%, 24.18%, 23.08%, 31.87%, 13.19%),
-    align: (center,center,center,center,center,),
-    table.header([Level], [They can be combined], [forming another
-      `X`], [preserving their properties], [It is easy],),
+
+#table(
+    columns: (auto, auto, auto, auto, auto),
+    align: (center,center,center,center,center, center,),
+    table.header(
+        [Level], 
+        [They can be combined], 
+        [forming another X], 
+        [preserving their properties], 
+        [It is easy],),
     table.hline(),
     [1], [No], [-], [-], [-],
     [2], [Yes], [No], [-], [-],
     [3], [Yes], [Yes], [No], [-],
     [4], [Yes], [Yes], [Yes], [No],
     [5], [Yes], [Yes], [Yes], [Yes],
-  )]
-  , kind: table
   )
+
 
 Of course, for your esoteric language and your serialization format, you
 aim to write parsers proudly fitting the last level.

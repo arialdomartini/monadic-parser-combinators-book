@@ -231,45 +231,33 @@ just need to change the signature of `<|` to accept an `'a Parser`
 instead of just an `'a`? Good question. Let's see. We can try to define
 2 enhanced operators:
 
-#figure(
-  align(center)[#table(
+#table(
     columns: 2,
-    align: (auto,auto,),
     table.header([F\# native], [Parser-powered],),
     table.hline(),
     [`<|`], [`<<|`],
     [`|>`], [`|>>`],
-  )]
-  , kind: table
-  )
+)
 
 with these signatures:
 
-#figure(
-  align(center)[#table(
+#table(
     columns: 3,
-    align: (auto,auto,auto,),
-    table.header([Version], [Operator], [Signature],),
+    table.header([Version], [Op], [Signature],),
     table.hline(),
-    [F\# native], [`<|`], [`('a -> 'b) -> 'a -> 'b`],
-    [Parser-powered], [`<<|`], [`('a -> 'b) -> 'a Parser -> 'b`],
-  )]
-  , kind: table
-  )
+    [F\# \ native], [`<|`], [`('a -> 'b) -> 'a -> 'b`],
+    [Parser \ powered], [`<<|`], [`('a -> 'b) -> 'a Parser -> 'b`],
+)
 
 and:
 
-#figure(
-  align(center)[#table(
+#table(
     columns: 3,
-    align: (auto,auto,auto,),
-    table.header([Version], [Operator], [Signature],),
+    table.header([Version], [Op], [Signature],),
     table.hline(),
-    [F\# native], [`|>`], [`'a        -> ('a -> 'b) -> 'b`],
-    [Parser-powered], [`|>>`], [`'a Parser -> ('a -> 'b) -> 'b`],
-  )]
-  , kind: table
-  )
+    [F\# \ native], [`|>`], [`'a        -> ('a -> 'b) -> 'b`],
+    [Parser \ powered], [`|>>`], [`'a Parser -> ('a -> 'b) -> 'b`],
+)
 
 ```ocaml
 let (<<|) (f: 'a -> 'b) (aP: 'a Parser) : 'b = __
@@ -319,31 +307,24 @@ only fair.
 This means that the signature of our enhanced operators should rather
 be:
 
-#figure(
-  align(center)[#table(
+#table(
     columns: 3,
-    align: (auto,auto,auto,),
-    table.header([Version], [Operator], [Signature],),
+    table.header([Version], [Op], [Signature],),
     table.hline(),
-    [F\# native], [`<|`], [`('a -> 'b) -> 'a -> 'b`],
-    [Parser-powered], [`<<|`], [`('a -> 'b) -> 'a Parser -> 'b Parser`],
-  )]
-  , kind: table
-  )
+    [F\# \ native], [`<|`], [`('a -> 'b) -> 'a -> 'b`],
+    [Parser \ powered], [`<<|`], [`('a -> 'b) -> 'a Parser -> 'b Parser`],
+)
+
 
 and:
 
-#figure(
-  align(center)[#table(
+#table(
     columns: 3,
-    align: (auto,auto,auto,),
-    table.header([Version], [Operator], [Signature],),
+    table.header([Version], [Op], [Signature],),
     table.hline(),
-    [F\# native], [`|>`], [`'a        -> ('a -> 'b) -> 'b`],
-    [Parser-powered], [`|>>`], [`'a Parser -> ('a -> 'b) -> 'b Parser`],
-  )]
-  , kind: table
-  )
+    [F\# \ native], [`|>`], [`'a        -> ('a -> 'b) -> 'b`],
+    [Parser \ powered], [`|>>`], [`'a Parser -> ('a -> 'b) -> 'b Parser`],
+)
 
 Since both `<<|` and `|>>` now return a `'b Parser`, the assertions:
 
@@ -615,18 +596,15 @@ type Boolish =
 Which keywords should your language use? `"true"` and `"false"` are so
 overrated and boring… What about using German instead?
 
-#figure(
-  align(center)[#table(
+
+#table(
     columns: 2,
-    align: (auto,auto,),
     table.header([Boolish value], [Keyword],),
     table.hline(),
     [`SoTrue`], [`richtig`],
     [`SoFalse`], [`falsch`],
     [`Occasionally`], [`gelegentlich`],
-  )]
-  , kind: table
-  )
+)
 
 Sounds promising! Building a parser for the keyword `falsch` is
 straighforward if you use `str`:
@@ -676,18 +654,14 @@ val (<<|) : ('a -> 'b) -> 'a Parser -> 'b Parser
 Given that all the functions in F\# are curried, there are 2 ways to
 read it:
 
-#figure(
-  align(center)[#table(
-    columns: (27.84%, 26.8%, 45.36%),
-    align: (auto,auto,auto,),
+#table(
+    columns: 3,
     table.header([Input], [Output], [Interpretation],),
     table.hline(),
     [`('a -> 'b) -> 'a Parser`], [`'b Parser`], [Apply a function to the
     result of a parser],
     [`('a -> 'b)`], [`'a Parser -> 'b Parser`], [Lift a function to the
     Parser world],
-  )]
-  , kind: table
   )
 
 You can easily apply the 1st interpretation to the `EpicTime` case. You
@@ -714,19 +688,15 @@ let epicTimeP : EpicTime Parser =
 
 The types in the game are:
 
-#figure(
-  align(center)[#table(
-    columns: (17.5%, 82.5%),
-    align: (auto,auto,),
+#table(
+    columns: 2,
     table.header([Element], [Signature],),
     table.hline(),
     [`toEpicTime`], [`DateTime -> EpicTime`],
     [`dateTimeP`], [`DateTime Parser`],
     [`<<|`], [(`DateTime -> EpicTime`) -\>
-    `DateTime Parser -> EpicTime Parser`],
-  )]
-  , kind: table
-  )
+        `DateTime Parser -> EpicTime Parser`],
+)
 
 You can imagine how `<<|`:
 
