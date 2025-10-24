@@ -1,4 +1,4 @@
-= 5 Shades Of Composability <chapter-2>
+= Five Shades Of Composability <chapter-2>
 
 You have surely noted that people into functional programming have an
 obsession with the notion of composition. For example, you could have

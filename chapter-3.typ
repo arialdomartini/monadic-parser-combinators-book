@@ -1,4 +1,4 @@
-= That's a Combinator! <chapter-3>
+= Look, Ma, no code! <chapter-3>
 
 So, let's challenge the composability of imperative parsers. Suppose
 that other than `parsePerson`:
