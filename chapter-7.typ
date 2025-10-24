@@ -79,74 +79,66 @@ build whatever parser.
 
 Let me list them below so you know right away where we're headed.
 
-Name
-Signature
-Purpose
-.\>\>.andThen
-'a Parser -\> 'b Parser -\> ('a \* 'b) Parser
-Parse 'a, then 'b, and finally return both in a tuple.
-\>\>=bind
-'a Parser -\> ('a -\> 'b Parser) -\> 'b Parser
-Parse 'a and pass it to a continuation.
-\<!\>\<\<|map
-('a -\> 'b) -\> 'a Parser -\> 'b Parser
-Transform a Parser of 'a into a Parser of 'b.
-|\>\>pipe
-'a Parser -\> ('a -\> 'b) -\> 'b Parser
-Like F\# pipe operator |\>, but operating with Parsers.
-\<\*\>ap
-('a -\> 'b) Parser -\> 'a Parser -\> 'b Parser
-Partial application of a Parser argument to a multi-parameters function.
-\<|\>
-'a Parser -\> 'a Parser -\> 'a Parser
-Try applying a Parser. It if fails, try another one.
-.\>\>
-'a Parser -\> 'b Parser -\> 'a Parser
-Apply 2 parsers, returning the result of the first one only.
-\>\>.
-'a Parser -\> 'b Parser -\> 'b Parser
-Apply 2 parsers, returning the result of the second one only.
-many
-'a Parser -\> 'a list Parser
-Repeatedly apply a parser until it fails, returning a list of parsed
-values.
-many1
-'a Parser -\> 'a list Parser
-Same as above, but expects at least 1 occurrence.
-skipMany
-'a Parser -\> () Parser
-Parse zero or more occurrences of something, discarding the result.
-skipMany1
-'a Parser -\> () Parser
-Same as above, but expects at least 1 occurrence.
-between
-'o Parser -\> 'c Parser -\> 'a Parser -\> 'a Parser
-Parse something between opening and closing elements.
-sepBy
-'a Parser -\> 'b Parser -\> 'a list Parser
-Parse a list of 'a elements separate by b.
-returnp
-'a -\> 'a Parser
-Lift a plain value into the Parser world.
-liftmap
-('a -\> 'b) -\> 'a Parser -\> 'b Parser
-Elevate a 1-parameter function into the Parsers world.
-lift2
-('a -\> 'b -\> 'c) -\> 'a Parser -\> 'b Parser -\> 'c Parser
-Elevate a 2-parameter function into the Parsers world.
-lift3
-('a -\> 'b -\> 'c -\> 'd) -\> 'a Parser -\> 'b Parser -\> 'c Parser -\>
-'d Parser
-Elevate a 3-parameter function into the Parsers world.
-pipe2
-'a Parser -\> 'b Parser -\> ('a -\> 'b -\> 'c) -\> 'c Parser
-Apply 2 Parser arguments to a 2-parameter function expecting values.
-pipe3
-'a Parser -\> 'b Parser -\> 'c Parser -\> ('a -\> 'b -\> 'c -\> 'd) -\>
-'d Parser
-Apply 3 Parser arguments to a 3-parameter function expecting values.
+#{
+  show table.cell: it => {
+        set text(size: 0.7em)
+        set par(justify: false)
+        it
+    }
+
+
+    table(
+        columns: (10%, 60%, auto),
+        table.header([Name], [Signature], [Purpose],),
+        table.hline(),
+
+        [`many`], [`(string -> 'a) -> (string -> 'a list)`], [parses zero or more occurrences of something, collecting the results in a list.],
+
+        [`.>>.` \ `.andThen`], [`'a Parser -> 'b Parser -> ('a \* 'b) Parser`], [Parse `'a`, then `'b`, and finally return both in a tuple.],
+
+        [`>>=` \ `bind`], [`'a Parser -> ('a -> 'b Parser) -> 'b Parser`], [Parse `'a` and pass it to a continuation.],
+
+        [`<!>` \ `map`], [`('a -\> 'b) -\> 'a Parser -\> 'b Parser`], [Transform a Parser of `'a` into a Parser of `'b`.],
+
+        [`|>>` \ `pipe`], [`'a Parser -> ('a -> 'b) -> 'b Parser`], [Like F\# pipe operator `|>`, but operating with Parsers.],
+
+        [`<\*>` \ `ap`], [`('a -> 'b) Parser -> 'a Parser -> 'b Parser`], [Partial application of a Parser argument to a multi-parameters function.],
+
+        [`<|>`], [`'a Parser -> 'a Parser -> 'a Parser`], [Try applying a Parser. It if fails, try another one.],
+
+        [`.>>`], [`'a Parser -> 'b Parser -> 'a Parser`], [Apply 2 parsers, returning the result of the first one only.],
+
+        [`>>.`], [`'a Parser -> 'b Parser -> 'b Parser`], [Apply 2 parsers, returning the result of the second one only.],
+
+        [`many`], [`'a Parser -> 'a list Parser`], [Repeatedly apply a parser until it fails, returning a list of parsed values.],
+
+        [`many1`], [`'a Parser -> 'a list Parser`], [Same as above, but expects at least 1 occurrence.],
+
+        [`skipMany`], [`'a Parser -> () Parser`], [Parse zero or more occurrences of something, discarding the result.],
+
+        [`skipMany1`], [`'a Parser -> () Parser`], [Same as above, but expects at least 1 occurrence.],
+
+        [`between`], [`'o Parser -> 'c Parser -> 'a Parser -> 'a Parser`], [Parse something between opening and closing elements.],
+
+        [`sepBy`], [`'a Parser -> 'b Parser -> 'a list Parser`], [`'a -> 'a Parser`], [Parse a list of `'a` elements separate by `'b`.], [`returnp`], [Lift a plain value into the Parser world.],
+
+        [`liftmap`], [`('a -> 'b) -> 'a Parser -> 'b Parser`], [Elevate a 1-parameter function into the Parsers world.],
+
+        [`lift2`], [`('a -> 'b -> 'c) -> 'a Parser -> 'b Parser -> 'c Parser`], [Elevate a 2-parameter function into the Parsers world.],
+
+        [`lift3`], [`('a -> 'b -> 'c -> 'd) -> 'a Parser -> 'b Parser -> 'c Parser -> 'd Parser`], [Elevate a 3-parameter function into the Parsers world.],
+
+        [`pipe2`], [`'a Parser -> 'b Parser -> ('a -> 'b -> 'c) -> 'c Parser`], [Apply 2 Parser arguments to a 2-parameter function expecting values.],
+
+        [`pipe3`], [`'a Parser -> 'b Parser -> 'c Parser -> ('a -> 'b -> 'c -> 'd) -> 'd Parser`], [Apply 3 Parser arguments to a 3-parameter function expecting values.],
+    
+    )
+}
+
 Don't feel overwhelmed. They are way easier to write than they appear at
 first. \
+
+
 As a starter, we will build `|>>` and `<<|`.
 
 == From The F\# Native Function Application…
