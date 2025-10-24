@@ -57,7 +57,6 @@ are the signatures.
 #tree-sitter too does something similar. It parses a string like:
 
 
-
 ```
 "let x = 42"
 ```

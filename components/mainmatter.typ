@@ -2,7 +2,7 @@
 #let alink(text, to, note) = {
     link(to)[#text]
 
-    footnote([#to --- #note])
+    footnote([#link(to)[#to] --- #note])
 
 }
 
@@ -58,10 +58,19 @@
     )
 
     #show link: it => {
-        underline(it)
+        
+        underline(
+            offset: 0.2em,
+            stroke: stroke(
+                paint: rgb("#888888"),
+                thickness: 1pt,
+                dash: (1pt, 1pt),
+
+            ),)[#it]
     }
 
-
+    
+    
     #set list(marker: [\u{2023}])
 
 
