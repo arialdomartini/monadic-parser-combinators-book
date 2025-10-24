@@ -78,16 +78,16 @@
     // Tables
     /////////
     
-    #let tablecolor = luma(30)
+    #let tablecolor = luma(200)
     #set table(
         align: center,
         stroke: (x, y) => 1pt + tablecolor,
         fill: (x, y) =>
         if y == 0 {
-            tablecolor
+            rgb("#eeeeee")
         }
     )
-    #show table.cell.where(y: 0): it => strong(text(white, it))
+    #show table.cell.where(y: 0): it => strong(text(black, it))
     #show table.cell: it => {
         set text(size: 1em)
         set par(justify: false)
