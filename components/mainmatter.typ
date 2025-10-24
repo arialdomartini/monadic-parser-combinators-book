@@ -13,19 +13,19 @@
     // Header
     /////////
 
+
     #let current-chapter-title() = context {
-        let headings = query(heading.where(level: 1).before(here()))
-        if headings == () [!!!]
-        else {headings.last().body}
+        let last = query(heading.where(level: 1).before(here())).last()
+        let num = counter(heading.where(level: 1)).at(last.location()).first()
+        [Chapter #num --- #last.body]
     }
-
-
+    
     #let my-header = pad(left: 0em, right: 0em, [
         // #set text(.8em, rgb("#888888"))
         #set text(.7em)
         #smallcaps(current-chapter-title())
         #h(1fr)
-        #context counter(page).display()
+        #context strong[#counter(page).display()]
         #line(
             length: 100%,
             stroke: 1pt + rgb("#888888")
