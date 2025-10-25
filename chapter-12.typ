@@ -425,10 +425,28 @@ through 11 chapters, developing building blocks after building blocks,
 only to be back to square one, building `many` by the means of pattern
 matching and passing `rest` around. That's depressing.
 
+#let link_cons = alink(
+    "https://en.wikipedia.org/wiki/Cons",
+    [cons-ing],
+
+    [ The LISP world is full of obsolete terms with bizarre and funny
+      etymologies. Among these are `cons` (for `cons`-tructing memory
+      objects) and the mysterious `car` (Contents of the Address part of
+      Register) and `cdr` (Contents of the Decrement part of
+      Register).
+        
+      Translated into modern F\#, these simply correspond to the
+      `List` operator `::`, and to the `List.head` and `List.tail`
+      functions.
+
+
+      So, _cons-ing_ just means _appending an element to a list head_.
+
+    ]  )
+
 Wait a minute! Can't we lift the function for recursively bulding a list
 to the Parser world using `<!>` and `<*>`? I mean, if building a list
-can be done #link("https://en.wikipedia.org/wiki/Cons")[cons-ing] values
-with:
+can be done #link_cons values with:
 
 ```ocaml
 let cons head tail = head :: tail
