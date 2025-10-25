@@ -47,14 +47,14 @@ Of course, it's likely that a programming language grammar is more
 complex than the JSON grammar. But the two concepts are alike, and so
 are the signatures.
 
-#let tree-sitter = alink("Tree-sitter",
+#let link_tree-sitter = alink("Tree-sitter",
     "https://tree-sitter.github.io/tree-sitter",
     [Tree-sitter is a parser generator library that builds syntax trees
     for source code in real time. It powers editing features in
     editors such Vim and Emacs.])
 
 
-#tree-sitter too does something similar. It parses a string like:
+#link_tree-sitter too does something similar. It parses a string like:
 
 
 ```
@@ -91,11 +91,30 @@ not granted to adhere to the rules of the chosen grammar. Indeed, if it
 violates them, then we expect the parser to fail and to emit an error,
 to help the user identify the syntax errors.
 
+#let link_descent_parsers = alink("Recursive Descent Parsers",
+    "https://en.wikipedia.org/wiki/Recursive_descent_parser",
+    [Top-down parsers composed of mutually recursive functions, each representing a grammar rule.
+
+    _Descent_ means that parsers start from the highest-level rule and
+    work their way down into the smaller parts (the _descendants_);
+    _Recursive_ here means that parsers use functions calling other
+    similar functions (including themselves if needed).
+
+    Essentially, it's like walking down a tree structure of grammar
+    rules by having each rule's function calling lower-level
+    descentant rules' functions.
+
+    Don't despair if it doesn't click right away. It'll become clear
+    as you read on. That's the very theme of the book.  ])
+
+
 There are multiple approaches to parsing, including the renowned Regular
 Expressions. \
 Monadic Parser Combinators are a particularly fascinating one: they are
-an example of
-#link("https://en.wikipedia.org/wiki/Recursive_descent_parser")[Recursive Descent Parsers];.
+an example of #link_descent_parsers.
+
+
+
 This means that no matter how complex the parser for a grammar is, it is
 defined based on smaller, simpler parsers, and those in turn are defined
 based on even smaller and simpler ones, and so on recursively, down to
