@@ -1,3 +1,5 @@
+#import "components/mainmatter.typ": alink
+
 = Things You Don't Care About <chapter-9>
 
 There is another elementary way to sequence 2 parsers: to only return
@@ -158,8 +160,13 @@ let ``function composition`` () =
     test <@ "abcd" |> composed = 4 @>
 ```
 
-Indeed, this operator is natively provided by F\#
-(#link("https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4552")[FSharp.Core/prim-types.fs\#L4546];):
+#let link_then = alink(
+    "https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4552",
+    [FSharp.Core/prim-types.fs\#L4546],
+    []
+)
+
+Indeed, this operator is natively provided by F\# (#link_then):
 
 ```ocaml
 let inline (>>) func1 func2 x = func2 (func1 x)
