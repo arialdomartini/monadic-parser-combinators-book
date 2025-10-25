@@ -1,3 +1,5 @@
+#import "components/mainmatter.typ": alink
+
 = Lifting Functions <chapter-11>
 
 == Fancy dates
@@ -281,9 +283,31 @@ Removing 1 parameter more, it's easy to define `lift`, for lifting
 let lift f a = f <!> a
 ```
 
-But look! #link("https://wiki.haskell.org/Eta_conversion")[η-reducing]
-this expression --- that is, removing `a` and `f` from both sides ---
-it's easy to see that `lift` is in fact our old friend `map`:
+#let link_eta_reduction = alink(
+    "https://wiki.haskell.org/Eta_conversion",
+    [η-reducing],
+    [   Do you remember when in middle school the math teacher
+        showed you how to simplify equations? Like when you had:
+        
+        $(a + b)*x = 42 * x$
+
+        and you could just cancel "$*x$" out on both sides?
+        
+        $(a + b) = 42$
+
+
+        η-conversion (pronounced _eta-conversion_) does exactly the
+        same thing, but with function parameters.
+
+        For this to work, the programming language must support
+        partial application. F\# does.
+
+    ]
+)
+
+But look! #link_eta_reduction this expression --- that is, removing
+`a` and `f` from both sides --- it's easy to see that `lift` is in
+fact our old friend `map`:
 
 ```ocaml
 let lift = map
