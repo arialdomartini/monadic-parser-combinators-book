@@ -1,3 +1,5 @@
+#import "components/mainmatter.typ": alink
+
 = One Combinator to Rule Them All <chapter-15>
 
 We will dedicate the next couple of chapters to giving ourselves a pat
@@ -27,8 +29,13 @@ profoundly true and powerful that you can use it to express a wide range
 of seemingly unrelated ideas, often more concisely and elegantly than
 before.
 
-Graham Hutton wrote a famous paper on one of those cases:
-#link("https://people.cs.nott.ac.uk/pszgmh/fold.pdf")[A tutorial on the universality and expressiveness of fold];.
+#let link_hutton = alink(
+    "https://people.cs.nott.ac.uk/pszgmh/fold.pdf",
+    [A tutorial on the universality and expressiveness of fold],
+    []
+)
+
+Graham Hutton wrote a famous paper on one of those cases: #link_hutton.
 Indeed, `fold` (or `Aggregate` in LINQ lingo) is so powerful that if you
 stripped `Select`, `Where`, `Sum`, `First`, `Zip`, `CountBy` and other
 functions away from LINQ, only saving `Aggregate`, believe it or not,
