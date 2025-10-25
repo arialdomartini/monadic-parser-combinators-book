@@ -137,5 +137,4 @@ So, let's see how to fix the pyramid of doom we wrote in `parsePerson`
 by distilling a new function application. And let's see how this leads
 us to re-invent --- yet another time --- Monads.
 
-Take a break, bite an apple, then jump to
-#link("/monadic-parser-combinators-6")[the next installment];.
+Take a break, bite an apple, then jump to @chapter-6.
