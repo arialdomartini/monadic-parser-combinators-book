@@ -1,3 +1,5 @@
+#import "components/mainmatter.typ": alink
+
 = Parser-Powered Function Application <chapter-7>
 
 Until this point, we have worked with these types:
@@ -186,9 +188,13 @@ let ``function application, via an operator`` () =
     test <@ twice <| 42 = 84 @>
 ```
 
-Its real implementation
-(#link("https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4546")[FSharp.Core/prim-types.fs\#L4546];)
-is:
+#let link_rev_pipe = alink(
+    "https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4546",
+    [FSharp.Core/prim-types.fs\#L4546],
+    []
+)
+
+Its real implementation (#link_rev_pipe) is:
 
 ```ocaml
 let inline (<|) func arg1 = func arg1
@@ -209,8 +215,13 @@ let ``function application with pipe`` () =
     test <@ 42 |> twice = 84 @>
 ```
 
-`|>` is actually defined like this in the F\# code
-(#link("https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4540")[FSharp.Core/prim-types.fs\#L4540];):
+#let link_pipe = alink(
+    "https://github.com/dotnet/fsharp/blob/main/src/FSharp.Core/prim-types.fs#L4540",
+    [FSharp.Core/prim-types.fs\#L4540],
+    []
+)
+
+`|>` is actually defined like this in the F\# code (#link_pipe):
 
 ```ocaml
 let inline (|>) arg func = func arg
