@@ -1,5 +1,5 @@
 
-#let alink(text, to, note) = {
+#let alink(to, text, note) = {
     link(to)[#text]
 
     footnote([#link(to)[#to] --- #note])

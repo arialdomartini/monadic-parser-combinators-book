@@ -47,8 +47,9 @@ Of course, it's likely that a programming language grammar is more
 complex than the JSON grammar. But the two concepts are alike, and so
 are the signatures.
 
-#let link_tree-sitter = alink("Tree-sitter",
+#let link_tree-sitter = alink(
     "https://tree-sitter.github.io/tree-sitter",
+    "Tree-sitter",
     [Tree-sitter is a parser generator library that builds syntax trees
     for source code in real time. It powers editing features in
     editors such Vim and Emacs.])
@@ -91,8 +92,9 @@ not granted to adhere to the rules of the chosen grammar. Indeed, if it
 violates them, then we expect the parser to fail and to emit an error,
 to help the user identify the syntax errors.
 
-#let link_descent_parsers = alink("Recursive Descent Parsers",
+#let link_descent_parsers = alink(
     "https://en.wikipedia.org/wiki/Recursive_descent_parser",
+    "Recursive Descent Parsers",
     [Top-down parsers composed of mutually recursive functions, each representing a grammar rule.
 
     _Descent_ means that parsers start from the highest-level rule and
@@ -134,14 +136,14 @@ That's the goal of these pages.
 <how-we-will-proceed>
 
 #let link_understanding_parsers = alink(
+    "https://fsharpforfunandprofit.com/series/understanding-parser-combinators",
     [The "Understanding Parser Combinators" series],
-    "https://fsharpforfunandprofit.com/series/understanding-parser-combinators/",
     [Part of the F\# for Fun and Profit. A 4-part tutorial,
     culminating with a manually crafted JSON parser.])
 
-#let link_parser-combinators-walkthrough = alink(
-    [Parser Combinators: a Walkthrough, Or: Write you a Parsec for Great Good],
+#let link_parser-combinators-walkthrough = alink(    
     "https://hasura.io/blog/parser-combinators-walkthrough",
+    [Parser Combinators: a Walkthrough, Or: Write you a Parsec for Great Good],
     [This one is very concise and amazingly clear, so
     I would recommend it even if you have no familiarity with Haskell.])
 
@@ -185,8 +187,8 @@ then let's get started.
 <notes>
 
 #let link_send_pr = alink(
-    [send me a pull request],
     "https://github.com/arialdomartini/arialdomartini.github.io/",
+    [send me a pull request],
     [This repo contains the complete Typst source code.]
 )
 
