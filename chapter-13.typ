@@ -101,11 +101,18 @@ The big deal is: this implementation is wrong. Did you spot the bug?
 
 == Semordnilap Tags
 <semordnilap-tags>
+
+#let link_semordnilap = alink(
+    "https://en.wiktionary.org/wiki/semordnilap",
+    [semordnilap],
+
+    [Did I draw Della too tall, Edward? I did?]
+)
+
 If you did not, let me make it more apparent. Indulge me while I
 introduce a little silly change in the XML grammar, in line with the
-craziness of your beautiful programming language: let's ask the user to
-type the closing tag name backward, as a
-#link("https://en.wiktionary.org/wiki/semordnilap")[semordnilap];. This
+craziness of your beautiful programming language: let's ask the user
+to type the closing tag name backward, as a #link_semordnilap. This
 will have the delightful effect of producing tag couples like
 `<stressed>...</desserts>`, `<repaid>...</diaper>`,
 `<evilStar>...</RatsLive>`. Amusing!
