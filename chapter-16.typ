@@ -64,9 +64,15 @@ let! value = parser
 doSomethingWith value
 ```
 
+#let link_variables_are_syntactic_sugar = alink(
+    "https://arialdomartini.github.io/sicp-let-syntactic-sugar-csharp",
+    [variables are just syntactic sugar for lambda expressions],
+    []
+)
+
 Only, remember to wrap the latter in a `parse { }` block. \
 I find the first step amusing, because it reminds me that
-#link("https://arialdomartini.github.io/sicp-let-syntactic-sugar-csharp")[variables are syntactic sugar for lambda expressions];.
+#link_variables_are_syntactic_sugar.
 
 This style was first introduced Haskell 1.3, under the name of #emph[do
 notation] (see
