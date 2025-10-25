@@ -50,7 +50,7 @@ are the signatures.
 #let link_tree-sitter = alink(
     "https://tree-sitter.github.io/tree-sitter",
     "Tree-sitter",
-    [Tree-sitter is a parser generator library that builds syntax trees
+    [Treesitter is a parser generator library that builds syntax trees
     for source code in real time. It powers editing features in
     editors such Vim and Emacs.])
 
@@ -188,8 +188,7 @@ then let's get started.
 
 #let link_send_pr = alink(
     "https://github.com/arialdomartini/arialdomartini.github.io/",
-    [send me a pull request],
-    [This repo contains the complete Typst source code.]
+    [send me a pull request], []
 )
 
 I am not a native English speaker: if you spot any typo or weird

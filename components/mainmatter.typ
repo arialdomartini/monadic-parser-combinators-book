@@ -2,8 +2,12 @@
 #let alink(to, text, note) = {
     link(to)[#text]
 
-    footnote([#link(to)[#to] --- #note])
-
+    if note == [] {
+        footnote(link(to)[#to])
+    }
+    else {
+        footnote([#link(to)[#to] --- #note])
+    }
 }
 
 
