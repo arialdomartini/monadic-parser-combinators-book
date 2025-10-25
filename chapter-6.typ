@@ -1,3 +1,6 @@
+#import "components/mainmatter.typ": alink
+
+
 = A Bite Before The Feast <chapter-6>
 
 I sometimes feel uneasy when books keep providing too many details
@@ -87,16 +90,29 @@ being distracted by the unconsumed input and the error handling. You can
 see this as an internal Domain Specific Language that tries to be more
 descriptive than imperative.
 
+#let link_paprika = alink(
+    "https://en.wikipedia.org/wiki/Paprika_(2006_film)",
+    [Satoshi Kon],
+
+    [Satoshi Kon (1963-2010) was a Japanese film director. In his
+     anime Paprika (2006), Dr. Atsuko Chiba, a research psychologist,
+     uses an experimental device to enter his patients' dreams. It's a
+     visually striking and philosophically deep anime about dreams
+     within dreams within dreams...
+        
+     Christopher Nolan has never directly commented extensively on the
+     impressive similarities with Inception (2010).] )
+
 Also, note that the arguments we feed `between` and `sepBy` with are
 parsers themselves. The outputs of `between` and `sepBy` are also
 parsers, which are then fed into `branch`, producing yet another parser.
 This parser is subsequently passed to `branches`, which multiplies it
 and generates a new parser. Finally, all of this culminates in
 `switchParser`, the outermost parser.
-#link("https://en.wikipedia.org/wiki/Paprika_(2006_film)")[Satoshi Kon]
-would be surely delighted by this recursive dreamscape, where each
-parser unfolds into another parser, like a never ending spiral of dreams
-nested within dreams.
+
+#link_paprika would be surely delighted by this recursive dreamscape,
+where each parser unfolds into another parser, like a never ending
+spiral of dreams nested within dreams.
 
 == Operators For Building Parsing-Combining Expressions
 <operators-for-building-parsing-combining-expressions>
