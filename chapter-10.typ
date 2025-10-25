@@ -1,3 +1,5 @@
+#import "components/mainmatter.typ": alink
+
 = Applying Functions, Ad Nauseam <chapter-10>
 
 There is something magic about the native F\# function application: once
@@ -427,10 +429,16 @@ let d:  'd         = f     a      b      c
 let dP: 'd Parser  = f <!> aP <*> bP <*> cP
 ```
 
-I have always been fascinated by the way the
-#link("https://idris-lang.org/")[Idris] programming language took this
-interpretation to the extreme, with Conor McBride's
-#link("https://docs.idris-lang.org/en/latest/tutorial/interfaces.html?highlight=idiom%20bracket#idiom-brackets")[Idiom Brackets];:
+#let link_idris = alink(
+    "https://idris-lang.org",
+    [Idris],
+    [Idris is a purely functional programming language, similar to
+Haskell and natively supporting Dependent Types.]  )
+
+I have always been fascinated by the way the #link_idris programming
+language took this interpretation to the extreme, with Conor McBride's
+#link("https://docs.idris-lang.org/en/latest/tutorial/interfaces.html?highlight=idiom%20bracket#idiom-brackets")[Idiom
+Brackets];:
 
 ```idris
 d = [| f aP bP cP |]
