@@ -302,9 +302,33 @@ intuitive that this must have to do with some kind of relationship
 between the elements of a grammar and, consequently, some kind of
 #emph[binding] between its parsers.
 
+#let link_context_sensitive_grammars = alink(
+    "https://en.wikipedia.org/wiki/Context-sensitive_grammar",
+    [Context-sensitive Grammars], 
+
+    [ In Context-free Grammars, symbols can be interpreted
+      unambiguously, regardless their position. For example, the $*$
+      in arithmetic expressions such as $42.8 * x$ is always the
+      multiplication, just like the $.$ strictly functions as a
+      decimal separator. As grammatical elements, these symbols cannot
+      be mistaken for anything else and they do not require additional
+      context to be parsed.
+
+      On the other side of the spectrum, in the grammar of C\# the
+      sequence of characters `using` can have different
+      interpretations depending on its context: it may either open a
+      namespace like in `using System`, or define a block for a
+      disposable object, like in `using (var reader = File.OpenText(name))`.
+      Or it can even appear as part of a string literal, such as in `"using F# is fun"`.
+
+      Understanding its correct meaning requires contextual awareness,
+      because it's part of a Context-sensitive Grammar.
+        
+    ] )
+
 Indeed, grammars with elements depending on each other, like in the case
 of our matching opening and closing tags, are called
-#link("https://en.wikipedia.org/wiki/Context-sensitive_grammar")[Context-sensitive Grammars];.
+#link_context_sensitive_grammars.
 A parser for this family of grammars requires a new tool that --- it
 could be demonstrated --- cannot be built as a composition of the
 applicative parsers we have distilled so far. We need a brand new
