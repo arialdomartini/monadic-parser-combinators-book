@@ -74,11 +74,21 @@ Only, remember to wrap the latter in a `parse { }` block. \
 I find the first step amusing, because it reminds me that
 #link_variables_are_syntactic_sugar.
 
-This style was first introduced Haskell 1.3, under the name of #emph[do
-notation] (see
-#link("https://www.haskell.org/definition/from12to13.html#do")[Changes from Haskell 1.2 to Haskell 1.3 - Monad Syntax];).
-That's often what I call it too, although the correct name for F\# is
-Computation Expression.
+#let link_do_notation = alink(
+    "https://www.haskell.org/definition/from12to13.html#do",
+    [Changes from Haskell 1.2 to Haskell 1.3 - Monad Syntax],
+    
+    [ Haskell's _do notation_ and F\#'s Computation Expressions play
+      the same role: they are syntactic sugar to write monadic code in
+      a more linear fashion, saving the developer from chaining many
+      nested expressions with funny operators. Haskell has been the
+      first language offering the feature and it was eventually
+      followed by few other ones (e.g., Scala with for-comprehension,
+      C\# with LINQ). ] )
+
+This style was first introduced Haskell 1.3, under the name of
+#emph[do notation] (see #link_do_notation).  That's often what I call
+it too, although the correct name for F\# is Computation Expression.
 
 === `map` In Do Notation <map-in-do-notation> Here's `map`, in its
 initil implementation, from @chapter-7:
