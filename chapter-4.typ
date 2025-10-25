@@ -1,3 +1,5 @@
+#import "components/mainmatter.typ": alink
+
 = Don't Mess Up The Signature <chapter4>
 
 == Arialdo, You Are A Liar
@@ -100,12 +102,17 @@ a parser would rather have the signature:
 val parser : string -> ('a * string)
 ```
 
+#let link_state_monad = alink(
+    "https://arialdomartini.github.io/state-monad-for-the-rest-of-us",
+    [State Monad for The Rest of Us],
+    
+    [A very gentle tutorial which builds a State Monad from the
+     scratch, in F\#.]  )
+
 Returning a tuple with the (polymorphic) parsed value #emph[plus] the
 unconsumed input, a parser can easily hand the work over to the next
 parser. You might recognize this as the signature of the State Monad (go
-read
-#link("state-monad-for-the-rest-of-us")[State Monad for The Rest of Us]
-if you are curious). The basic usage pattern, then, could be:
+read #link_state_monad if you are curious). The basic usage pattern, then, could be:
 
 - Invoke a parser.
 - Keep the parsed value in a variable.
