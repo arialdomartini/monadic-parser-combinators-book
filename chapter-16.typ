@@ -336,8 +336,7 @@ let rec many p =
     <|> (pure' [])
 ```
 
-Compare this with what we obtained in
-#link("/monadic-parser-combinators-11")[Chapter 11];:
+Compare this with what we obtained in @chapter-11:
 
 ```ocaml
 let many<'a> (parser: 'a Parser): 'a list Parser = Parser (fun input ->
