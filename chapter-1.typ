@@ -132,11 +132,23 @@ That's the goal of these pages.
 
 == How We Will Proceed
 <how-we-will-proceed>
+
+#let link_understanding_parsers = alink(
+    [The "Understanding Parser Combinators" series],
+    "https://fsharpforfunandprofit.com/series/understanding-parser-combinators/",
+    [Part of the F\# for Fun and Profit. A 4-part tutorial,
+    culminating with a manually crafted JSON parser.])
+
+#let link_parser-combinators-walkthrough = alink(
+    [Parser Combinators: a Walkthrough, Or: Write you a Parsec for Great Good],
+    "https://hasura.io/blog/parser-combinators-walkthrough",
+    [This one is very concise and amazingly clear, so
+    I would recommend it even if you have no familiarity with Haskell.])
+
 There are many similar series online, some specific to F\# --- such as
-#link("https://fsharpforfunandprofit.com/series/understanding-parser-combinators/")[The "Understanding Parser Combinators" series]
-by Scott Wlaschin --- many others based on Haskell, like the excellent
-#link("https://hasura.io/blog/parser-combinators-walkthrough")[Parser Combinators: a Walkthrough, Or: Write you a Parsec for Great Good]
-by Antoine Leblanc. \
+#link_understanding_parsers by Scott Wlaschin --- many others based on
+Haskell, like the excellent #link_parser-combinators-walkthrough by
+Antoine Leblanc. \
 This post tries to stand out in a few different ways:
 
 - If other attempts to this topic left you scratching your head, this
