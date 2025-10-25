@@ -555,13 +555,26 @@ Look how concise:
 let epicTimeP = dateTimeP |>> toEpicTime
 ```
 
+#let link_tacit_programming = alink(
+    "https://en.wikipedia.org/wiki/Tacit_programming",
+    [Tacit Programming],
+    
+    [Also (and more frequently) called _Point-free Style_, where the
+     term _point_ stands for _function parameter_. In Point-free
+     style, function are defined without any explicitly mention to
+     parameter and are instead defined by composing other
+     functions, like in `v = length . filter isDigit . map toLower`.
+
+     This requires a higher level of abstraction that, when abused,
+     may lead to very obscure code. It is only fair that this earned
+     it the nickname _pointless style_.  ] )
+
 It does not even mention a single function parameter: it a pure
 combination of parsers and functions. This style is called Point Free
-Style or
-#link("https://en.wikipedia.org/wiki/Tacit_programming")[Tacit Programming];,
-and is typical when playing with functional combinators. It's
-fundamentally the consequence of manipulating things in an elevated,
-more abstract context. We will get back to this later.
+Style or #link_tacit_programming, and is typical when playing with
+functional combinators. It's fundamentally the consequence of
+manipulating things in an elevated, more abstract context. We will get
+back to this later.
 
 == Mapping strings to types
 <mapping-strings-to-types>
