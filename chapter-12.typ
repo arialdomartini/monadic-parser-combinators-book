@@ -1,3 +1,5 @@
+#import "components/mainmatter.typ": alink
+
 = Things You Are Not Sure About <chapter-12>
 
 There are only 2 important missing features in the Parser Combinator
@@ -137,14 +139,33 @@ let choice =
 
 but F\# type inference would scream at us.
 
-Technically speaking, this super-short version is based on the fact that
-a `Parser`, together with the binary operation `<|>` #emph[forms a
-#link("https://ncatlab.org/nlab/show/semigroup")[semigroup];];. In
-simple words, this means that we managed to have an operation to reduce
-2 different items into 1, and this is a very well known pattern in
-functional programming. Indeed, `List.reduce` is based on that pattern.
-#link("https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html#reduce")[Its documentation]
-states:
+#let link_semigroup = alink(
+    "https://ncatlab.org/nlab/show/semigroup",
+    [Semigroup],
+
+    [ A _Semigroup_ is a scary word for a very simple notion: think to
+      the $+$ operation with natural numbers; you can see it as a way
+      to combine (in any order) 2 numbers to get a new number.
+
+      Generalizing this idea, a Semigroup is _a set_ together with _a
+      function_ for combining any two elements of that set, and to get
+      back a value still in the same set, in a way where the order of
+      the parameters doesn't matter.
+
+      Semigroups (and the related Monoids) are eveywhere: strings
+      under concatenation, booleans under `or`, lists under
+      concatenation, CSS style merging, they all form Semigroups.
+
+    ])
+
+Technically speaking, this super-short version is based on the fact
+that a `Parser`, together with the binary operation `<|>` #emph[forms
+a #link_semigroup]. In simple words, this means that we managed to
+have an operation to reduce 2 different items into 1, and this is a
+very well known pattern in functional programming. Indeed,
+`List.reduce` is based on that pattern.
+#link("https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html#reduce")[Its
+documentation] states:
 
 ```
 val reduce: reduction: ('T -> 'T -> 'T) -> list: 'T list -> 'T
