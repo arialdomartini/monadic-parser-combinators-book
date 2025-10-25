@@ -182,6 +182,13 @@
 
     }    
 
+    ////////////
+    // Footnotes
+    ////////////
+
+    #set footnote.entry(
+        gap: 0.8em,
+    )    
 
     #body
     
