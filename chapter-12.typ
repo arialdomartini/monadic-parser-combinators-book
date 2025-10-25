@@ -158,14 +158,17 @@ but F\# type inference would scream at us.
 
     ])
 
+#let link_reduce = alink(
+    "https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html#reduce",
+    [Its documentation],
+    [])
+
 Technically speaking, this super-short version is based on the fact
 that a `Parser`, together with the binary operation `<|>` #emph[forms
 a #link_semigroup]. In simple words, this means that we managed to
 have an operation to reduce 2 different items into 1, and this is a
 very well known pattern in functional programming. Indeed,
-`List.reduce` is based on that pattern.
-#link("https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html#reduce")[Its
-documentation] states:
+`List.reduce` is based on that pattern. #link_reduce states:
 
 ```
 val reduce: reduction: ('T -> 'T -> 'T) -> list: 'T list -> 'T
