@@ -1,5 +1,8 @@
 = A Tale Of 2 Coupling Types <chapter-5>
 
+#import "components/mainmatter.typ": alink
+
+
 The `parsePerson` function delegates the parsing of GUIDs, strings and
 dates to external functions. We think that this decouples it from of the
 parsing logic of the specific fields. While this is indeed the case, the
@@ -112,11 +115,18 @@ errors via a `Result` instance instead of exceptions, as in our case. Or
 you want a family of function applications, one for each of your
 specific use case.
 
-FP techniques provide a way more generic solution than special keywords
-like `async` and `await`. If you read
-#link("/monads-for-the-rest-of-us")[Monads for The Rest of Us];, the
-notion of Applicative Functors and Monads as an extension of function
-application should not be new to you.
+#let link_monads_for_the_rest_of_us = alink(
+    "https://arialdomartini.github.io/monads-for-the-rest-of-us",
+    [Monads for The Rest of Us],
+    
+    [A very gentle introduction to Monads, also covering Functors and
+     Applicative Functors. It uses mostly F\#.]  )
+
+FP techniques provide a way more generic solution than special
+keywords like `async` and `await`. If you read
+#link_monads_for_the_rest_of_us, the notion of Applicative Functors
+and Monads as an extension of function application should not be new
+to you.
 
 Here's the takeaway: if in OOP the signature incompatibility is #emph[a
 problem] to be avoided or to be solved by the means of wrappers and

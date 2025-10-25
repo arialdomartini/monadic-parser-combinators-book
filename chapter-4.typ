@@ -416,13 +416,19 @@ let parsePerson: Person Parser =
         | Error err -> Error err
 ```
 
+#let link_pyramid_of_doom = alink(
+    "https://en.wikipedia.org/wiki/Pyramid_of_doom_(programming)",
+    [Pyramid of Doom],
+    []
+)
+
 Holy cow! This is absolutely horrific. There is more error control code
 than domain logic! But this was somehow expected: changing the signature
 of `Parser` implies some kind #emph[structural logic] to be executed
 when parsers --- #emph[all the parsers] --- are executed. In our case we
 pushed ourselves to the limit combining 2 structural changes: passing
 `rest` around and matching error cases. And we got a
-#link("https://en.wikipedia.org/wiki/Pyramid_of_doom_(programming)")[Pyramid of Doom]
+#link_pyramid_of_doom.
 
 The good news: the attempts to factor this mess out will lead us to
 invent Applicative Functors and Monads. Let's reflect how we should
