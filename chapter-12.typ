@@ -472,12 +472,30 @@ let rec many parser =
 Here we go! If the first part (the lifted `cons`) fails, we just a
 lifted empty list.
 
-It perfectly type checks. This is promising! "If it compiles it works",
-they told you. Until it does not. Try yourself: if you run the test, it
-enters an infinite loop. It compiled only because `⊥`, or
-#link("https://wiki.haskell.org/Bottom")[bottom];, the ideal type
-representing never-returning functions, is a member of all the types.
-What a scam…
+#let link_bottom = alink(
+    "https://wiki.haskell.org/Bottom",
+    "`bottom`",
+    
+    [ In most programming languages, even though functions declare a
+    return type, their evaluation always carries an implicit,
+    additional possible outcome: they can fail to provide an
+    answer. This can happen either because they never terminate (for
+    example, when they enter an infinite loop) or because they panic
+    and raise an error. Rarely this is reflected in their type
+    signature.
+
+    `⊥` (pronounced _bottom_) represents the clash between Turing Completeness
+    and the inescapable Halting Problem: it is the representation of
+    this undecidability.
+
+    A way to express this notion is `bottom = bottom`, a
+    function which calls itself, ad nauseam.] )
+
+It perfectly type checks. This is promising! "If it compiles it
+works", they told you. Until it does not. Try yourself: if you run the
+test, it enters an infinite loop. It compiled only because `⊥`, or
+#link_bottom, the ideal type representing never-returning functions,
+is a member of all the types.  What a scam…
 
 In simpler words, the problem here is that function application is
 eager: F\# evaluates all the arguments before passing them to a
