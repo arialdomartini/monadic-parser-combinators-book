@@ -183,9 +183,15 @@ then let's get started.
 
 == Notes
 <notes>
+
+#let link_send_pr = alink(
+    [send me a pull request],
+    "https://github.com/arialdomartini/arialdomartini.github.io/",
+    [This repo contains the complete Typst source code.]
+)
+
 I am not a native English speaker: if you spot any typo or weird
-sentence, feel free to
-#link("https://github.com/arialdomartini/arialdomartini.github.io/")[send me a pull request];.
+sentence, feel free to #link_send_pr.
 
 This book is crafted by people, not AI. Illustrations are original
 work by Nanou.
