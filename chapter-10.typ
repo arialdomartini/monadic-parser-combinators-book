@@ -433,12 +433,39 @@ let dP: 'd Parser  = f <!> aP <*> bP <*> cP
     "https://idris-lang.org",
     [Idris],
     [Idris is a purely functional programming language, similar to
-Haskell and natively supporting Dependent Types.]  )
+    Haskell and natively supporting Dependent Types.]  )
+
+#let link_idiom_brackets_idris = alink(
+    "https://docs.idris-lang.org/en/latest/tutorial/interfaces.html#idiom-brackets",
+    [Idiom Brackets],
+
+    [Just like the _do notation_ is a syntax for Monads, Idioms
+    Brackets is the equivalent syntactic sugar for Applicative
+    Functors. Rather than writing:
+
+```haskell
+(+) <$> x <*> y
+```
+
+        they let you just write:
+
+        ```haskell
+[| x + y |]
+```
+    ]
+)
+
+#let link_conor = alink(
+    "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/applicative-programming-with-effects/C80616ACD5687ABDC86D2B341E83D298",
+    [Conor McBride],
+
+    [Applicative Functors were invented in 2008 by Conor McBride and Ross Paterson, in the paper Applicative programming with effects. The same authors also introduced the Idiom Brackets syntax.]
+)
+
+
 
 I have always been fascinated by the way the #link_idris programming
-language took this interpretation to the extreme, with Conor McBride's
-#link("https://docs.idris-lang.org/en/latest/tutorial/interfaces.html?highlight=idiom%20bracket#idiom-brackets")[Idiom
-Brackets];:
+language took this interpretation to the extreme, with #link_conor's #link_idiom_brackets_idris:
 
 ```idris
 d = [| f aP bP cP |]
