@@ -176,14 +176,26 @@ let map f aP =
     aP >>= (f >> return')
 ```
 
+#let link_computation_expressions = alink(
+    "https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/computation-expressions",
+    [Computation Expressions],
+
+    [ An F\# Computation Expression is a programmable syntactic sugar
+      construct providing a very convenient and readable way to
+      combine (otherwise convoluted) monadic expressions as they were
+      imperative code. \
+
+      We will see them very soon. ]  )
+
+
 Wow! How concise! The compiler is happy with the signature and every,
 every single test is still green.
-#link("https://backtothefuture.fandom.com/wiki/This_is_heavy")[This is heavy];!
-It's actually quite something! I bet that the result appears cryptic and
-magic, at first. I swear that, after playing enough with FP, you will
-find it understandable. And I promise that, when we will finally
-introduce the #emph[do notation] by the means of F\# Computation
-Expressions, everything will get very intuitive.
+#link("https://backtothefuture.fandom.com/wiki/This_is_heavy")[This is
+heavy];!  It's actually quite something! I bet that the result appears
+cryptic and magic, at first. I swear that, after playing enough with
+FP, you will find it understandable. And I promise that, when we will
+finally introduce the #emph[do notation] by the means of
+#link_computation_expressions, everything will get very intuitive.
 
 == Look Ma, Applicative Functors Too!
 <look-ma-applicative-functors-too>

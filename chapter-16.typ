@@ -1,12 +1,14 @@
+#import "components/mainmatter.typ": alink
+
 = A Programmable Semicolon <chapter-16>
 
-Monads are beautiful, and so is F\#. No wonders that the latter natively
-supports the former. There a little trick to extend the F\# syntax to
-support monadic parser combinators. Indeed, since F\# natively knows how
-to deal with Monads, via
-#link("https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/computation-expressions")[Computation Expressions];,
-it's a matter telling it which Monad implementation to use. \
-The implementations of `bind` and `return'` will suffice:
+
+Monads are beautiful, and so is F\#. No wonders that the latter
+natively supports the former. There a little trick to extend the F\#
+syntax to support monadic parser combinators. Indeed, since F\#
+natively knows how to deal with Monads, via Computation Expressions,
+it's a matter telling it which Monad implementation to use. \ The
+implementations of `bind` and `return'` will suffice:
 
 ```ocaml
 type ParseBuilder() =
