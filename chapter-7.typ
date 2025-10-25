@@ -493,14 +493,22 @@ let ``date test`` () =
     test <@ run dateTimeP "2025-01-01 18:11:12, the rest" = Success (DateTime(2025, 01, 01, 18, 11, 12), ", the rest") @>
 ```
 
+#let link_epoch = alink(
+    "https://en.wikipedia.org/wiki/Unix_time",
+    [Epoch time],
+    
+    [A time format based on the idea of counting the number of seconds
+    elapsed since an arbitrary fixed starting point, called the
+    _Epoch_. In Unix, Epoch is conventionally set to the midnight UTC
+    on 1#super("st") January 1970.]  )
+
 But when it's time to use `DateTime` as an internal representation of
 dates in your esoteric programming language, you reject the idea: it's
-way too conventional. You once read about the
-#link("https://en.wikipedia.org/wiki/Unix_time")[Epoch time] which
-represents time by the number of seconds since the midnight of 1 January
-1970. Why 1970, you wonder? Because Unix was created in the early 1970s.
-What a lame excuse! You rather prefer a format that celebrates yourself.
-What about using:
+way too conventional. You once read about the #link_epoch which
+represents time by the number of seconds since the midnight of 1
+January 1970. Why 1970, you wonder? Because Unix was created in the
+early 1970s.  What a lame excuse! You rather prefer a format that
+celebrates yourself.  What about using:
 
 ```ocaml
 type EpicTime = EpicTime of double
