@@ -3,17 +3,14 @@
 
 #let logo = "/static/img/chapter-1.png"
 
-#let content = grid(gutter: .8em, columns: (1fr),
-
-      align(right)[ You have always wanted to invent \
-                     your own programming language,\ 
-                      and to do this with F\#, right? \
-          That's always  been your dream.],
+#let content = (
+    [ You have always wanted to invent \
+        your own programming language,\ 
+        and to do this with F\#, right? \
+        That's always  been your dream.],
     
-    [  Naturally, the idea was always to build its parser using Monadic Parser Combinators.
-
-        So, let's make it happen!]
-    )
+    [ Naturally, the idea was always to build its parser using Monadic
+        Parser Combinators.  So, let's make it happen!]  )
 
 #chapter-intro(
     [Turtles <introduction>],

@@ -29,7 +29,12 @@
         img
     )
         
-    text(1.5em, content)
+    text(1.5em)[
+        #grid(gutter: .8em, columns: (1fr),
+
+            align(right, content.at(0)), // first part, right aligned (wrapping aroung the logo)
+            content.at(1)                // second part, justified
+        )]
     
 
         division-line()
