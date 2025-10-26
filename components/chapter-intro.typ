@@ -12,7 +12,7 @@
     
     division-line()
 
-    let img = image(logo, width: 88pt)
+    let img = image(logo, width: 110pt)
 
     let fig = figure(
         placement: top,
@@ -24,8 +24,8 @@
     place(
         left,
         float: false,
-        dx: -25pt,
-        dy: -30pt,
+        dx: -45pt,
+        dy: -70pt,
         img
     )
         
