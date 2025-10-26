@@ -6,7 +6,8 @@
         let content ={
             if it.level == 1 {
                 v(1em, weak: true)
-                text(size: 1.2em)[
+
+                text(size: 1em)[
                     #smallcaps(strong(entry))
                 ]
             }

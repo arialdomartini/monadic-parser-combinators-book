@@ -156,7 +156,7 @@
                 inset: 0em,
                 place(
                     right,
-                    dx: -100% - 0.618em,
+                    dx: -100% - 1.8em,
                     text(headingNumber.display())
                 ) + it.body
             )
