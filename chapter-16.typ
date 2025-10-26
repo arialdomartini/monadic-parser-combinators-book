@@ -90,7 +90,7 @@ This style was first introduced Haskell 1.3, under the name of
 #emph[do notation] (see #link_do_notation).  That's often what I call
 it too, although the correct name for F\# is Computation Expression.
 
-=== `map` In Do Notation <map-in-do-notation> Here's `map`, in its
+== `map` In Do Notation <map-in-do-notation> Here's `map`, in its
 initil implementation, from @chapter-7:
 
 ```ocaml
@@ -186,7 +186,7 @@ let map f aP = parse {
 As far as I know, when using this style there is no way to obtain a
 Point Free style.
 
-=== `ap` In Do Notation <ap-in-do-notation> Do you remember how we
+== `ap` In Do Notation <ap-in-do-notation> Do you remember how we
 defined the Applicative Functor's `ap` in @chapter-10?
 
 ```ocaml
@@ -259,9 +259,10 @@ will find the resulting expression more eloquent and expressive.
 
 Here are some examples.
 
-=== Old Wine In New Bottles
+== Old Wine In New Bottles
 <old-wine-in-new-bottles>
-==== `.>>.`
+
+=== `.>>.`
 <section>
 Apply 2 parsers, returning both results in a tuple. \
 This is a literal translation:
@@ -276,7 +277,7 @@ let (.>>.) aP bP =
     }
 ```
 
-==== `.>>`
+=== `.>>`
 <section-1>
 Apply 2 parsers, returning the result of the first one only. \
 Here the trick is to ignore the result of the second parser.
@@ -291,7 +292,7 @@ let (.>>) firstP secondP =
     }
 ```
 
-==== `>>.`
+=== `>>.`
 <section-2>
 Apply 2 parsers, returning the result of the second one only. \
 That's trivial! This time we just need to ignore the first result:
@@ -308,7 +309,7 @@ let (>>.) firstP secondP =
     }
 ```
 
-==== `many`
+=== `many`
 <many>
 Repeatedly apply a parser until it fails, returning a list of parsed
 values. \
@@ -361,7 +362,7 @@ let rec many parser =
 With Computation Expression we obtained an astoundingly easier
 formulation, don't you think?
 
-==== `skipMany`
+=== `skipMany`
 <skipmany>
 Parse zero or more occurrences of something, discarding the result.
 That's easy! We just need to parse many elements, only to ignore them:
@@ -374,7 +375,7 @@ let skipMany p =
     }
 ```
 
-==== `sepBy`
+=== `sepBy`
 <sepby>
 Parse a list of elements separated by a separator. \
 Finally, a more challenging one! Here's a possible implementation. A
@@ -398,7 +399,7 @@ let rec sepBy separator parser =
     }
 ```
 
-==== `lift3`
+=== `lift3`
 <lift3>
 Elevate a 3-parameter function into the Parsers world. \
 It's the combinator with this signature:
@@ -424,6 +425,6 @@ let lift3 f aP bP cP =
     }
 ```
 
-=== A Programmable Semicolon
+== A Programmable Semicolon
 <a-programmable-semicolon>
 `<|>`
