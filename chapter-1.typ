@@ -1,6 +1,8 @@
 #import "components/mainmatter.typ": alink
 #import "components/chapter-intro.typ": chapter-intro
 
+= Turtles <introduction>
+
 #let logo = "/static/img/chapter-1.png"
 
 #let content = (
@@ -12,8 +14,7 @@
     [ Naturally, the idea was always to build its parser using Monadic
         Parser Combinators.  So, let's make it happen!]  )
 
-#chapter-intro(
-    [Turtles <introduction>],
+#chapter-intro(    
     content,
     logo
 )

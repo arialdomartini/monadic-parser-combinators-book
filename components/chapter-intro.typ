@@ -6,10 +6,8 @@
             stroke: 3pt + rgb("#000000")
         )]}
 
-#let chapter-intro(title, content, logo) = {
+#let chapter-intro(content, logo) = {
 
-    [= #title]
-    
     division-line()
 
     let img = image(logo, width: 110pt)

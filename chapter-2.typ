@@ -1,21 +1,34 @@
+#import "components/chapter-intro.typ": chapter-intro
+
+#let logo = "/static/img/chapter-1.png"
+
 = Five Shades Of Composability <chapter-2>
 
-You have surely noted that people into functional programming have an
-obsession with the notion of composition. For example, you could have
-stumbled into sentences such as:
+#let content = (
+    [ Folks into functional programming  \
+        have an obsession with the notion \
+        of _composition_. They moan that  \
+        "Exceptions don't _compose_ well",],
+    
+    [  that "Locks are bad because they don't _compose_" and
+        that "Monads _compose_ nicely".
 
-- Exceptions don't compose well.
-- Locks are bad because they don't compose.
-- Monads compose nicely.
+        Everything's gotta compose, apparently. Let's try to make sense of this.
 
-and the like.
+    ]  )
 
-This installment will try to help you develop an intuition about what
-composition is, why you want your parsers to be #emph[composable] and
-what Applicative Functors and Monads have to do with all of this.
+#chapter-intro(
+    content,
+    logo
+)
 
 == What's The Fuss About Composition?
 <whats-the-fuss-about-composition>
+
+Let me try to help you develop an intuition about what composition is,
+why you want your parsers to be #emph[composable] and what Applicative
+Functors and Monads have to do with all of this.
+
 You want your esoteric language to support a new groundbreaking
 serialization format, surely destined to eradicate JSON and YAML. It
 will let developers express a record as:
