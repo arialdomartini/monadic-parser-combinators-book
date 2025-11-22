@@ -194,8 +194,10 @@ This post tries to stand out in a few different ways:
   in our daily job projects and yet, when it comes to writing posts,
   tutorials and books, we never address testing at all?
 
-Fine, enough with the introduction. Ready? Treat yourself to a sorbet,
-then let's get started.
+#let note = footnote[Yes, of course this is a homage to Daniel P. Friedman, Matthias Felleisen, Duane Bibby and Gerald J. Sussman's The Little Schemer - https://felleisen.org/matthias/BTLS-index.html]
+
+Fine, enough with the introduction. Ready? Treat yourself to a
+sorbet#note, then let's get started
 
 == Notes
 <notes>
