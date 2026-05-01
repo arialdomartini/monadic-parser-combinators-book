@@ -173,7 +173,7 @@
                 size: 1.2em,
                 weight: "bold",
                 it.body))])
-        v(2em)
+        v(1em)
 
     }    
 

@@ -1,6 +1,5 @@
 #import "components/chapter-intro.typ": chapter-intro
 
-#let logo = "/static/img/chapter-1.png"
 
 = Five Shades Of Composability <chapter-2>
 
@@ -17,11 +16,12 @@
 
     ]  )
 
+/*
 #chapter-intro(
     content,
     logo
 )
-
+*/
 == What's The Fuss About Composition?
 <whats-the-fuss-about-composition>
 

@@ -3,20 +3,24 @@
 
 = Turtles <introduction>
 
-#let logo = "/static/img/chapter-1.png"
+#let logo = "/static/img/chapter-1-turtle.jpg"
 
 #let content = (
-    [ You have always wanted to invent \
-        your own programming language,\ 
-        and to do this with F\#, right? \
-        That's always  been your dream.],
+    [ You have always wanted \
+      to invent your own pro-\
+      gramming language, and \ 
+      to do this with F\#, haven't you? \
+    ],
     
-    [ Naturally, the idea was always to build its parser using Monadic
-        Parser Combinators.  So, let's make it happen!]  )
+    [ That's always  been your dream. \
+      \
+      Naturally, the idea was always to build its parser using Monadic
+      Parser Combinators.  So, let's make it happen!]  )
 
 #chapter-intro(    
     content,
-    logo
+    logo,
+    175pt
 )
 
 
