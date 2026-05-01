@@ -1,6 +1,32 @@
 #import "components/mainmatter.typ": alink
 
+#import "components/chapter-intro.typ": chapter-intro
+
+#let logo = "/static/img/chapter-12-philosopher.jpg"
+
+
+
 = Things You Are Not Sure About <chapter-12>
+
+#let content = (
+    [ In the Platonic realm, \
+      a parser would know in \
+      advance what keywords \
+      it's about to encounter. \
+      But the world is a vale\
+      of tears and the code \
+      writen in our fancy \
+
+    ],
+    
+    [       language will be full of surprises. \
+        We'd better teach our parser some backtracking tricks: trying a path, admitting it failed, and rolling back to try again .  ]  )
+
+#chapter-intro(
+    content,
+    logo,
+    175pt
+)
 
 There are only 2 important missing features in the Parser Combinator
 library you are building:
