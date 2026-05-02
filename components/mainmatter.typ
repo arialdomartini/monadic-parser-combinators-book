@@ -1,4 +1,3 @@
-
 #let alink(to, text, note) = {
     link(to)[#text]
 
@@ -10,13 +9,17 @@
     }
 }
 
+#let no-header-pages = state("no-header-pages", ())
 
+#let mark-no-header() = context {
+    let p = here().page()
+    no-header-pages.update(pages => pages + (p,))
+}
 
 #let mainmatter(body) = [
     /////////
     // Header
     /////////
-
 
     #let current-chapter-title() = context {
         let last = query(heading.where(level: 1).before(here())).last()
@@ -44,11 +47,18 @@
     }
 
 
+    #let is-no-header-page() = context {
+        let pages = no-header-pages.final()
+        pages.contains(here().page())
+    }
+
     #set page(
         header-ascent: 0pt,
-
-        header: context if not is-chapter-page() {
-            my-header
+        header: context {
+            let pages = no-header-pages.final()
+            if not is-chapter-page() and not pages.contains(here().page()) {
+                my-header
+            }
         }
     )
 
@@ -62,19 +72,15 @@
     )
 
     #show link: it => {
-        
         underline(
             offset: 0.2em,
             stroke: stroke(
                 paint: rgb("#888888"),
                 thickness: 1pt,
                 dash: (1pt, 1pt),
-
             ),)[#it]
     }
 
-    
-    
     #set list(marker: [\u{2023}])
 
 
@@ -99,7 +105,6 @@
     }
     #show table: it => align(center, it)
 
-    
 
     ///////
     // Code
@@ -115,8 +120,6 @@
     #show raw: it => {
         box(
             fill: rgb("#f5f5f5"),
-            // fill: rgb("#e6e8ea"),
-            //      stroke: rgb("#d1d9e0b3"),
             outset: (y: 3pt),
             inset: (x: 2pt),
             radius: 3pt,
@@ -194,7 +197,6 @@
                 weight: "bold",
                 it.body))])
         v(1em)
-
     }    
 
     ////////////
@@ -206,5 +208,4 @@
     )    
 
     #body
-    
 ]

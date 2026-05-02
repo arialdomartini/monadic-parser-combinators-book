@@ -203,16 +203,3 @@ This post tries to stand out in a few different ways:
 Fine, enough with the introduction. Ready? Treat yourself to a
 sorbet#note, then let's get started
 
-== Notes
-<notes>
-
-#let link_send_pr = alink(
-    "https://github.com/arialdomartini/arialdomartini.github.io/",
-    [send me a pull request], []
-)
-
-I am not a native English speaker: if you spot any typo or weird
-sentence, feel free to #link_send_pr.
-
-This book is crafted by people, not AI. Illustrations are original
-work by Nanou.
