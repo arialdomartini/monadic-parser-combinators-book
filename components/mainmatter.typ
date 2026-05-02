@@ -104,8 +104,12 @@
     ///////
     // Code
     ///////
-    #let codeBackground = rgb("#f5fafa")
-    #let codeStroke = rgb("#ffffff")
+    #let codeBackground = rgb("#f5faf5")
+    #let codeStrokeLine = 1pt + rgb("#ffffff")
+    #let codeStroke = (
+        top: codeStrokeLine,
+        bottom: codeStrokeLine
+    )
 
 
     #show raw: it => {
