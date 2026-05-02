@@ -1,6 +1,6 @@
 #import "components/mainmatter.typ": alink
 
-= Don't Mess Up The Signature <chapter4>
+= Pyramid of Doom <chapter4>
 
 == Arialdo, You Are A Liar
 <arialdo-you-are-a-liar>
