@@ -1,6 +1,39 @@
 #import "components/mainmatter.typ": alink
+#import "components/chapter-intro.typ": chapter-intro
 
 = Pyramid of Doom <chapter4>
+
+
+#let logo = "/static/img/chapter-4-crying.jpg"
+
+
+
+
+
+#let content = (
+    [ It doesn't take any spe-\
+      cial skill to get a program \
+      working. Even LLMs can. \
+      Getting a program work  \
+      so it stays malleable as \
+      features add up, that's a \
+      different beast.  Change a
+      ],
+    
+    [   signature the wrong way, and the complexity blows up in your face. \
+\
+
+That's when you start dreaming of monads.
+
+    ]  )
+
+
+#chapter-intro(
+    content,
+    logo,
+    170pt
+)
+
 
 == Arialdo, You Are A Liar
 <arialdo-you-are-a-liar>
