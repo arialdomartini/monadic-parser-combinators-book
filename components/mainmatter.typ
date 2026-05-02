@@ -104,6 +104,9 @@
     ///////
     // Code
     ///////
+    #let codeBackground = rgb("#f5fafa")
+    #let codeStroke = rgb("#ffffff")
+
 
     #show raw: it => {
         box(
@@ -122,9 +125,9 @@
     #show: codly-init.with()
     #codly(
         radius: 0em,
-        fill: luma(255),
-        zebra-fill: luma(255),
-        stroke: 1pt + luma(255),
+        fill: codeBackground,
+        zebra-fill: codeBackground,
+        stroke: 0pt + luma(255),
         smart-indent: false,
         display-icon: false,
         display-name: false,
@@ -132,8 +135,21 @@
         number-format: none
     )
 
-    #show raw.where(block: true): set text(0.7em, font: "Monoid")
+    #show raw.where(block: true): set text(0.8em, font: "Monoid")
 
+    
+    #show raw.where(block: true): it => {
+        pad(
+            x: -2.5cm,
+            block(
+                width: 100% + 2 * 4cm,
+                inset: (x: 2.5cm, y: 1em),
+                fill: codeBackground,
+                stroke: codeStroke, 
+                it
+            )
+        )
+    }
 
 
     ///////////
