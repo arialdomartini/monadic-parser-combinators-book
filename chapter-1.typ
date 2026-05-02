@@ -9,13 +9,14 @@
     [ You have always wanted \
       to invent your own pro-\
       gramming language, and \ 
-      to do this with F\#, haven't you? \
+
     ],
     
-    [ That's always  been your dream. \
-      \
+    [ to do this with F\#, haven't you? That's always  been your dream. \
       Naturally, the idea was always to build its parser using Monadic
-      Parser Combinators.  So, let's make it happen!]  )
+      Parser Combinators. \
+      \
+      So, let's make it happen!]  )
 
 #chapter-intro(    
     content,
