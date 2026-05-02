@@ -46,7 +46,7 @@
 
     #v(10pt)
 
-    Edited with love with Typst and Emacs.
+    Edited with ❤️ with Typst and Emacs.
 
     #v(10pt)
 
