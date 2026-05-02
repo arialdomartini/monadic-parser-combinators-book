@@ -1,4 +1,32 @@
+#import "components/chapter-intro.typ": chapter-intro
+
 = Look, Ma, no code! <chapter-3>
+
+
+#let logo = "/static/img/chapter-2-joined-by-the-nose.jpg"
+
+
+#let content = (
+    [ Writing code is a joy. \
+      Writing code that \
+      writes code (I am\
+      looking at you, LISP) \
+      is divine. But, admittedly, \
+      there's nothing more],
+    
+    [ satisfying than getting the work done without writing any code at all,
+      only by assembling already existing building blocks. \
+      \
+      That's the joy of composition, at its purest.
+    ]  )
+
+
+#chapter-intro(
+    content,
+    logo,
+    185pt
+)
+
 
 So, let's challenge the composability of imperative parsers. Suppose
 that other than `parsePerson`:
@@ -24,9 +52,9 @@ type RockTrio =
 ```
 
 Beside some specific syntax that might exist for the serializazion of
-rock trios--- and which we don't care at the moment --- the point is
-that we can think of writing `parseRockTrio` leveraging `parseString`
-and `parsePerson`.
+rock trios (which we don't care at the moment) the point is that we
+can think of writing `parseRockTrio` leveraging `parseString` and
+`parsePerson`.
 
 What if we also have `SoloArtist` to be parsed as:
 
