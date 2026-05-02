@@ -3,25 +3,31 @@
 
 = Five Shades Of Composability <chapter-2>
 
-#let content = (
-    [ Folks into functional programming  \
-        have an obsession with the notion \
-        of _composition_. They moan that  \
-        "Exceptions don't _compose_ well",],
-    
-    [  that "Locks are bad because they don't _compose_" and
-        that "Monads _compose_ nicely".
+#let logo = "/static/img/chapter-2-joined-by-the-nose.jpg"
 
+
+#let content = (
+    [ Folks into functional \
+        programming have an \
+        obsession with the \
+        notion  of _composition_. \
+        They moan that "Ex- \
+        ceptions don't _compose_ ",],
+    
+    [  well, that "Locks are bad because they don't _compose_" and
+        that "Monads _compose_ nicely". \
+        \
         Everything's gotta compose, apparently. Let's try to make sense of this.
 
     ]  )
 
-/*
+
 #chapter-intro(
     content,
-    logo
+    logo,
+    185pt
 )
-*/
+
 == What's The Fuss About Composition?
 <whats-the-fuss-about-composition>
 
