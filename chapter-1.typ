@@ -25,8 +25,8 @@
 )
 
 
-The compiler of your beautiful new language --- with which you will
-bring the use of `goto` and `null` back to life --- will have several
+The compiler of your beautiful new language, with which you will
+bring the use of `goto` and `null` back to life, will have several
 components.
 
 - An Intermediate Code Generator.
@@ -99,10 +99,10 @@ signature:
 val treeSitter : SourceCode -> TreeSitterSExpression
 ```
 
-I guess you see the pattern. \
-A parser is a function that takes loosely-structured data (usually ---
-but not necessarily --- text), and tries to build a more structured data
-out of it, accordingly to the rules of a formal grammar.
+I guess you see the pattern. \ A parser is a function that takes
+loosely-structured data (usually, but not necessarily, text), and
+tries to build a more structured data out of it, accordingly to the
+rules of a formal grammar.
 
 == Mr.James, It's Parsers all The Way Down
 <mr.james-its-parsers-all-the-way-down>
@@ -166,11 +166,11 @@ That's the goal of these pages.
     [This one is very concise and amazingly clear, so
     I would recommend it even if you have no familiarity with Haskell.])
 
-There are many similar series online, some specific to F\# --- such as
-#link_understanding_parsers by Scott Wlaschin --- many others based on
+There are many similar series online, some specific to F\# (such as
+#link_understanding_parsers by Scott Wlaschin) many others based on
 Haskell, like the excellent #link_parser-combinators-walkthrough by
-Antoine Leblanc. \
-This post tries to stand out in a few different ways:
+Antoine Leblanc. \ This post tries to stand out in a few different
+ways:
 
 - If other attempts to this topic left you scratching your head, this
   series should make things a lot easier. \
@@ -180,8 +180,8 @@ This post tries to stand out in a few different ways:
   know why stuff works rather than being hit with jargon-heavy
   explanations.
 
-- Many tutorials begin with writing a simple parser --- conventionally,
-  the single-character parser. This does not. Instead, we will focus on
+- Many tutorials begin with writing a simple parser (conventionally,
+  the single-character parser). This does not. Instead, we will focus on
   combinators first, postponing the implementation of concrete parsers.
   When I was first introduced to parsers, I was just confused: what on
   earth does it mean to parse a single character returning a character?
