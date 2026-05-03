@@ -133,8 +133,8 @@ problem] to be avoided or to be solved by the means of wrappers and
 adapters, in FP the same incompatibility is #emph[a design tool] to be
 leveraged.
 
-So, let's see how to fix the pyramid of doom we wrote in `parsePerson`
-by distilling a new function application. And let's see how this leads
-us to re-invent --- yet another time --- Monads.
+So, let's see how to fix the Pyramid of Doom we obtained in
+`parsePerson` by distilling a new function application. And let's see
+how this leads us to re-invent --- yet another time --- Monads.
 
 Take a break, bite an apple, then jump to @chapter-6.
