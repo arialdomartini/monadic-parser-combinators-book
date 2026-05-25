@@ -14,13 +14,13 @@
     [ It doesn't take any spe-\
       cial skill to get a program \
       working. Even LLMs can. \
-      Getting a program work  \
-      so it stays malleable as \
-      features add up, that's a \
-      different beast.  Change a
+      Getting a program work so \
+      it stays malleable as features \
+        add up, that's a different beast. \
+        Change a signature the wrong
       ],
     
-    [   signature the wrong way, and the complexity blows up in your face. \
+    [  way, and the complexity blows up in your face. \
 \
 
 That's when you start dreaming of monads.
